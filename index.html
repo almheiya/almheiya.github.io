@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo Screen</title>
+<title>Vlog Introduction</title>
 
 <style>
 *{
@@ -14,8 +14,8 @@
 }
 
 body{
-    background:#120000;
-    color:#ff1a1a;
+    background:#000;
+    color:#0d47a1;
     display:flex;
     justify-content:center;
     align-items:center;
@@ -24,43 +24,98 @@ body{
     text-align:center;
 }
 
+/* Sparkling stars */
+body::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:
+        radial-gradient(circle,#4fc3f7 1px,transparent 2px),
+        radial-gradient(circle,#90caf9 1px,transparent 2px),
+        radial-gradient(circle,#64b5f6 2px,transparent 3px);
+    background-size:120px 120px,180px 180px,240px 240px;
+    animation:twinkle 6s linear infinite;
+    opacity:.5;
+}
+
 .container{
-    animation:flicker 1.5s infinite;
+    position:relative;
+    z-index:1;
+    animation:flicker 2s infinite;
 }
 
 h1{
-    font-size:4rem;
-    text-shadow:0 0 10px red,0 0 20px red;
+    font-size:3.5rem;
+    color:#1565c0;
+    text-shadow:
+        0 0 8px #1565c0,
+        0 0 18px #1e88e5,
+        0 0 35px #42a5f5;
     margin-bottom:20px;
 }
 
-p{
-    font-size:1.3rem;
-    color:#ffb3b3;
+.info{
+    font-size:1.5rem;
+    color:#64b5f6;
+    margin:10px 0;
+    text-shadow:0 0 10px #1e88e5;
 }
 
-.warning{
+.intro{
     margin-top:30px;
-    color:white;
-    font-size:0.9rem;
+    font-size:1.2rem;
+    color:#bbdefb;
+    line-height:1.8;
+    max-width:700px;
 }
 
 @keyframes flicker{
-    0%,100%{opacity:1;}
-    50%{opacity:.7;}
-    55%{opacity:.4;}
-    60%{opacity:1;}
+    0%,100%{
+        opacity:1;
+    }
+    50%{
+        opacity:.8;
+    }
+    55%{
+        opacity:.5;
+    }
+    60%{
+        opacity:1;
+    }
+}
+
+@keyframes twinkle{
+    from{
+        transform:translateY(0);
+    }
+    to{
+        transform:translateY(-100px);
+    }
 }
 </style>
 </head>
+
 <body>
 
 <div class="container">
-    <h1>YOU'VE BEEN HACKED!</h1>
-    <p>Initializing system breach...</p>
-    <p>Accessing secure files...</p>
-    <p>Downloading confidential data...</p>
+    <h1>WELCOME TO MY VLOG</h1>
 
+    <div class="info">
+        <strong>Name:</strong> Your Name
+    </div>
+
+    <div class="info">
+        <strong>Course:</strong> BS Information Technology
+    </div>
+
+    <div class="intro">
+        Hi everyone! I'm <strong>Your Name</strong>, a student taking
+        <strong>BS Information Technology</strong>. Welcome to my vlog!
+        Today I'll be sharing interesting experiences, learning moments,
+        and exciting adventures. I hope you enjoy watching and thank you
+        for joining me on this journey!
+    </div>
 </div>
 
 </body>
