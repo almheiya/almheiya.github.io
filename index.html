@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
+
       font-family: Georgia, "Times New Roman", serif;
 
       background:
@@ -34,6 +36,7 @@
       border-radius: 50%;
       background: rgba(147, 197, 253, 0.18);
       animation: float 8s infinite ease-in-out;
+      pointer-events: none;
     }
 
     .bubble:nth-child(1) {
@@ -72,10 +75,15 @@
     /* Main container */
     .container {
       position: relative;
-      width: 90%;
-      max-width: 700px;
+      width: min(90%, 700px);
+      margin: 0 auto;
       text-align: center;
       z-index: 2;
+    }
+
+    /* Opening screen */
+    #opening {
+      width: 100%;
     }
 
     h1 {
@@ -87,7 +95,7 @@
 
     .subtitle {
       color: #dbeafe;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
       font-family: Arial, sans-serif;
     }
 
@@ -95,8 +103,8 @@
     .envelope-wrapper {
       position: relative;
       width: 360px;
-      height: 250px;
-      margin: auto;
+      height: 280px;
+      margin: 0 auto;
       cursor: pointer;
       transition: transform 0.4s ease;
     }
@@ -105,29 +113,76 @@
       transform: translateY(-8px) scale(1.03);
     }
 
+    /* Letter */
+    .paper {
+      position: absolute;
+      z-index: 2;
+
+      width: 85%;
+      height: 200px;
+
+      left: 7.5%;
+      bottom: 35px;
+
+      background: #eff6ff;
+      border-radius: 5px;
+
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+
+      padding: 25px;
+
+      /* Hidden inside envelope at first */
+      transform: translateY(130px);
+
+      transition: transform 0.8s ease;
+    }
+
+    .paper-lines {
+      width: 100%;
+      height: 100%;
+
+      background: repeating-linear-gradient(
+        #eff6ff 0px,
+        #eff6ff 27px,
+        #bfdbfe 28px
+      );
+    }
+
+    /* Envelope body */
     .envelope {
       position: absolute;
+
       width: 100%;
       height: 180px;
-      bottom: 0;
+
+      left: 0;
+      bottom: 20px;
+
       background: #2563eb;
+
       border-radius: 8px;
+
       box-shadow: 0 25px 50px rgba(15, 23, 42, 0.4);
+
       overflow: hidden;
-      z-index: 1;
+
+      z-index: 3;
     }
 
     /* Envelope front */
     .envelope::before {
       content: "";
+
       position: absolute;
       inset: 0;
+
       background: linear-gradient(
         145deg,
         #3b82f6,
         #2563eb 55%,
         #1d4ed8
       );
+
       clip-path: polygon(
         0 0,
         50% 58%,
@@ -137,78 +192,101 @@
       );
     }
 
-    /* Letter sticking out */
-    .paper {
-      position: absolute;
-      z-index: 2;
-      width: 85%;
-      height: 200px;
-      left: 7.5%;
-      bottom: 30px;
-      background: #eff6ff;
-      border-radius: 5px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-      padding: 25px;
-      transition: transform 0.8s ease;
-    }
-
-    .paper-lines {
-      width: 100%;
-      height: 100%;
-      background: repeating-linear-gradient(
-        #eff6ff 0px,
-        #eff6ff 27px,
-        #bfdbfe 28px
-      );
-    }
-
     /* Envelope flap */
     .flap {
       position: absolute;
-      z-index: 4;
+
       width: 100%;
       height: 140px;
-      top: 70px;
+
+      left: 0;
+      top: 80px;
+
       background: #60a5fa;
-      clip-path: polygon(0 0, 50% 100%, 100% 0);
-      transform-origin: top;
+
+      clip-path: polygon(
+        0 0,
+        50% 100%,
+        100% 0
+      );
+
+      transform-origin: top center;
+
       transition: transform 0.8s ease;
+
+      z-index: 4;
     }
 
+    /* Seal */
     .seal {
       position: absolute;
+
       z-index: 5;
+
       width: 55px;
       height: 55px;
+
       border-radius: 50%;
+
       background: #1e3a8a;
       color: white;
+
       display: flex;
       align-items: center;
       justify-content: center;
-      left: calc(50% - 27px);
-      top: 130px;
+
+      left: 50%;
+      top: 135px;
+
+      transform: translateX(-50%);
+
       font-size: 24px;
+
       box-shadow: 0 5px 15px rgba(0, 0, 50, 0.3);
+
       transition: opacity 0.5s ease;
     }
 
+    /* Hint */
     .hint {
-      margin-top: 30px;
+      margin-top: 10px;
+
       color: white;
+
       font-family: Arial, sans-serif;
       font-size: 14px;
+
       opacity: 0.9;
+    }
+
+    /* Open animation */
+    .open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .open .paper {
+      transform: translateY(-90px);
+    }
+
+    .open .seal {
+      opacity: 0;
     }
 
     /* Letter editor */
     .letter-editor {
       display: none;
+
+      width: 100%;
+
       background: rgba(239, 246, 255, 0.96);
+
       border: 4px solid #60a5fa;
       border-radius: 20px;
+
       padding: 30px;
+
       box-shadow: 0 30px 70px rgba(15, 23, 42, 0.45);
+
       animation: appear 0.8s ease;
     }
 
@@ -233,15 +311,20 @@
     .letter-editor textarea {
       width: 100%;
       min-height: 300px;
+
       resize: vertical;
+
       border: 2px solid #93c5fd;
       border-radius: 12px;
+
       padding: 20px;
+
       outline: none;
 
       font-family: Georgia, "Times New Roman", serif;
       font-size: 18px;
       line-height: 1.8;
+
       color: #172554;
 
       background:
@@ -254,24 +337,37 @@
 
     .letter-editor textarea:focus {
       border-color: #2563eb;
-      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+
+      box-shadow:
+        0 0 0 4px rgba(37, 99, 235, 0.15);
     }
 
+    /* Buttons */
     .buttons {
       display: flex;
+
       gap: 12px;
+
       justify-content: center;
+
       margin-top: 20px;
+
       flex-wrap: wrap;
     }
 
     button {
       border: none;
+
       border-radius: 10px;
+
       padding: 12px 22px;
+
       cursor: pointer;
+
       font-size: 15px;
+
       font-weight: bold;
+
       transition: 0.25s;
     }
 
@@ -303,12 +399,18 @@
       background: #bfdbfe;
     }
 
+    /* Saved message */
     .saved-message {
       margin-top: 15px;
+
       color: #2563eb;
+
       font-family: Arial, sans-serif;
+
       font-weight: bold;
+
       opacity: 0;
+
       transition: opacity 0.3s;
     }
 
@@ -316,35 +418,56 @@
       opacity: 1;
     }
 
-    /* Open animation */
-    .open .flap {
-      transform: rotateX(180deg);
-    }
-
-    .open .paper {
-      transform: translateY(-120px);
-    }
-
-    .open .seal {
-      opacity: 0;
-    }
-
+    /* Mobile */
     @media (max-width: 500px) {
+
+      .container {
+        width: 95%;
+      }
+
       .envelope-wrapper {
         width: 300px;
-        height: 220px;
+        height: 240px;
       }
 
       .envelope {
         height: 150px;
+        bottom: 20px;
       }
 
       .paper {
+        width: 85%;
         height: 170px;
+        left: 7.5%;
+        bottom: 35px;
+
+        transform: translateY(110px);
+      }
+
+      .open .paper {
+        transform: translateY(-70px);
       }
 
       .flap {
         top: 70px;
+        height: 120px;
+      }
+
+      .seal {
+        top: 115px;
+      }
+
+      .letter-editor {
+        padding: 20px;
+      }
+
+      .letter-editor h2 {
+        font-size: 1.6rem;
+      }
+
+      .letter-editor textarea {
+        min-height: 250px;
+        font-size: 16px;
       }
     }
   </style>
@@ -352,6 +475,7 @@
 
 <body>
 
+  <!-- Floating bubbles -->
   <div class="bubble"></div>
   <div class="bubble"></div>
   <div class="bubble"></div>
@@ -362,30 +486,50 @@
     <section id="opening">
 
       <h1>A Letter For You 💙</h1>
-      <p class="subtitle">Click the envelope to open it</p>
 
-      <div class="envelope-wrapper" id="envelopeWrapper">
+      <p class="subtitle">
+        Click the envelope to open it
+      </p>
 
+      <div
+        class="envelope-wrapper"
+        id="envelopeWrapper"
+      >
+
+        <!-- Paper -->
         <div class="paper">
           <div class="paper-lines"></div>
         </div>
 
+        <!-- Envelope -->
         <div class="envelope"></div>
 
+        <!-- Flap -->
         <div class="flap"></div>
 
-        <div class="seal">✉</div>
+        <!-- Seal -->
+        <div class="seal">
+          ✉
+        </div>
 
       </div>
 
-      <p class="hint">Click the blue envelope</p>
+      <p class="hint">
+        Click the blue envelope
+      </p>
 
     </section>
 
-    <!-- Letter editor -->
-    <section class="letter-editor" id="letterEditor">
 
-      <h2>💌 Write Your Letter</h2>
+    <!-- Letter editor -->
+    <section
+      class="letter-editor"
+      id="letterEditor"
+    >
+
+      <h2>
+        💌 Write Your Letter
+      </h2>
 
       <textarea
         id="letterText"
@@ -400,21 +544,33 @@ With love,"
 
       <div class="buttons">
 
-        <button class="save" onclick="saveLetter()">
+        <button
+          class="save"
+          onclick="saveLetter()"
+        >
           Save Letter
         </button>
 
-        <button class="clear" onclick="clearLetter()">
+        <button
+          class="clear"
+          onclick="clearLetter()"
+        >
           Clear
         </button>
 
-        <button class="close" onclick="closeLetter()">
+        <button
+          class="close"
+          onclick="closeLetter()"
+        >
           Close
         </button>
 
       </div>
 
-      <p class="saved-message" id="savedMessage">
+      <p
+        class="saved-message"
+        id="savedMessage"
+      >
         ✓ Your letter has been saved!
       </p>
 
@@ -422,13 +578,24 @@ With love,"
 
   </main>
 
+
   <script>
 
-    const envelope = document.getElementById("envelopeWrapper");
-    const opening = document.getElementById("opening");
-    const editor = document.getElementById("letterEditor");
-    const textarea = document.getElementById("letterText");
-    const savedMessage = document.getElementById("savedMessage");
+    const envelope =
+      document.getElementById("envelopeWrapper");
+
+    const opening =
+      document.getElementById("opening");
+
+    const editor =
+      document.getElementById("letterEditor");
+
+    const textarea =
+      document.getElementById("letterText");
+
+    const savedMessage =
+      document.getElementById("savedMessage");
+
 
     /* Open envelope */
     envelope.addEventListener("click", () => {
@@ -438,6 +605,7 @@ With love,"
       setTimeout(() => {
 
         opening.style.display = "none";
+
         editor.style.display = "block";
 
         textarea.focus();
@@ -446,47 +614,62 @@ With love,"
 
     });
 
+
     /* Save letter */
     function saveLetter() {
 
       const text = textarea.value;
 
-      localStorage.setItem("myBlueLetter", text);
+      localStorage.setItem(
+        "myBlueLetter",
+        text
+      );
 
       savedMessage.classList.add("show");
 
       setTimeout(() => {
+
         savedMessage.classList.remove("show");
+
       }, 2500);
 
     }
+
 
     /* Clear letter */
     function clearLetter() {
 
       textarea.value = "";
 
-      localStorage.removeItem("myBlueLetter");
+      localStorage.removeItem(
+        "myBlueLetter"
+      );
 
     }
+
 
     /* Close letter */
     function closeLetter() {
 
       editor.style.display = "none";
+
       opening.style.display = "block";
 
       envelope.classList.remove("open");
 
     }
 
-    /* Load previously saved letter */
+
+    /* Load saved letter */
     window.addEventListener("load", () => {
 
-      const saved = localStorage.getItem("myBlueLetter");
+      const saved =
+        localStorage.getItem("myBlueLetter");
 
       if (saved) {
+
         textarea.value = saved;
+
       }
 
     });
@@ -495,3 +678,6 @@ With love,"
 
 </body>
 </html>
+```
+
+This version specifically fixes the **paper being visible before opening** and keeps the envelope centered.
