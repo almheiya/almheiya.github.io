@@ -6,7 +6,7 @@
   <title>Blue Letter</title>
 
   <style>
-     {
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -114,6 +114,7 @@
       border-radius: 8px;
       box-shadow: 0 25px 50px rgba(15, 23, 42, 0.4);
       overflow: hidden;
+      z-index: 1;
     }
 
     /* Envelope front */
@@ -127,7 +128,13 @@
         #2563eb 55%,
         #1d4ed8
       );
-      clip-path: polygon(0 0, 50% 58%, 100% 0, 100% 100%, 0 100%);
+      clip-path: polygon(
+        0 0,
+        50% 58%,
+        100% 0,
+        100% 100%,
+        0 100%
+      );
     }
 
     /* Letter sticking out */
@@ -322,10 +329,6 @@
       opacity: 0;
     }
 
-    .hidden {
-      display: none;
-    }
-
     @media (max-width: 500px) {
       .envelope-wrapper {
         width: 300px;
@@ -367,8 +370,7 @@
           <div class="paper-lines"></div>
         </div>
 
-        <div class="envelope">
-        </div>
+        <div class="envelope"></div>
 
         <div class="flap"></div>
 
@@ -379,7 +381,6 @@
       <p class="hint">Click the blue envelope</p>
 
     </section>
-
 
     <!-- Letter editor -->
     <section class="letter-editor" id="letterEditor">
@@ -398,6 +399,7 @@ With love,"
       ></textarea>
 
       <div class="buttons">
+
         <button class="save" onclick="saveLetter()">
           Save Letter
         </button>
@@ -409,6 +411,7 @@ With love,"
         <button class="close" onclick="closeLetter()">
           Close
         </button>
+
       </div>
 
       <p class="saved-message" id="savedMessage">
@@ -419,7 +422,6 @@ With love,"
 
   </main>
 
-
   <script>
 
     const envelope = document.getElementById("envelopeWrapper");
@@ -428,13 +430,13 @@ With love,"
     const textarea = document.getElementById("letterText");
     const savedMessage = document.getElementById("savedMessage");
 
-
     /* Open envelope */
     envelope.addEventListener("click", () => {
 
       envelope.classList.add("open");
 
       setTimeout(() => {
+
         opening.style.display = "none";
         editor.style.display = "block";
 
@@ -443,7 +445,6 @@ With love,"
       }, 900);
 
     });
-
 
     /* Save letter */
     function saveLetter() {
@@ -460,7 +461,6 @@ With love,"
 
     }
 
-
     /* Clear letter */
     function clearLetter() {
 
@@ -469,7 +469,6 @@ With love,"
       localStorage.removeItem("myBlueLetter");
 
     }
-
 
     /* Close letter */
     function closeLetter() {
@@ -480,7 +479,6 @@ With love,"
       envelope.classList.remove("open");
 
     }
-
 
     /* Load previously saved letter */
     window.addEventListener("load", () => {
