@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For Frenz</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Georgia, serif;
+    background: #dceeff;
+}
+
+/* =========================
+   ENVELOPE SCREEN
+========================= */
+
+.envelope-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: opacity 1s ease;
+}
+
+.title {
+    margin-bottom: 35px;
+    text-align: center;
+    color: #24496b;
+}
+
+.title h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.title p {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #55738e;
+}
+
+/* Envelope */
+
+.envelope {
+    position: relative;
+    width: 330px;
+    height: 210px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+/* Back */
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #6c9bc4;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Paper */
+
+.paper {
+    position: absolute;
+    width: 270px;
+    height: 170px;
+    background: #fff;
+    left: 30px;
+    top: 25px;
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 20px;
+
+    color: #57718a;
+    font-size: 18px;
+
+    transition:
+        transform 1.2s ease,
+        opacity 0.8s ease;
+}
+
+/*
+   The paper moves upward only slightly.
+   It remains behind the envelope front.
+*/
+
+.envelope.open .paper {
+    transform: translateY(-45px);
+}
+
+/* Front of envelope */
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    overflow: hidden;
+}
+
+/* Left triangle */
+
+.envelope-front::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 105px solid transparent;
+    border-bottom: 105px solid #83afd2;
+    border-left: 165px solid #83afd2;
+}
+
+/* Right triangle */
+
+.envelope-front::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 105px solid transparent;
+    border-bottom: 105px solid #83afd2;
+    border-right: 165px solid #83afd2;
+}
+
+/* Flap */
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 165px solid transparent;
+    border-right: 165px solid transparent;
+    border-top: 110px solid #a9cce8;
+
+    transform-origin: top center;
+    transition: transform 1s ease;
+
+    z-index: 5;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+/* Click instruction */
+
+.instruction {
+    margin-top: 25px;
+    color: #55738e;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+
+    transition: opacity 0.5s ease;
+}
+
+.envelope.open ~ .instruction {
+    opacity: 0;
+}
+
+/* =========================
+   WHITE FLASH
+========================= */
+
+.white-flash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 100;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.white-flash.active {
+    animation: flash 1.5s ease forwards;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+
+    35% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letter-screen {
+    display: none;
+    background: white;
+    min-height: 100vh;
+    padding: 70px 25px;
+}
+
+.letter {
+    max-width: 700px;
+    margin: auto;
+
+    color: #34495e;
+    line-height: 1.9;
+    font-size: 17px;
+}
+
+.letter h2 {
+    text-align: center;
+    color: #416b91;
+    font-weight: normal;
+    margin-bottom: 50px;
+}
+
+.letter p {
+    margin-bottom: 25px;
+}
+
+.signature {
+    margin-top: 50px;
+    text-align: right;
+}
+
+/* Fade letter in */
+
+.letter.show {
+    animation: letterFade 1.5s ease forwards;
+}
+
+@keyframes letterFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .envelope {
+        width: 290px;
+        height: 185px;
+    }
+
+    .paper {
+        width: 235px;
+        height: 150px;
+        left: 27px;
+        top: 20px;
+    }
+
+    .flap {
+        border-left-width: 145px;
+        border-right-width: 145px;
+        border-top-width: 95px;
+    }
+
+    .envelope-front::before {
+        border-top-width: 92px;
+        border-bottom-width: 92px;
+        border-left-width: 145px;
+    }
+
+    .envelope-front::after {
+        border-top-width: 92px;
+        border-bottom-width: 92px;
+        border-right-width: 145px;
+    }
+
+    .title h1 {
+        font-size: 27px;
+    }
+
+    .letter {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ENVELOPE -->
+
+<section class="envelope-screen" id="envelopeScreen">
+
+    <div class="title">
+        <h1>A Letter For Frenz</h1>
+        <p>A little something written for you</p>
+    </div>
+
+    <div class="envelope" id="envelope">
+
+        <div class="envelope-back"></div>
+
+        <!-- Paper stays behind the envelope front -->
+        <div class="paper">
+            A Letter...
+        </div>
+
+        <div class="envelope-front"></div>
+
+        <div class="flap"></div>
+
+    </div>
+
+    <div class="instruction">
+        Click the envelope to open
+    </div>
+
+</section>
+
+
+<!-- WHITE FLASH -->
+
+<div class="white-flash" id="whiteFlash"></div>
+
+
+<!-- LETTER -->
+
+<section class="letter-screen" id="letterScreen">
+
+    <div class="letter" id="letter">
+
+        <h2>For Frenz</h2>
+
+        <p>
+            Dear Frenz,
+        </p>
+
+        <p>
+            I wanted to write this little letter for you because
+            sometimes there are things that are easier to say
+            when they are written down.
+        </p>
+
+        <p>
+            Thank you for being someone who has been part of
+            my life and for all the memories we have shared.
+            Even the simple moments can become memories
+            that we remember for a long time.
+        </p>
+
+        <p>
+            I hope you know that you are appreciated more than
+            you might realize. I am grateful for the conversations,
+            the laughs, and all the little moments in between.
+        </p>
+
+        <p>
+            Whatever happens in the future, I hope you continue
+            growing, learning, and becoming the person you want
+            to be.
+        </p>
+
+        <p>
+            Thank you for being you.
+        </p>
+
+        <div class="signature">
+            With love,<br>
+            Mia
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+const envelope = document.getElementById("envelope");
+const envelopeScreen = document.getElementById("envelopeScreen");
+const whiteFlash = document.getElementById("whiteFlash");
+const letterScreen = document.getElementById("letterScreen");
+const letter = document.getElementById("letter");
+
+let opened = false;
+
+envelope.addEventListener("click", () => {
+
+    if (opened) return;
+
+    opened = true;
+
+    /* Open envelope */
+    envelope.classList.add("open");
+
+    /*
+       Wait for the paper/flap animation
+       before starting the white transition.
+    */
+
+    setTimeout(() => {
+
+        /* Start white flash */
+        whiteFlash.classList.add("active");
+
+    }, 1200);
+
+
+    /*
+       Once the screen is white,
+       switch from envelope to letter.
+    */
+
+    setTimeout(() => {
+
+        envelopeScreen.style.display = "none";
+
+        letterScreen.style.display = "block";
+
+        /*
+           Remove the flash after the letter
+           has appeared.
+        */
+
+        setTimeout(() => {
+
+            whiteFlash.style.display = "none";
+
+            letter.classList.add("show");
+
+        }, 100);
+
+    }, 1900);
+
+});
+
+</script>
+
+</body>
+</html>
