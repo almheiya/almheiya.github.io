@@ -254,6 +254,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
         }
 
         .paper-lines {
@@ -307,6 +308,7 @@
             z-index: 5;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             filter: drop-shadow(0 6px 12px rgba(15, 23, 42, 0.25));
+            cursor: pointer;
         }
 
         /* HIDDEN TEASER INSIDE FLAP */
@@ -412,7 +414,7 @@
 
         .controls-wrapper {
             display: flex;
-            gap: 15px;
+            justify-content: center;
             margin-top: 25px;
             z-index: 20;
         }
@@ -421,10 +423,10 @@
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.3);
             color: #ffffff;
-            padding: 10px 22px;
+            padding: 12px 28px;
             border-radius: 30px;
             font-family: system-ui, -apple-system, sans-serif;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             letter-spacing: 0.5px;
             cursor: pointer;
@@ -440,15 +442,6 @@
             background: rgba(255, 255, 255, 0.28);
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-        }
-
-        .action-btn-primary {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            border: 1px solid #60a5fa;
-        }
-
-        .action-btn-primary:hover {
-            background: linear-gradient(135deg, #3b82f6, #2563eb);
         }
 
         .open-instruction {
@@ -757,7 +750,7 @@
                     <div class="envelope-back-inner"></div>
 
                     <!-- PAPER INSIDE ENVELOPE -->
-                    <div class="paper" id="paper">
+                    <div class="paper" id="paper" onclick="openEnvelope()">
                         <div class="paper-lines">
                             <span class="paper-peek-text">Read my letter...</span>
                         </div>
@@ -767,8 +760,8 @@
                     <div class="envelope-front-pocket"></div>
 
                     <!-- ENVELOPE TOP FLAP -->
-                    <div class="flap" id="flap">
-                        <!-- HIDDEN TEASER UNDER FLAP -->
+                    <div class="flap" id="flap" onclick="openEnvelope()">
+                        <!-- HIDDEN TEASER INSIDE FLAP -->
                         <div class="flap-hidden-teaser">
                             <div class="teaser-badge">Spoiler: It's a YES!</div><br>
                             <div class="teaser-checkbox">[x] Official Boyfriend Status: APPROVED</div>
@@ -785,17 +778,14 @@
             </div>
         </div>
 
-        <!-- CONTROLS FOR USER INTERACTION -->
+        <!-- SINGLE CONTROL TO FLIP ENVELOPE -->
         <div class="controls-wrapper">
             <button class="action-btn" id="flipBtn" onclick="toggleFlip()">
                 <span>Flip Envelope</span>
             </button>
-            <button class="action-btn action-btn-primary" id="openBtn" onclick="openEnvelope()">
-                <span>Open Envelope</span>
-            </button>
         </div>
 
-        <p class="open-instruction" id="instruction">Flip or click the wax seal to open</p>
+        <p class="open-instruction" id="instruction">Flip or tap the envelope seal to open</p>
 
     </section>
 
