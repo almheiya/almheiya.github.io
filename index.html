@@ -1,957 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For Frenz</title>
 
-  <title>A Letter For Frenz</title>
+<style>
+* {
+    box-sizing: border-box;
+}
 
-  <style>
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    font-family: Georgia, serif;
+    background: #dceeff;
+}
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+/* =========================
+   ENVELOPE SCREEN
+========================= */
+
+.envelope-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: opacity 1s ease;
+}
+
+.title {
+    margin-bottom: 35px;
+    text-align: center;
+    color: #24496b;
+}
+
+.title h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    font-weight: normal;
+}
+
+.title p {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #55738e;
+}
+
+/* Envelope */
+
+.envelope {
+    position: relative;
+    width: 330px;
+    height: 210px;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+/* Back */
+
+.envelope-back {
+    position: absolute;
+    inset: 0;
+    background: #6c9bc4;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Paper */
+
+.paper {
+    position: absolute;
+    width: 270px;
+    height: 170px;
+    background: #fff;
+    left: 30px;
+    top: 25px;
+    z-index: 2;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 20px;
+
+    color: #57718a;
+    font-size: 18px;
+
+    transition:
+        transform 1.2s ease,
+        opacity 0.8s ease;
+}
+
+/*
+   The paper moves upward only slightly.
+   It remains behind the envelope front.
+*/
+
+.envelope.open .paper {
+    transform: translateY(-45px);
+}
+
+/* Front of envelope */
+
+.envelope-front {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    overflow: hidden;
+}
+
+/* Left triangle */
+
+.envelope-front::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 105px solid transparent;
+    border-bottom: 105px solid #83afd2;
+    border-left: 165px solid #83afd2;
+}
+
+/* Right triangle */
+
+.envelope-front::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-top: 105px solid transparent;
+    border-bottom: 105px solid #83afd2;
+    border-right: 165px solid #83afd2;
+}
+
+/* Flap */
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 165px solid transparent;
+    border-right: 165px solid transparent;
+    border-top: 110px solid #a9cce8;
+
+    transform-origin: top center;
+    transition: transform 1s ease;
+
+    z-index: 5;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+/* Click instruction */
+
+.instruction {
+    margin-top: 25px;
+    color: #55738e;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+
+    transition: opacity 0.5s ease;
+}
+
+.envelope.open ~ .instruction {
+    opacity: 0;
+}
+
+/* =========================
+   WHITE FLASH
+========================= */
+
+.white-flash {
+    position: fixed;
+    inset: 0;
+    background: white;
+    z-index: 100;
+
+    opacity: 0;
+    pointer-events: none;
+}
+
+.white-flash.active {
+    animation: flash 1.5s ease forwards;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    35% {
+        opacity: 1;
     }
 
-    body {
-      min-height: 100vh;
-      font-family: Georgia, "Times New Roman", serif;
-      overflow-x: hidden;
+    100% {
+        opacity: 1;
+    }
+}
 
-      background:
-        radial-gradient(
-          circle at 15% 15%,
-          rgba(147, 197, 253, 0.45),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 85% 80%,
-          rgba(29, 78, 216, 0.45),
-          transparent 32%
-        ),
-        linear-gradient(
-          135deg,
-          #0f172a,
-          #172554,
-          #1d4ed8,
-          #38bdf8
-        );
+/* =========================
+   LETTER
+========================= */
 
-      color: #172554;
+.letter-screen {
+    display: none;
+    background: white;
+    min-height: 100vh;
+    padding: 70px 25px;
+}
+
+.letter {
+    max-width: 700px;
+    margin: auto;
+
+    color: #34495e;
+    line-height: 1.9;
+    font-size: 17px;
+}
+
+.letter h2 {
+    text-align: center;
+    color: #416b91;
+    font-weight: normal;
+    margin-bottom: 50px;
+}
+
+.letter p {
+    margin-bottom: 25px;
+}
+
+.signature {
+    margin-top: 50px;
+    text-align: right;
+}
+
+/* Fade letter in */
+
+.letter.show {
+    animation: letterFade 1.5s ease forwards;
+}
+
+@keyframes letterFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
 
-
-    /* BACKGROUND BUBBLES */
-
-    .bubble {
-      position: fixed;
-      border-radius: 50%;
-      background: rgba(191, 219, 254, 0.16);
-      pointer-events: none;
-      animation: float 9s infinite ease-in-out;
-    }
-
-    .bubble:nth-child(1) {
-      width: 150px;
-      height: 150px;
-      left: 7%;
-      top: 10%;
-    }
-
-    .bubble:nth-child(2) {
-      width: 240px;
-      height: 240px;
-      right: 3%;
-      top: 12%;
-      animation-delay: 2s;
-    }
-
-    .bubble:nth-child(3) {
-      width: 90px;
-      height: 90px;
-      left: 12%;
-      bottom: 8%;
-      animation-delay: 4s;
-    }
-
-    @keyframes float {
-      0%, 100% {
+    to {
+        opacity: 1;
         transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-25px);
-      }
     }
+}
 
+/* Mobile */
 
-    /* OPENING SCREEN */
+@media (max-width: 500px) {
 
-    #opening {
-      min-height: 100vh;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      text-align: center;
-
-      padding-top: 45px;
-
-      transition:
-        opacity 1s ease,
-        visibility 1s ease;
+    .envelope {
+        width: 290px;
+        height: 185px;
     }
-
-    #opening.fade-out {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    h1 {
-      color: white;
-
-      font-size:
-        clamp(2.5rem, 7vw, 5rem);
-
-      font-weight: normal;
-      letter-spacing: 2px;
-
-      margin-bottom: 12px;
-
-      text-shadow:
-        0 6px 25px rgba(0, 0, 80, 0.3);
-    }
-
-    .subtitle {
-      color: #dbeafe;
-
-      font-family: Arial, sans-serif;
-      font-size: 15px;
-      letter-spacing: 0.5px;
-
-      margin-bottom: 55px;
-    }
-
-
-    /* ENVELOPE */
-
-    .envelope-wrapper {
-      position: relative;
-
-      width: 620px;
-      height: 460px;
-
-      margin: 0 auto;
-
-      cursor: pointer;
-
-      perspective: 1200px;
-
-      transition:
-        transform 0.4s ease;
-    }
-
-    .envelope-wrapper:hover {
-      transform:
-        translateY(-8px)
-        scale(1.02);
-    }
-
-
-    /* ENVELOPE BACK */
-
-    .envelope-back {
-      position: absolute;
-
-      width: 100%;
-      height: 300px;
-
-      left: 0;
-      bottom: 40px;
-
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #60a5fa,
-          #2563eb 55%,
-          #1d4ed8
-        );
-
-      z-index: 1;
-
-      box-shadow:
-        0 30px 60px rgba(15, 23, 42, 0.42);
-    }
-
-
-    /*
-      PAPER HOLDER
-
-      Important:
-      This is now allowed to extend upward,
-      so the paper can actually come OUT
-      of the envelope.
-    */
-
-    .paper-area {
-      position: absolute;
-
-      width: 100%;
-      height: 460px;
-
-      left: 0;
-      bottom: 40px;
-
-      overflow: visible;
-
-      z-index: 3;
-
-      pointer-events: none;
-    }
-
-
-    /* PAPER */
 
     .paper {
-      position: absolute;
-
-      width: 88%;
-      height: 350px;
-
-      left: 6%;
-
-      /*
-        Fully hidden inside the envelope.
-      */
-      bottom: -350px;
-
-      background: white;
-
-      border-radius: 5px;
-
-      padding: 35px;
-
-      box-shadow:
-        0 15px 40px
-        rgba(15, 23, 42, 0.22);
-
-      /*
-        Smooth upward movement.
-      */
-      transition:
-        bottom 1.25s
-        cubic-bezier(0.16, 1, 0.3, 1);
-
-      /*
-        The paper waits for the flap
-        to begin opening first.
-      */
-      transition-delay: 0.3s;
+        width: 235px;
+        height: 150px;
+        left: 27px;
+        top: 20px;
     }
-
-    .paper-lines {
-      width: 100%;
-      height: 100%;
-
-      background:
-        repeating-linear-gradient(
-          to bottom,
-          #ffffff 0px,
-          #ffffff 31px,
-          #dbeafe 32px
-        );
-
-      border-top:
-        1px solid #dbeafe;
-    }
-
-
-    /*
-      When opened, the paper rises
-      significantly above the envelope.
-    */
-
-    .open .paper {
-      bottom: 245px;
-    }
-
-
-    /* ENVELOPE FRONT */
-
-    .envelope-front {
-      position: absolute;
-
-      width: 100%;
-      height: 300px;
-
-      left: 0;
-      bottom: 40px;
-
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #3b82f6,
-          #2563eb 55%,
-          #1e40af
-        );
-
-      clip-path:
-        polygon(
-          0 0,
-          50% 63%,
-          100% 0,
-          100% 100%,
-          0 100%
-        );
-
-      /*
-        The front stays in front of
-        the bottom portion of the paper.
-      */
-      z-index: 4;
-
-      pointer-events: none;
-    }
-
-
-    /* FLAP */
 
     .flap {
-      position: absolute;
-
-      width: 100%;
-      height: 225px;
-
-      left: 0;
-      top: 120px;
-
-      background:
-        linear-gradient(
-          160deg,
-          #93c5fd,
-          #60a5fa 55%,
-          #3b82f6
-        );
-
-      clip-path:
-        polygon(
-          0 0,
-          50% 100%,
-          100% 0
-        );
-
-      transform-origin:
-        top center;
-
-      transition:
-        transform 0.9s
-        cubic-bezier(0.22, 1, 0.36, 1);
-
-      z-index: 6;
-
-      filter:
-        drop-shadow(
-          0 5px 7px
-          rgba(15, 23, 42, 0.12)
-        );
+        border-left-width: 145px;
+        border-right-width: 145px;
+        border-top-width: 95px;
     }
 
-    .open .flap {
-      transform:
-        rotateX(180deg);
+    .envelope-front::before {
+        border-top-width: 92px;
+        border-bottom-width: 92px;
+        border-left-width: 145px;
     }
 
-
-    /* HEART STAMP */
-
-    .seal {
-      position: absolute;
-
-      width: 78px;
-      height: 78px;
-
-      left: 50%;
-      top: 207px;
-
-      transform:
-        translateX(-50%)
-        rotate(-45deg);
-
-      background:
-        linear-gradient(
-          145deg,
-          #1e3a8a,
-          #172554
-        );
-
-      z-index: 8;
-
-      box-shadow:
-        0 7px 20px
-        rgba(15, 23, 42, 0.3);
-
-      transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
+    .envelope-front::after {
+        border-top-width: 92px;
+        border-bottom-width: 92px;
+        border-right-width: 145px;
     }
 
-    .seal::before,
-    .seal::after {
-      content: "";
-
-      position: absolute;
-
-      width: 78px;
-      height: 78px;
-
-      border-radius: 50%;
-
-      background:
-        linear-gradient(
-          145deg,
-          #1e3a8a,
-          #172554
-        );
+    .title h1 {
+        font-size: 27px;
     }
 
-    .seal::before {
-      top: -39px;
-      left: 0;
+    .letter {
+        font-size: 16px;
     }
-
-    .seal::after {
-      top: 0;
-      left: 39px;
-    }
-
-    .seal span {
-      position: absolute;
-
-      width: 25px;
-      height: 25px;
-
-      left: 27px;
-      top: 27px;
-
-      border-left:
-        2px solid #bfdbfe;
-
-      border-bottom:
-        2px solid #bfdbfe;
-
-      z-index: 2;
-    }
-
-    .open .seal {
-      opacity: 0;
-
-      transform:
-        translateX(-50%)
-        rotate(-45deg)
-        scale(0.7);
-    }
-
-
-    /* CLICK TO OPEN */
-
-    .open-instruction {
-      margin-top: -10px;
-
-      color: #dbeafe;
-
-      font-family: Arial, sans-serif;
-
-      font-size: 13px;
-
-      letter-spacing: 1px;
-
-      opacity: 0.9;
-    }
-
-
-    /* LETTER PAGE */
-
-    #letterPage {
-      position: fixed;
-
-      inset: 0;
-
-      background: white;
-
-      opacity: 0;
-      visibility: hidden;
-
-      transform:
-        translateY(25px);
-
-      transition:
-        opacity 1.3s ease,
-        transform 1.3s ease,
-        visibility 1.3s ease;
-
-      overflow-y: auto;
-
-      z-index: 20;
-    }
-
-    #letterPage.show {
-      opacity: 1;
-      visibility: visible;
-
-      transform:
-        translateY(0);
-    }
-
-
-    /* LETTER CONTENT */
-
-    .letter-content {
-      width: min(85%, 780px);
-
-      margin-left: auto;
-      margin-right: auto;
-
-      padding:
-        100px
-        0
-        150px;
-
-      color: #172554;
-
-      font-size: 19px;
-
-      line-height: 2;
-
-      text-align: left;
-    }
-
-    .letter-content h2 {
-      text-align: center;
-
-      color: #1d4ed8;
-
-      font-size:
-        clamp(2rem, 5vw, 3rem);
-
-      font-weight: normal;
-
-      letter-spacing: 2px;
-
-      margin-bottom: 65px;
-    }
-
-    .letter-content h2::after {
-      content: "";
-
-      display: block;
-
-      width: 60px;
-      height: 2px;
-
-      background: #93c5fd;
-
-      margin:
-        20px auto
-        0;
-    }
-
-    .letter-content p {
-      width: 100%;
-
-      margin:
-        0 0 38px;
-
-      white-space: pre-line;
-
-      text-align: left;
-    }
-
-    .signature {
-      margin-top: 75px !important;
-
-      text-align: right !important;
-
-      font-style: italic;
-
-      color: #1d4ed8;
-    }
-
-
-    /* BACK BUTTON */
-
-    .back-button {
-      position: fixed;
-
-      top: 25px;
-      right: 30px;
-
-      z-index: 30;
-
-      border:
-        1px solid #bfdbfe;
-
-      background:
-        rgba(239, 246, 255, 0.95);
-
-      color: #1e40af;
-
-      padding:
-        10px
-        18px;
-
-      border-radius: 20px;
-
-      cursor: pointer;
-
-      font-family: Arial, sans-serif;
-
-      font-size: 13px;
-
-      letter-spacing: 0.5px;
-
-      transition:
-        background 0.3s ease,
-        transform 0.3s ease;
-    }
-
-    .back-button:hover {
-      background: #dbeafe;
-
-      transform:
-        translateY(-2px);
-    }
-
-
-    /* MOBILE */
-
-    @media (max-width: 650px) {
-
-      #opening {
-        padding-top: 35px;
-      }
-
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      .subtitle {
-        margin-bottom: 35px;
-      }
-
-      .envelope-wrapper {
-        width: 380px;
-        height: 310px;
-      }
-
-      .envelope-back,
-      .envelope-front {
-        height: 200px;
-        bottom: 20px;
-      }
-
-      /*
-        Taller paper area on mobile too.
-      */
-      .paper-area {
-        height: 310px;
-        bottom: 20px;
-      }
-
-      .paper {
-        height: 245px;
-
-        width: 88%;
-        left: 6%;
-
-        bottom: -245px;
-
-        padding: 22px;
-
-        transition:
-          bottom 1.1s
-          cubic-bezier(0.16, 1, 0.3, 1);
-
-        transition-delay: 0.25s;
-      }
-
-      .open .paper {
-        bottom: 155px;
-      }
-
-      .flap {
-        height: 150px;
-        top: 80px;
-      }
-
-      .seal {
-        width: 58px;
-        height: 58px;
-
-        top: 138px;
-      }
-
-      .seal::before,
-      .seal::after {
-        width: 58px;
-        height: 58px;
-      }
-
-      .seal::before {
-        top: -29px;
-      }
-
-      .seal::after {
-        left: 29px;
-      }
-
-      .open-instruction {
-        margin-top: -5px;
-      }
-
-      .letter-content {
-        width: 86%;
-
-        padding:
-          80px
-          0
-          110px;
-
-        font-size: 17px;
-
-        line-height: 1.9;
-      }
-
-      .letter-content h2 {
-        margin-bottom: 50px;
-      }
-
-      .back-button {
-        top: 15px;
-        right: 15px;
-      }
-    }
-
-  </style>
+}
+</style>
 </head>
-
 
 <body>
 
+<!-- ENVELOPE -->
 
-  <!-- BACKGROUND -->
+<section class="envelope-screen" id="envelopeScreen">
 
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
+    <div class="title">
+        <h1>A Letter For Frenz</h1>
+        <p>A little something written for you</p>
+    </div>
 
+    <div class="envelope" id="envelope">
 
-  <!-- OPENING -->
+        <div class="envelope-back"></div>
 
-  <section id="opening">
-
-    <h1>A LETTER FOR FRENZ</h1>
-
-    <p class="subtitle">
-      A little something written for you
-    </p>
-
-
-    <!-- ENVELOPE -->
-
-    <div
-      class="envelope-wrapper"
-      id="envelopeWrapper"
-    >
-
-      <div class="envelope-back"></div>
-
-
-      <!-- PAPER -->
-
-      <div class="paper-area">
-
+        <!-- Paper stays behind the envelope front -->
         <div class="paper">
-
-          <div class="paper-lines"></div>
-
+            A Letter...
         </div>
 
-      </div>
+        <div class="envelope-front"></div>
 
-
-      <div class="envelope-front"></div>
-
-      <div class="flap"></div>
-
-
-      <!-- HEART -->
-
-      <div class="seal">
-        <span></span>
-      </div>
+        <div class="flap"></div>
 
     </div>
 
+    <div class="instruction">
+        Click the envelope to open
+    </div>
 
-    <!-- DIRECTIONS -->
-
-    <p class="open-instruction">
-      Click to open
-    </p>
-
-  </section>
+</section>
 
 
+<!-- WHITE FLASH -->
 
-  <!-- LETTER PAGE -->
-
-  <section id="letterPage">
-
-    <button
-      class="back-button"
-      onclick="closeLetter()"
-    >
-      Back
-    </button>
+<div class="white-flash" id="whiteFlash"></div>
 
 
-    <article class="letter-content">
+<!-- LETTER -->
 
-      <h2>A LETTER FOR FRENZ</h2>
+<section class="letter-screen" id="letterScreen">
 
+    <div class="letter" id="letter">
 
-      <p>
-Dear someone special,
+        <h2>For Frenz</h2>
 
-Write your actual letter here.
+        <p>
+            Dear Frenz,
+        </p>
 
-You can make this as long as you want. The page will automatically become scrollable as the letter gets longer.
+        <p>
+            I wanted to write this little letter for you because
+            sometimes there are things that are easier to say
+            when they are written down.
+        </p>
 
-You can add multiple paragraphs and the reader will simply scroll down through the letter.
-      </p>
+        <p>
+            Thank you for being someone who has been part of
+            my life and for all the memories we have shared.
+            Even the simple moments can become memories
+            that we remember for a long time.
+        </p>
 
+        <p>
+            I hope you know that you are appreciated more than
+            you might realize. I am grateful for the conversations,
+            the laughs, and all the little moments in between.
+        </p>
 
-      <p>
-This is another paragraph of your letter.
+        <p>
+            Whatever happens in the future, I hope you continue
+            growing, learning, and becoming the person you want
+            to be.
+        </p>
 
-Because the letter is written directly into the webpage instead of using a textarea, the reader cannot edit your words.
-      </p>
+        <p>
+            Thank you for being you.
+        </p>
 
+        <div class="signature">
+            With love,<br>
+            Mia
+        </div>
 
-      <p>
-Continue writing your message here.
+    </div>
 
-The white background keeps the letter clean and simple while the blue details keep the overall design connected to the envelope.
-      </p>
-
-
-      <p class="signature">
-        With love,<br>
-        Your Name
-      </p>
-
-    </article>
-
-  </section>
-
-
-
-  <!-- JAVASCRIPT -->
-
-  <script>
-
-    const envelope =
-      document.getElementById(
-        "envelopeWrapper"
-      );
-
-    const opening =
-      document.getElementById(
-        "opening"
-      );
-
-    const letterPage =
-      document.getElementById(
-        "letterPage"
-      );
+</section>
 
 
-    envelope.addEventListener(
-      "click",
-      () => {
+<script>
 
-        if (
-          envelope.classList.contains("open")
-        ) {
-          return;
-        }
+const envelope = document.getElementById("envelope");
+const envelopeScreen = document.getElementById("envelopeScreen");
+const whiteFlash = document.getElementById("whiteFlash");
+const letterScreen = document.getElementById("letterScreen");
+const letter = document.getElementById("letter");
 
-        envelope.classList.add("open");
+let opened = false;
 
+envelope.addEventListener("click", () => {
+
+    if (opened) return;
+
+    opened = true;
+
+    /* Open envelope */
+    envelope.classList.add("open");
+
+    /*
+       Wait for the paper/flap animation
+       before starting the white transition.
+    */
+
+    setTimeout(() => {
+
+        /* Start white flash */
+        whiteFlash.classList.add("active");
+
+    }, 1200);
+
+
+    /*
+       Once the screen is white,
+       switch from envelope to letter.
+    */
+
+    setTimeout(() => {
+
+        envelopeScreen.style.display = "none";
+
+        letterScreen.style.display = "block";
 
         /*
-          Wait for the flap and paper
-          animation to finish before
-          showing the letter page.
+           Remove the flash after the letter
+           has appeared.
         */
 
         setTimeout(() => {
 
-          opening.classList.add(
-            "fade-out"
-          );
+            whiteFlash.style.display = "none";
 
+            letter.classList.add("show");
 
-          setTimeout(() => {
+        }, 100);
 
-            letterPage.classList.add(
-              "show"
-            );
+    }, 1900);
 
-          }, 350);
+});
 
-        }, 1650);
-
-      }
-    );
-
-
-    function closeLetter() {
-
-      letterPage.classList.remove(
-        "show"
-      );
-
-
-      setTimeout(() => {
-
-        opening.classList.remove(
-          "fade-out"
-        );
-
-        envelope.classList.remove(
-          "open"
-        );
-
-        letterPage.scrollTop = 0;
-
-      }, 800);
-
-    }
-
-  </script>
+</script>
 
 </body>
 </html>
-```
