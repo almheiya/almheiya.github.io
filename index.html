@@ -1,1 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Blue Letter</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* =========================
+   OPENING SCREEN
+========================= */
+
+body {
+    background: linear-gradient(135deg, #dcecff, #a9cef2);
+    overflow: hidden;
+}
+
+/* Center everything */
+
+.opening-screen {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 10;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+}
+
+/* =========================
+   BLUE LETTER
+========================= */
+
+.envelope {
+    position: relative;
+
+    width: 310px;
+    height: 210px;
+
+    cursor: pointer;
+
+    perspective: 1000px;
+
+    filter: drop-shadow(0 15px 20px rgba(0, 50, 100, 0.2));
+
+    transition:
+        transform 0.4s ease,
+        filter 0.4s ease;
+}
+
+.envelope:hover {
+    transform: translateY(-8px);
+    filter: drop-shadow(0 22px 25px rgba(0, 50, 100, 0.25));
+}
+
+/* Main blue envelope */
+
+.envelope-body {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #4d8fc9;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    z-index: 2;
+}
+
+/* Envelope diagonal folds */
+
+.envelope-body::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    background: #76addb;
+
+    transform: rotate(45deg);
+
+    left: -80px;
+    bottom: -145px;
+}
+
+.envelope-body::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    background: #76addb;
+
+    transform: rotate(45deg);
+
+    right: -80px;
+    bottom: -145px;
+}
+
+/* =========================
+   PAPER
+========================= */
+
+.paper {
+    position: absolute;
+
+    left: 5%;
+    bottom: 10px;
+
+    width: 90%;
+    height: 190px;
+
+    background: white;
+
+    border-radius: 3px;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+
+    z-index: 1;
+
+    padding: 25px;
+
+    opacity: 0;
+
+    transform: translateY(100px);
+
+    transition:
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.5s ease;
+}
+
+/* Envelope flap */
+
+.flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 155px solid transparent;
+    border-right: 155px solid transparent;
+    border-top: 115px solid #5f9fd2;
+
+    z-index: 3;
+
+    transform-origin: top;
+
+    transition:
+        transform 0.9s ease;
+
+    pointer-events: none;
+}
+
+/* Small label */
+
+.letter-label {
+    position: absolute;
+
+    z-index: 4;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: white;
+
+    text-align: center;
+
+    pointer-events: none;
+}
+
+.letter-label h1 {
+    font-size: 28px;
+    letter-spacing: 3px;
+    font-weight: normal;
+}
+
+.letter-label p {
+    margin-top: 7px;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+/* =========================
+   OPENING ANIMATION
+========================= */
+
+.envelope.open .paper {
+    opacity: 1;
+    transform: translateY(-130px);
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open {
+    transform: translateY(-20px);
+}
+
+/* =========================
+   WHITE FADE
+========================= */
+
+.fade-screen {
+    position: fixed;
+
+    inset: 0;
+
+    background: white;
+
+    z-index: 20;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: opacity 1.5s ease;
+}
+
+.fade-screen.active {
+    opacity: 1;
+}
+
+/* =========================
+   LETTER CONTENT
+========================= */
+
+.letter-page {
+    position: fixed;
+
+    inset: 0;
+
+    background: white;
+
+    overflow-y: auto;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 1.2s ease,
+        visibility 1.2s ease;
+
+    z-index: 5;
+}
+
+.letter-page.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Content container */
+
+.letter-content {
+    width: min(700px, 88%);
+
+    margin: 0 auto;
+
+    padding-top: 100px;
+    padding-bottom: 120px;
+}
+
+/* Title */
+
+.letter-content h1 {
+    text-align: center;
+
+    color: #3f78ad;
+
+    font-size: 42px;
+
+    font-weight: normal;
+
+    margin-bottom: 50px;
+}
+
+/* Letter text */
+
+.letter-text {
+    color: #333;
+
+    font-size: 18px;
+
+    line-height: 1.9;
+
+    white-space: pre-line;
+}
+
+/* Signature */
+
+.signature {
+    margin-top: 60px;
+
+    text-align: right;
+
+    font-size: 20px;
+
+    color: #3f78ad;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .envelope {
+        width: 270px;
+        height: 180px;
+    }
+
+    .flap {
+        border-left-width: 135px;
+        border-right-width: 135px;
+        border-top-width: 100px;
+    }
+
+    .letter-label h1 {
+        font-size: 24px;
+    }
+
+    .letter-label p {
+        font-size: 11px;
+    }
+
+    .envelope.open .paper {
+        transform: translateY(-110px);
+    }
+
+    .letter-content {
+        width: 86%;
+        padding-top: 70px;
+        padding-bottom: 90px;
+    }
+
+    .letter-content h1 {
+        font-size: 32px;
+        margin-bottom: 35px;
+    }
+
+    .letter-text {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     OPENING SCREEN
+========================= -->
+
+<div class="opening-screen" id="openingScreen">
+
+    <div class="envelope" id="envelope">
+
+        <!-- Paper hidden inside -->
+        <div class="paper"></div>
+
+        <!-- Envelope body -->
+        <div class="envelope-body"></div>
+
+        <!-- Flap -->
+        <div class="flap"></div>
+
+        <!-- Letter label -->
+        <div class="letter-label">
+            <h1>BLUE LETTER</h1>
+            <p>click to open</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     WHITE FADE
+========================= -->
+
+<div class="fade-screen" id="fadeScreen"></div>
+
+
+<!-- =========================
+     ACTUAL LETTER
+========================= -->
+
+<div class="letter-page" id="letterPage">
+
+    <main class="letter-content">
+
+        <h1>A Letter For You</h1>
+
+        <div class="letter-text">
+
+Dear you,
+
+This is where you can write your letter.
+
+You can make it as long as you want. Since the page is scrollable, the viewer can continue reading even if the letter is very long.
+
+You can also add multiple paragraphs like this.
+
+Write whatever you want here.
+
+Take your time.
+
+I hope you enjoy reading this letter.
+
+With love,
+
+        </div>
+
+        <div class="signature">
+            — Mia
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+const envelope = document.getElementById("envelope");
+const openingScreen = document.getElementById("openingScreen");
+const fadeScreen = document.getElementById("fadeScreen");
+const letterPage = document.getElementById("letterPage");
+
+let opened = false;
+
+envelope.addEventListener("click", function() {
+
+    if (opened) return;
+
+    opened = true;
+
+    /* Paper pops upward */
+    envelope.classList.add("open");
+
+    /* Wait for the paper animation */
+    setTimeout(function() {
+
+        /* Fade screen to white */
+        fadeScreen.classList.add("active");
+
+    }, 1100);
+
+
+    /* Show the actual letter */
+    setTimeout(function() {
+
+        openingScreen.style.opacity = "0";
+        openingScreen.style.visibility = "hidden";
+
+        letterPage.classList.add("show");
+
+        /* Allow scrolling */
+        document.body.style.overflow = "auto";
+
+    }, 2200);
+
+});
+
+</script>
+
+</body>
+</html>
