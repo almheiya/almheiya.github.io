@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,9 +47,7 @@
     }
 
 
-    /* =========================
-       BACKGROUND BUBBLES
-    ========================= */
+    /* BACKGROUND BUBBLES */
 
     .bubble {
       position: fixed;
@@ -92,9 +91,7 @@
     }
 
 
-    /* =========================
-       OPENING SCREEN
-    ========================= */
+    /* OPENING SCREEN */
 
     #opening {
       min-height: 100vh;
@@ -106,9 +103,6 @@
 
       text-align: center;
 
-      /*
-        Moves the whole content slightly lower.
-      */
       padding-top: 45px;
 
       transition:
@@ -147,9 +141,7 @@
     }
 
 
-    /* =========================
-       ENVELOPE WRAPPER
-    ========================= */
+    /* ENVELOPE */
 
     .envelope-wrapper {
       position: relative;
@@ -174,9 +166,7 @@
     }
 
 
-    /* =========================
-       ENVELOPE BACK
-    ========================= */
+    /* ENVELOPE BACK */
 
     .envelope-back {
       position: absolute;
@@ -204,32 +194,33 @@
     }
 
 
-    /* =========================
-       PAPER AREA
-    ========================= */
+    /*
+      PAPER HOLDER
+
+      Important:
+      This is now allowed to extend upward,
+      so the paper can actually come OUT
+      of the envelope.
+    */
 
     .paper-area {
       position: absolute;
 
       width: 100%;
-      height: 300px;
+      height: 460px;
 
       left: 0;
       bottom: 40px;
 
-      overflow: hidden;
+      overflow: visible;
 
-      border-radius: 13px;
-
-      z-index: 2;
+      z-index: 3;
 
       pointer-events: none;
     }
 
 
-    /* =========================
-       PAPER
-    ========================= */
+    /* PAPER */
 
     .paper {
       position: absolute;
@@ -240,29 +231,32 @@
       left: 6%;
 
       /*
-        Completely hidden inside
-        the envelope when closed.
+        Fully hidden inside the envelope.
       */
-      bottom: -315px;
+      bottom: -350px;
 
-      background: #ffffff;
+      background: white;
 
       border-radius: 5px;
 
       padding: 35px;
 
       box-shadow:
-        0 10px 35px rgba(15, 23, 42, 0.18);
+        0 15px 40px
+        rgba(15, 23, 42, 0.22);
 
       /*
-        The paper waits slightly
-        before beginning its movement.
+        Smooth upward movement.
       */
       transition:
-        bottom 1.15s
-        cubic-bezier(0.22, 1, 0.36, 1);
+        bottom 1.25s
+        cubic-bezier(0.16, 1, 0.3, 1);
 
-      transition-delay: 0.35s;
+      /*
+        The paper waits for the flap
+        to begin opening first.
+      */
+      transition-delay: 0.3s;
     }
 
     .paper-lines {
@@ -282,9 +276,17 @@
     }
 
 
-    /* =========================
-       ENVELOPE FRONT
-    ========================= */
+    /*
+      When opened, the paper rises
+      significantly above the envelope.
+    */
+
+    .open .paper {
+      bottom: 245px;
+    }
+
+
+    /* ENVELOPE FRONT */
 
     .envelope-front {
       position: absolute;
@@ -314,15 +316,17 @@
           0 100%
         );
 
+      /*
+        The front stays in front of
+        the bottom portion of the paper.
+      */
       z-index: 4;
 
       pointer-events: none;
     }
 
 
-    /* =========================
-       FLAP
-    ========================= */
+    /* FLAP */
 
     .flap {
       position: absolute;
@@ -348,7 +352,8 @@
           100% 0
         );
 
-      transform-origin: top center;
+      transform-origin:
+        top center;
 
       transition:
         transform 0.9s
@@ -363,10 +368,13 @@
         );
     }
 
+    .open .flap {
+      transform:
+        rotateX(180deg);
+    }
 
-    /* =========================
-       HEART STAMP
-    ========================= */
+
+    /* HEART STAMP */
 
     .seal {
       position: absolute;
@@ -446,37 +454,6 @@
       z-index: 2;
     }
 
-
-    /* =========================
-       OPEN ANIMATION
-    ========================= */
-
-    /*
-      STEP 1:
-      The flap opens first.
-    */
-
-    .open .flap {
-      transform:
-        rotateX(180deg);
-    }
-
-
-    /*
-      STEP 2:
-      After a short delay, the paper
-      slides upward from INSIDE.
-    */
-
-    .open .paper {
-      bottom: 210px;
-    }
-
-
-    /*
-      Hide the heart after opening.
-    */
-
     .open .seal {
       opacity: 0;
 
@@ -487,9 +464,7 @@
     }
 
 
-    /* =========================
-       OPENING INSTRUCTION
-    ========================= */
+    /* CLICK TO OPEN */
 
     .open-instruction {
       margin-top: -10px;
@@ -506,9 +481,7 @@
     }
 
 
-    /* =========================
-       LETTER PAGE
-    ========================= */
+    /* LETTER PAGE */
 
     #letterPage {
       position: fixed;
@@ -542,9 +515,7 @@
     }
 
 
-    /* =========================
-       LETTER CONTENT
-    ========================= */
+    /* LETTER CONTENT */
 
     .letter-content {
       width: min(85%, 780px);
@@ -618,9 +589,7 @@
     }
 
 
-    /* =========================
-       BACK BUTTON
-    ========================= */
+    /* BACK BUTTON */
 
     .back-button {
       position: fixed;
@@ -665,9 +634,7 @@
     }
 
 
-    /* =========================
-       MOBILE
-    ========================= */
+    /* MOBILE */
 
     @media (max-width: 650px) {
 
@@ -689,9 +656,16 @@
       }
 
       .envelope-back,
-      .envelope-front,
-      .paper-area {
+      .envelope-front {
         height: 200px;
+        bottom: 20px;
+      }
+
+      /*
+        Taller paper area on mobile too.
+      */
+      .paper-area {
+        height: 310px;
         bottom: 20px;
       }
 
@@ -701,19 +675,19 @@
         width: 88%;
         left: 6%;
 
-        bottom: -220px;
+        bottom: -245px;
 
         padding: 22px;
 
         transition:
-          bottom 1.05s
-          cubic-bezier(0.22, 1, 0.36, 1);
+          bottom 1.1s
+          cubic-bezier(0.16, 1, 0.3, 1);
 
-        transition-delay: 0.3s;
+        transition-delay: 0.25s;
       }
 
       .open .paper {
-        bottom: 130px;
+        bottom: 155px;
       }
 
       .flap {
@@ -783,9 +757,7 @@
   <div class="bubble"></div>
 
 
-  <!-- =========================
-       OPENING
-  ========================= -->
+  <!-- OPENING -->
 
   <section id="opening">
 
@@ -803,33 +775,28 @@
       id="envelopeWrapper"
     >
 
-      <!-- Envelope back -->
-
       <div class="envelope-back"></div>
 
 
-      <!-- Paper -->
+      <!-- PAPER -->
 
       <div class="paper-area">
 
         <div class="paper">
+
           <div class="paper-lines"></div>
+
         </div>
 
       </div>
 
 
-      <!-- Envelope front -->
-
       <div class="envelope-front"></div>
-
-
-      <!-- Flap -->
 
       <div class="flap"></div>
 
 
-      <!-- Heart stamp -->
+      <!-- HEART -->
 
       <div class="seal">
         <span></span>
@@ -838,7 +805,7 @@
     </div>
 
 
-    <!-- Direction -->
+    <!-- DIRECTIONS -->
 
     <p class="open-instruction">
       Click to open
@@ -848,9 +815,7 @@
 
 
 
-  <!-- =========================
-       LETTER PAGE
-  ========================= -->
+  <!-- LETTER PAGE -->
 
   <section id="letterPage">
 
@@ -903,9 +868,7 @@ The white background keeps the letter clean and simple while the blue details ke
 
 
 
-  <!-- =========================
-       JAVASCRIPT
-  ========================= -->
+  <!-- JAVASCRIPT -->
 
   <script>
 
@@ -939,8 +902,9 @@ The white background keeps the letter clean and simple while the blue details ke
 
 
         /*
-          The flap opens first.
-          Then the paper rises.
+          Wait for the flap and paper
+          animation to finish before
+          showing the letter page.
         */
 
         setTimeout(() => {
@@ -958,7 +922,7 @@ The white background keeps the letter clean and simple while the blue details ke
 
           }, 350);
 
-        }, 1550);
+        }, 1650);
 
       }
     );
