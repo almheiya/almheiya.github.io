@@ -680,7 +680,7 @@
     <!-- MAIN OPENING ENVELOPE SCREEN -->
     <section id="opening">
 
-        <h1>A LETTER FOR FRENZ</h1>
+        <h1>A LETTER FOR YOU BABY</h1>
         <p class="subtitle">A special message waiting inside</p>
 
         <!-- 3D FLIP ENVELOPE CONTAINER -->
@@ -691,11 +691,10 @@
                 <div class="envelope-side-front">
                     <div class="envelope-stamp">
                         LOVE
-                        <span>💌</span>
                     </div>
 
                     <div class="envelope-address">
-                        To: Frenz ✨<br>
+                        To: Frenzyy <br>
                         <span style="font-size: 0.85em; opacity: 0.8; font-family: system-ui;">For Your Eyes Only</span>
                     </div>
 
@@ -724,7 +723,7 @@
                     <div class="flap" id="flap">
                         <!-- HIDDEN TEASER UNDER FLAP -->
                         <div class="flap-hidden-teaser">
-                            <div class="teaser-badge">Spoiler: It's a YES! 💖</div><br>
+                            <div class="teaser-badge">Spoiler: It's a YES!</div><br>
                             <div class="teaser-checkbox">[x] Official Boyfriend Status: APPROVED</div>
                         </div>
                     </div>
@@ -742,10 +741,10 @@
         <!-- CONTROLS FOR USER INTERACTION -->
         <div class="controls-wrapper">
             <button class="action-btn" id="flipBtn" onclick="toggleFlip()">
-                <span>🔄 Flip Envelope</span>
+                <span>Flip Envelope</span>
             </button>
             <button class="action-btn action-btn-primary" id="openBtn" onclick="openEnvelope()">
-                <span>✉️ Open Envelope</span>
+                <span>Open Envelope</span>
             </button>
         </div>
 
@@ -776,15 +775,15 @@
 
             <p class="signature">
                 Forever yours,<br>
-                Your Girlfriend ❤️
+                Your Girlfriend
             </p>
 
             <!-- RSVP CONFIRMATION BOX -->
             <div class="rsvp-box">
-                <h3>Make It Official! ✨</h3>
+                <h3>Make It Official!</h3>
                 <p>Click below to seal our agreement and celebrate!</p>
                 <button class="rsvp-button" onclick="celebrateRSVP()">
-                    Click to lock in our status! 💖
+                    Click to lock in our status!
                 </button>
             </div>
         </article>
@@ -809,7 +808,7 @@
             envelopeCard.classList.toggle("is-flipped", isFlipped);
             
             // Update button label
-            flipBtn.innerHTML = isFlipped ? "<span>🔄 View Front</span>" : "<span>🔄 Flip Envelope</span>";
+            flipBtn.innerHTML = isFlipped ? "<span>View Front</span>" : "<span>Flip Envelope</span>";
         }
 
         /* OPEN ENVELOPE ANIMATION SEQUENCE */
@@ -820,7 +819,7 @@
             if (!isFlipped) {
                 isFlipped = true;
                 envelopeCard.classList.add("is-flipped");
-                flipBtn.innerHTML = "<span>🔄 View Front</span>";
+                flipBtn.innerHTML = "<span>View Front</span>";
                 setTimeout(startOpenSequence, 400);
             } else {
                 startOpenSequence();
@@ -890,7 +889,7 @@
 
             // Button feedback
             const rsvpBtn = document.querySelector('.rsvp-button');
-            rsvpBtn.innerHTML = "OFFICIALLY LOCKED IN! 🎉💖";
+            rsvpBtn.innerHTML = "OFFICIALLY LOCKED IN!";
             rsvpBtn.style.background = "linear-gradient(135deg, #10b981, #059669)";
         }
 
