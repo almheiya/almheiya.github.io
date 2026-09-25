@@ -144,11 +144,43 @@
             letter-spacing: 1px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(4px);
+            gap: 6px;
         }
 
-        .envelope-stamp span {
-            font-size: 22px;
+        /* Pixel Heart & Stamp Price CSS */
+        .pixel-heart {
+            position: relative;
+            width: 14px;
+            height: 14px;
+            background: #ef4444;
+            transform: rotate(-45deg);
             margin-top: 4px;
+        }
+
+        .pixel-heart::before,
+        .pixel-heart::after {
+            content: "";
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #ef4444;
+        }
+
+        .pixel-heart::before {
+            top: -7px;
+            left: 0;
+        }
+
+        .pixel-heart::after {
+            top: 0;
+            left: 7px;
+        }
+
+        .stamp-price {
+            font-size: 13px;
+            font-weight: bold;
+            color: #ffffff;
         }
 
         .envelope-address {
@@ -282,7 +314,7 @@
             position: absolute;
             top: 40px;
             left: 50%;
-            transform: translateX(-50%) rotateX(180deg); /* Counter flip so text reads normally when flap flips up */
+            transform: translateX(-50%) rotateX(180deg);
             width: 80%;
             text-align: center;
             color: #1e3a8a;
@@ -633,8 +665,22 @@
                 font-size: 9px;
             }
 
-            .envelope-stamp span {
-                font-size: 16px;
+            .pixel-heart {
+                width: 10px;
+                height: 10px;
+            }
+
+            .pixel-heart::before,
+            .pixel-heart::after {
+                width: 10px;
+                height: 10px;
+            }
+
+            .pixel-heart::before { top: -5px; }
+            .pixel-heart::after { left: 5px; }
+
+            .stamp-price {
+                font-size: 10px;
             }
 
             .envelope-address {
@@ -689,8 +735,9 @@
                 
                 <!-- FRONT SIDE OF ENVELOPE -->
                 <div class="envelope-side-front">
-                    <div class="envelope-stamp">
-                        LOVE
+                    <div class="envelope-stamp" title="Pixel Stamp">
+                        <div class="pixel-heart"></div>
+                        <span class="stamp-price">10¢</span>
                     </div>
 
                     <div class="envelope-address">
