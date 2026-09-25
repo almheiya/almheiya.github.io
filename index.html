@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,6 +107,11 @@
 
       text-align: center;
 
+      /*
+        Moves the whole content slightly lower.
+      */
+      padding-top: 45px;
+
       transition:
         opacity 1s ease,
         visibility 1s ease;
@@ -200,11 +206,7 @@
 
 
     /* =========================
-       PAPER
-       
-       IMPORTANT:
-       The paper is clipped by the
-       envelope wrapper while closed.
+       PAPER AREA
     ========================= */
 
     .paper-area {
@@ -225,6 +227,11 @@
       pointer-events: none;
     }
 
+
+    /* =========================
+       PAPER
+    ========================= */
+
     .paper {
       position: absolute;
 
@@ -233,6 +240,10 @@
 
       left: 6%;
 
+      /*
+        Completely hidden inside
+        the envelope when closed.
+      */
       bottom: -315px;
 
       background: #ffffff;
@@ -244,13 +255,15 @@
       box-shadow:
         0 10px 35px rgba(15, 23, 42, 0.18);
 
+      /*
+        The paper waits slightly
+        before beginning its movement.
+      */
       transition:
-        bottom 1.2s cubic-bezier(
-          0.22,
-          1,
-          0.36,
-          1
-        );
+        bottom 1.15s
+        cubic-bezier(0.22, 1, 0.36, 1);
+
+      transition-delay: 0.35s;
     }
 
     .paper-lines {
@@ -272,9 +285,6 @@
 
     /* =========================
        ENVELOPE FRONT
-       
-       This sits in front of the
-       paper's lower section.
     ========================= */
 
     .envelope-front {
@@ -312,7 +322,7 @@
 
 
     /* =========================
-       ENVELOPE FLAP
+       FLAP
     ========================= */
 
     .flap {
@@ -342,12 +352,8 @@
       transform-origin: top center;
 
       transition:
-        transform 1s cubic-bezier(
-          0.22,
-          1,
-          0.36,
-          1
-        );
+        transform 0.9s
+        cubic-bezier(0.22, 1, 0.36, 1);
 
       z-index: 6;
 
@@ -423,9 +429,6 @@
       left: 39px;
     }
 
-
-    /* Small heart highlight */
-
     .seal span {
       position: absolute;
 
@@ -441,8 +444,6 @@
       border-bottom:
         2px solid #bfdbfe;
 
-      transform: rotate(0deg);
-
       z-index: 2;
     }
 
@@ -452,21 +453,30 @@
     ========================= */
 
     /*
-      Paper moves straight upward
-      from inside the envelope.
+      STEP 1:
+      The flap opens first.
+    */
 
-      It does NOT start behind
-      the envelope.
+    .open .flap {
+      transform:
+        rotateX(180deg);
+    }
+
+
+    /*
+      STEP 2:
+      After a short delay, the paper
+      slides upward from INSIDE.
     */
 
     .open .paper {
       bottom: 210px;
     }
 
-    .open .flap {
-      transform:
-        rotateX(180deg);
-    }
+
+    /*
+      Hide the heart after opening.
+    */
 
     .open .seal {
       opacity: 0;
@@ -475,6 +485,25 @@
         translateX(-50%)
         rotate(-45deg)
         scale(0.7);
+    }
+
+
+    /* =========================
+       OPENING INSTRUCTION
+    ========================= */
+
+    .open-instruction {
+      margin-top: -10px;
+
+      color: #dbeafe;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 13px;
+
+      letter-spacing: 1px;
+
+      opacity: 0.9;
     }
 
 
@@ -532,6 +561,7 @@
       color: #172554;
 
       font-size: 19px;
+
       line-height: 2;
 
       text-align: left;
@@ -642,6 +672,10 @@
 
     @media (max-width: 650px) {
 
+      #opening {
+        padding-top: 35px;
+      }
+
       h1 {
         font-size: 2.5rem;
       }
@@ -664,12 +698,19 @@
 
       .paper {
         height: 245px;
+
         width: 88%;
         left: 6%;
 
         bottom: -220px;
 
         padding: 22px;
+
+        transition:
+          bottom 1.05s
+          cubic-bezier(0.22, 1, 0.36, 1);
+
+        transition-delay: 0.3s;
       }
 
       .open .paper {
@@ -702,6 +743,10 @@
         left: 29px;
       }
 
+      .open-instruction {
+        margin-top: -5px;
+      }
+
       .letter-content {
         width: 86%;
 
@@ -711,6 +756,7 @@
           110px;
 
         font-size: 17px;
+
         line-height: 1.9;
       }
 
@@ -730,7 +776,8 @@
 
 <body>
 
-  <!-- Background -->
+
+  <!-- BACKGROUND -->
 
   <div class="bubble"></div>
   <div class="bubble"></div>
@@ -750,6 +797,8 @@
     </p>
 
 
+    <!-- ENVELOPE -->
+
     <div
       class="envelope-wrapper"
       id="envelopeWrapper"
@@ -760,7 +809,7 @@
       <div class="envelope-back"></div>
 
 
-      <!-- Paper is contained inside this area -->
+      <!-- Paper -->
 
       <div class="paper-area">
 
@@ -781,13 +830,20 @@
       <div class="flap"></div>
 
 
-      <!-- Heart seal -->
+      <!-- Heart stamp -->
 
       <div class="seal">
         <span></span>
       </div>
 
     </div>
+
+
+    <!-- Direction -->
+
+    <p class="open-instruction">
+      Click to open
+    </p>
 
   </section>
 
@@ -883,6 +939,11 @@ The white background keeps the letter clean and simple while the blue details ke
         envelope.classList.add("open");
 
 
+        /*
+          The flap opens first.
+          Then the paper rises.
+        */
+
         setTimeout(() => {
 
           opening.classList.add(
@@ -898,7 +959,7 @@ The white background keeps the letter clean and simple while the blue details ke
 
           }, 350);
 
-        }, 1050);
+        }, 1550);
 
       }
     );
