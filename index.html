@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>A Letter For You 💙</title>
+  <title>A Letter For You</title>
 
   <style>
 
@@ -21,16 +21,25 @@
 
     body {
       min-height: 100vh;
+
       font-family: Georgia, "Times New Roman", serif;
 
       background:
-        radial-gradient(circle at 20% 20%, #60a5fa 0%, transparent 25%),
-        radial-gradient(circle at 80% 80%, #1d4ed8 0%, transparent 30%),
+        radial-gradient(
+          circle at 15% 15%,
+          rgba(147, 197, 253, 0.45),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 80%,
+          rgba(29, 78, 216, 0.45),
+          transparent 32%
+        ),
         linear-gradient(
           135deg,
           #0f172a,
-          #1e40af,
-          #2563eb,
+          #172554,
+          #1d4ed8,
           #38bdf8
         );
 
@@ -39,38 +48,50 @@
       overflow-x: hidden;
     }
 
+
     /* =========================
-       BACKGROUND BUBBLES
+       FLOATING BUBBLES
        ========================= */
 
     .bubble {
       position: fixed;
+
       border-radius: 50%;
-      background: rgba(147, 197, 253, 0.18);
-      animation: float 8s infinite ease-in-out;
+
+      background:
+        rgba(191, 219, 254, 0.16);
+
       pointer-events: none;
+
+      animation:
+        float 9s infinite ease-in-out;
     }
 
     .bubble:nth-child(1) {
-      width: 120px;
-      height: 120px;
-      left: 10%;
+      width: 150px;
+      height: 150px;
+
+      left: 7%;
       top: 10%;
     }
 
     .bubble:nth-child(2) {
-      width: 200px;
-      height: 200px;
-      right: 5%;
-      top: 15%;
+      width: 240px;
+      height: 240px;
+
+      right: 3%;
+      top: 12%;
+
       animation-delay: 2s;
     }
 
     .bubble:nth-child(3) {
-      width: 80px;
-      height: 80px;
-      left: 15%;
-      bottom: 10%;
+      width: 90px;
+      height: 90px;
+
+      left: 12%;
+      bottom: 8%;
+
       animation-delay: 4s;
     }
 
@@ -92,12 +113,15 @@
        ========================= */
 
     #opening {
+
       min-height: 100vh;
 
       display: flex;
+
       flex-direction: column;
 
       justify-content: center;
+
       align-items: center;
 
       text-align: center;
@@ -105,35 +129,51 @@
       transition:
         opacity 1s ease,
         visibility 1s ease;
+
     }
 
     #opening.fade-out {
+
       opacity: 0;
+
       visibility: hidden;
+
     }
+
 
     h1 {
+
       color: white;
 
-      font-size: clamp(
-        2rem,
-        6vw,
-        4rem
-      );
+      font-size:
+        clamp(2.5rem, 7vw, 4.8rem);
 
-      margin-bottom: 10px;
+      font-weight: normal;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 12px;
 
       text-shadow:
-        0 5px 20px
+        0 6px 25px
         rgba(0, 0, 80, 0.3);
+
     }
 
+
     .subtitle {
+
       color: #dbeafe;
 
-      margin-bottom: 35px;
+      font-family:
+        Arial, sans-serif;
 
-      font-family: Arial, sans-serif;
+      font-size: 15px;
+
+      letter-spacing: 0.5px;
+
+      margin-bottom: 50px;
+
     }
 
 
@@ -145,8 +185,9 @@
 
       position: relative;
 
-      width: 360px;
-      height: 280px;
+      width: 500px;
+
+      height: 360px;
 
       margin: 0 auto;
 
@@ -155,99 +196,135 @@
       transition:
         transform 0.4s ease;
 
+      perspective: 1000px;
+
     }
+
 
     .envelope-wrapper:hover {
+
       transform:
         translateY(-8px)
-        scale(1.03);
+        scale(1.025);
+
     }
 
 
-    /* Paper */
+    /* =========================
+       PAPER
+       ========================= */
 
     .paper {
 
       position: absolute;
 
-      width: 85%;
-      height: 210px;
+      width: 88%;
 
-      left: 7.5%;
-      bottom: 25px;
+      height: 300px;
+
+      left: 6%;
+
+      bottom: 30px;
 
       background: #ffffff;
 
-      border-radius: 4px;
+      border-radius: 5px;
 
-      padding: 20px;
-
-      z-index: 2;
+      padding: 28px;
 
       /*
-        IMPORTANT:
-        The paper starts
+        Paper begins completely
         INSIDE the envelope.
       */
 
       transform:
-        translateY(135px);
+        translateY(245px);
 
-      transition:
-        transform 1s ease;
+      /*
+        Paper is above the envelope
+        so it comes forward when opening.
+      */
+
+      z-index: 5;
 
       box-shadow:
-        0 5px 20px
-        rgba(0, 0, 0, 0.15);
+        0 8px 30px
+        rgba(15, 23, 42, 0.18);
 
-    }
-
-
-    /* Paper lines */
-
-    .paper-lines {
-
-      width: 100%;
-      height: 100%;
-
-      background:
-        repeating-linear-gradient(
-          #ffffff 0px,
-          #ffffff 28px,
-          #bfdbfe 29px
+      transition:
+        transform 1.1s
+        cubic-bezier(
+          0.22,
+          1,
+          0.36,
+          1
         );
 
     }
 
 
-    /* Envelope body */
+    /* Paper decorative lines */
+
+    .paper-lines {
+
+      width: 100%;
+
+      height: 100%;
+
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          #ffffff 0px,
+          #ffffff 30px,
+          #dbeafe 31px
+        );
+
+      border-top:
+        1px solid #dbeafe;
+
+    }
+
+
+    /* =========================
+       ENVELOPE BODY
+       ========================= */
 
     .envelope {
 
       position: absolute;
 
       width: 100%;
-      height: 180px;
+
+      height: 230px;
 
       left: 0;
-      bottom: 20px;
 
-      background: #2563eb;
+      bottom: 25px;
 
-      border-radius: 8px;
+      background:
+        linear-gradient(
+          145deg,
+          #60a5fa,
+          #2563eb 55%,
+          #1d4ed8
+        );
 
-      overflow: hidden;
+      border-radius: 10px;
 
       z-index: 3;
 
+      overflow: hidden;
+
       box-shadow:
-        0 25px 50px
-        rgba(15, 23, 42, 0.4);
+        0 30px 60px
+        rgba(15, 23, 42, 0.42);
 
     }
 
 
-    /* Envelope front */
+    /*
+      Envelope front folds
+    */
 
     .envelope::before {
 
@@ -262,13 +339,13 @@
           145deg,
           #3b82f6,
           #2563eb 55%,
-          #1d4ed8
+          #1e40af
         );
 
       clip-path:
         polygon(
           0 0,
-          50% 58%,
+          50% 62%,
           100% 0,
           100% 100%,
           0 100%
@@ -277,19 +354,51 @@
     }
 
 
-    /* Envelope flap */
+    /*
+      Small inner shadow
+      for a more realistic envelope
+    */
+
+    .envelope::after {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      border-radius: 10px;
+
+      box-shadow:
+        inset 0 0 25px
+        rgba(15, 23, 42, 0.12);
+
+    }
+
+
+    /* =========================
+       FLAP
+       ========================= */
 
     .flap {
 
       position: absolute;
 
       width: 100%;
-      height: 140px;
+
+      height: 180px;
 
       left: 0;
-      top: 80px;
 
-      background: #60a5fa;
+      top: 105px;
+
+      background:
+        linear-gradient(
+          160deg,
+          #93c5fd,
+          #60a5fa 55%,
+          #3b82f6
+        );
 
       clip-path:
         polygon(
@@ -302,56 +411,112 @@
         top center;
 
       transition:
-        transform 0.9s ease;
+        transform 1s
+        cubic-bezier(
+          0.22,
+          1,
+          0.36,
+          1
+        );
 
-      z-index: 4;
+      z-index: 6;
+
+      filter:
+        drop-shadow(
+          0 4px 6px
+          rgba(15, 23, 42, 0.12)
+        );
 
     }
 
 
-    /* Seal */
+    /* =========================
+       SEAL
+       ========================= */
 
     .seal {
 
       position: absolute;
 
-      width: 55px;
-      height: 55px;
+      width: 66px;
+
+      height: 66px;
 
       left: 50%;
-      top: 135px;
+
+      top: 170px;
 
       transform:
         translateX(-50%);
 
       border-radius: 50%;
 
-      background: #1e3a8a;
+      background:
+        linear-gradient(
+          145deg,
+          #1e3a8a,
+          #172554
+        );
 
-      color: white;
+      border:
+        3px solid
+        rgba(191, 219, 254, 0.5);
 
-      display: flex;
-
-      justify-content: center;
-      align-items: center;
-
-      font-size: 24px;
-
-      z-index: 5;
+      z-index: 8;
 
       box-shadow:
-        0 5px 15px
-        rgba(0, 0, 50, 0.3);
+        0 7px 20px
+        rgba(15, 23, 42, 0.3);
 
       transition:
-        opacity 0.5s ease;
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+    }
+
+
+    .seal::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 30px;
+
+      height: 22px;
+
+      left: 50%;
+
+      top: 50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      border:
+        2px solid
+        #bfdbfe;
+
+      border-radius: 3px;
 
     }
 
 
     /* =========================
-       OPENING ANIMATION
+       OPEN ANIMATION
        ========================= */
+
+    .open .paper {
+
+      /*
+        Paper rises completely
+        in front of the envelope.
+      */
+
+      transform:
+        translateY(-175px);
+
+    }
+
 
     .open .flap {
 
@@ -360,20 +525,14 @@
 
     }
 
-    .open .paper {
-
-      /*
-        Paper pops upward
-      */
-
-      transform:
-        translateY(-110px);
-
-    }
 
     .open .seal {
 
       opacity: 0;
+
+      transform:
+        translateX(-50%)
+        scale(0.7);
 
     }
 
@@ -388,11 +547,14 @@
 
       color: white;
 
-      font-family: Arial, sans-serif;
+      font-family:
+        Arial, sans-serif;
 
-      font-size: 14px;
+      font-size: 13px;
 
-      opacity: 0.9;
+      letter-spacing: 1px;
+
+      opacity: 0.85;
 
     }
 
@@ -407,19 +569,19 @@
 
       inset: 0;
 
-      background: white;
+      background: #ffffff;
 
       opacity: 0;
 
       visibility: hidden;
 
       transform:
-        translateY(30px);
+        translateY(25px);
 
       transition:
-        opacity 1.2s ease,
-        transform 1.2s ease,
-        visibility 1.2s ease;
+        opacity 1.3s ease,
+        transform 1.3s ease,
+        visibility 1.3s ease;
 
       overflow-y: auto;
 
@@ -441,20 +603,19 @@
 
 
     /* =========================
-       ACTUAL LETTER
+       LETTER CONTENT
        ========================= */
 
     .letter-content {
 
-      width: min(
-        90%,
-        750px
-      );
+      width:
+        min(88%, 780px);
 
-      margin: 0 auto;
+      margin:
+        0 auto;
 
       padding:
-        80px 0 120px;
+        90px 0 140px;
 
       color: #172554;
 
@@ -473,16 +634,39 @@
 
       color: #1d4ed8;
 
-      font-size: 2.5rem;
+      font-size:
+        clamp(2rem, 5vw, 3rem);
 
-      margin-bottom: 50px;
+      font-weight: normal;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 60px;
+
+    }
+
+
+    .letter-content h2::after {
+
+      content: "";
+
+      display: block;
+
+      width: 55px;
+
+      height: 2px;
+
+      background: #93c5fd;
+
+      margin:
+        20px auto 0;
 
     }
 
 
     .letter-content p {
 
-      margin-bottom: 30px;
+      margin-bottom: 35px;
 
       white-space: pre-line;
 
@@ -491,53 +675,69 @@
 
     .signature {
 
-      margin-top: 60px;
+      margin-top: 70px;
 
       text-align: right;
 
       font-style: italic;
 
+      color: #1d4ed8;
+
     }
 
 
     /* =========================
-       CLOSE BUTTON
+       BACK BUTTON
        ========================= */
 
     .back-button {
 
       position: fixed;
 
-      top: 20px;
-      right: 20px;
+      top: 25px;
+
+      right: 30px;
 
       z-index: 30;
 
-      border: none;
+      border: 1px solid #bfdbfe;
 
-      background: #dbeafe;
+      background: rgba(
+        239,
+        246,
+        255,
+        0.9
+      );
 
       color: #1e40af;
 
       padding:
         10px 18px;
 
-      border-radius: 10px;
+      border-radius: 20px;
 
       cursor: pointer;
 
-      font-family: Arial, sans-serif;
+      font-family:
+        Arial, sans-serif;
 
-      font-weight: bold;
+      font-size: 13px;
+
+      letter-spacing: 0.5px;
 
       transition:
-        background 0.3s ease;
+        background 0.3s ease,
+        transform 0.3s ease;
 
     }
 
+
     .back-button:hover {
 
-      background: #bfdbfe;
+      background: #dbeafe;
+
+      transform:
+        translateY(-2px);
 
     }
 
@@ -546,65 +746,92 @@
        MOBILE
        ========================= */
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
 
-      .envelope-wrapper {
+      h1 {
 
-        width: 300px;
-        height: 240px;
+        font-size: 2.5rem;
 
       }
 
+
+      .subtitle {
+
+        margin-bottom: 35px;
+
+      }
+
+
+      .envelope-wrapper {
+
+        width: 340px;
+
+        height: 270px;
+
+      }
+
+
       .envelope {
 
-        height: 150px;
+        height: 175px;
 
         bottom: 20px;
 
       }
 
+
       .paper {
 
-        width: 85%;
+        width: 88%;
 
-        height: 175px;
+        height: 220px;
 
-        left: 7.5%;
+        left: 6%;
 
-        bottom: 30px;
+        bottom: 25px;
+
+        padding: 20px;
 
         transform:
-          translateY(110px);
+          translateY(185px);
 
       }
+
 
       .open .paper {
 
         transform:
-          translateY(-75px);
+          translateY(-115px);
 
       }
+
 
       .flap {
 
-        top: 70px;
+        height: 135px;
 
-        height: 120px;
+        top: 75px;
 
       }
+
 
       .seal {
 
-        top: 115px;
+        width: 55px;
+
+        height: 55px;
+
+        top: 125px;
 
       }
 
+
       .letter-content {
 
-        width: 88%;
+        width: 86%;
 
         padding:
-          70px 0 100px;
+          75px 0 100px;
 
         font-size: 17px;
 
@@ -612,11 +839,19 @@
 
       }
 
+
       .letter-content h2 {
 
-        font-size: 2rem;
+        margin-bottom: 45px;
 
-        margin-bottom: 35px;
+      }
+
+
+      .back-button {
+
+        top: 15px;
+
+        right: 15px;
 
       }
 
@@ -628,21 +863,23 @@
 
 <body>
 
-  <!-- Background bubbles -->
+
+  <!-- Background -->
 
   <div class="bubble"></div>
   <div class="bubble"></div>
   <div class="bubble"></div>
+
 
 
   <!-- =========================
-       OPENING SCREEN
+       OPENING
        ========================= -->
 
   <section id="opening">
 
     <h1>
-      A Letter For You 💙
+      A Letter For You
     </h1>
 
     <p class="subtitle">
@@ -655,7 +892,8 @@
       id="envelopeWrapper"
     >
 
-      <!-- Paper inside envelope -->
+
+      <!-- Paper -->
 
       <div class="paper">
 
@@ -676,15 +914,14 @@
 
       <!-- Seal -->
 
-      <div class="seal">
-        ✉
-      </div>
+      <div class="seal"></div>
+
 
     </div>
 
 
     <p class="hint">
-      Click the blue envelope
+      Click to open
     </p>
 
   </section>
@@ -692,32 +929,31 @@
 
 
   <!-- =========================
-       LETTER PAGE
+       LETTER
        ========================= -->
 
   <section id="letterPage">
+
 
     <button
       class="back-button"
       onclick="closeLetter()"
     >
-      ← Back
+      Back
     </button>
 
 
     <article class="letter-content">
 
+
       <h2>
-        💌 A Letter For You
+        A Letter For You
       </h2>
 
 
       <!--
-        WRITE YOUR ACTUAL LETTER HERE.
-
-        The viewer can READ this,
-        but there is no textarea,
-        so they cannot edit it.
+        REPLACE THE TEXT BELOW
+        WITH YOUR ACTUAL LETTER.
       -->
 
 
@@ -726,32 +962,31 @@ Dear someone special,
 
 Write your actual letter here.
 
-You can make this as long as you want. The page will automatically become scrollable when the letter is longer than the screen.
+You can make this as long as you want. The page will automatically become scrollable as the letter gets longer.
 
-You can also separate your letter into multiple paragraphs like this.
-
-Take your time writing it. 💙
+You can add multiple paragraphs and the reader will simply scroll down through the letter.
       </p>
 
 
       <p>
 This is another paragraph of your letter.
 
-Because this is normal text instead of a textarea, the viewer cannot click inside it and change your message.
+Because the letter is written directly into the webpage instead of using a textarea, the reader cannot edit your words.
       </p>
 
 
       <p>
-You can continue adding as many paragraphs as you want.
+Continue writing your message here.
 
-The white page will remain visible while the person scrolls down through the entire letter.
+The white background keeps the letter clean and simple while the blue details keep the overall design connected to the envelope.
       </p>
 
 
       <p class="signature">
         With love,<br>
-        Your Name 💙
+        Your Name
       </p>
+
 
     </article>
 
@@ -761,15 +996,18 @@ The white page will remain visible while the person scrolls down through the ent
 
   <script>
 
+
     const envelope =
       document.getElementById(
         "envelopeWrapper"
       );
 
+
     const opening =
       document.getElementById(
         "opening"
       );
+
 
     const letterPage =
       document.getElementById(
@@ -785,32 +1023,37 @@ The white page will remain visible while the person scrolls down through the ent
       "click",
       () => {
 
-        /*
-          Prevent clicking twice
-          during animation
-        */
 
         if (
-          envelope.classList.contains("open")
+          envelope.classList.contains(
+            "open"
+          )
         ) {
+
           return;
+
         }
 
 
-        /* Open envelope */
+        /*
+          Start envelope animation
+        */
 
-        envelope.classList.add("open");
+        envelope.classList.add(
+          "open"
+        );
 
 
         /*
-          Wait for the paper
-          animation to finish
+          Wait for paper
+          to rise
         */
 
         setTimeout(() => {
 
+
           /*
-            Fade out opening screen
+            Fade opening screen
           */
 
           opening.classList.add(
@@ -819,7 +1062,7 @@ The white page will remain visible while the person scrolls down through the ent
 
 
           /*
-            Show white letter page
+            Show white letter
           */
 
           setTimeout(() => {
@@ -828,13 +1071,15 @@ The white page will remain visible while the person scrolls down through the ent
               "show"
             );
 
-          }, 300);
+          }, 350);
 
 
-        }, 900);
+        }, 1050);
+
 
       }
     );
+
 
 
     /* =========================
@@ -843,8 +1088,9 @@ The white page will remain visible while the person scrolls down through the ent
 
     function closeLetter() {
 
+
       /*
-        Hide letter page
+        Hide white page
       */
 
       letterPage.classList.remove(
@@ -852,27 +1098,31 @@ The white page will remain visible while the person scrolls down through the ent
       );
 
 
-      /*
-        Wait for fade-out
-      */
-
       setTimeout(() => {
+
+
+        /*
+          Bring envelope back
+        */
 
         opening.classList.remove(
           "fade-out"
         );
 
+
         envelope.classList.remove(
           "open"
         );
 
+
         /*
-          Return to top
+          Reset letter scroll
         */
 
         letterPage.scrollTop = 0;
 
-      }, 700);
+
+      }, 800);
 
     }
 
