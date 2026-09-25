@@ -68,7 +68,6 @@ body {
 .bubble:nth-child(1) {
     width: 150px;
     height: 150px;
-
     left: 7%;
     top: 10%;
 }
@@ -76,20 +75,16 @@ body {
 .bubble:nth-child(2) {
     width: 240px;
     height: 240px;
-
     right: 3%;
     top: 12%;
-
     animation-delay: 2s;
 }
 
 .bubble:nth-child(3) {
     width: 90px;
     height: 90px;
-
     left: 12%;
     bottom: 8%;
-
     animation-delay: 4s;
 }
 
@@ -114,11 +109,8 @@ body {
     min-height: 100vh;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: center;
-
     align-items: center;
 
     text-align: center;
@@ -151,7 +143,6 @@ h1 {
     letter-spacing: 2px;
 
     margin-top: 15px;
-
     margin-bottom: 12px;
 
     text-shadow:
@@ -180,7 +171,6 @@ h1 {
     position: relative;
 
     width: 620px;
-
     height: 540px;
 
     margin: 0 auto;
@@ -208,11 +198,9 @@ h1 {
     position: absolute;
 
     width: 100%;
-
     height: 380px;
 
     left: 0;
-
     bottom: 40px;
 
     border-radius: 13px;
@@ -242,17 +230,26 @@ h1 {
 .paper {
     position: absolute;
 
+    /*
+       The paper is the same width
+       as the inside of the envelope.
+    */
     width: 88%;
 
-    height: 320px;
+    /*
+       Paper is shorter than the
+       envelope body.
+    */
+    height: 310px;
 
     left: 6%;
 
     /*
-       Starts lower inside the envelope
-       so the paper does not peek out.
+       IMPORTANT:
+       The paper starts deep inside
+       the envelope.
     */
-    top: 70px;
+    top: 105px;
 
     z-index: 2;
 
@@ -270,16 +267,6 @@ h1 {
 
     transition:
         transform 1.2s ease;
-}
-
-
-/*
-   Paper pops upward when opened.
-*/
-
-.envelope-wrapper.open .paper {
-    transform:
-        translateY(-105px);
 }
 
 
@@ -312,13 +299,15 @@ h1 {
     position: absolute;
 
     width: 100%;
-
     height: 380px;
 
     left: 0;
-
     bottom: 40px;
 
+    /*
+       The front MUST be above
+       the paper.
+    */
     z-index: 4;
 
     border-radius: 13px;
@@ -331,6 +320,11 @@ h1 {
             #1e40af
         );
 
+    /*
+       The top point of the front
+       covers the lower portion
+       of the paper.
+    */
     clip-path:
         polygon(
             0 0,
@@ -352,11 +346,9 @@ h1 {
     position: absolute;
 
     width: 100%;
-
     height: 285px;
 
     left: 0;
-
     top: 120px;
 
     background:
@@ -396,6 +388,20 @@ h1 {
 
 
 /* =========================
+   PAPER OPENING MOVEMENT
+========================= */
+
+.envelope-wrapper.open .paper {
+    /*
+       Paper gently slides upward
+       from inside the envelope.
+    */
+    transform:
+        translateY(-105px);
+}
+
+
+/* =========================
    HEART STAMP
 ========================= */
 
@@ -406,7 +412,6 @@ h1 {
     height: 78px;
 
     left: 50%;
-
     top: 255px;
 
     transform:
@@ -477,9 +482,6 @@ h1 {
 
     z-index: 2;
 }
-
-
-/* Hide heart when opened */
 
 .envelope-wrapper.open .seal {
     opacity: 0;
@@ -727,7 +729,6 @@ h1 {
 
     h1 {
         font-size: 2.5rem;
-
         margin-top: 20px;
     }
 
@@ -737,14 +738,12 @@ h1 {
 
     .envelope-wrapper {
         width: 380px;
-
         height: 330px;
     }
 
     .envelope-back,
     .envelope-front {
         height: 220px;
-
         bottom: 20px;
     }
 
@@ -755,7 +754,11 @@ h1 {
 
         left: 6%;
 
-        top: 35px;
+        /*
+           Keep paper deep inside
+           on mobile too.
+        */
+        top: 55px;
 
         padding: 22px;
 
@@ -770,14 +773,12 @@ h1 {
 
     .flap {
         height: 165px;
-
         top: 80px;
     }
 
     .seal {
         width: 58px;
         height: 58px;
-
         top: 145px;
     }
 
@@ -819,6 +820,15 @@ h1 {
         right: 15px;
     }
 
+}
+
+
+/* =========================
+   OPEN ENVELOPE
+========================= */
+
+.envelope-wrapper.open {
+    cursor: default;
 }
 
 </style>
@@ -1099,6 +1109,18 @@ function closeLetter() {
         opened = false;
 
         letterPage.scrollTop = 0;
+
+        /*
+           Reset white flash so the
+           envelope can be opened again.
+        */
+
+        whiteFlash.classList.remove(
+            "active"
+        );
+
+        whiteFlash.style.display =
+            "block";
 
     }, 800);
 
