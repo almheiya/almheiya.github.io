@@ -484,6 +484,12 @@
             line-height: 1.95;
         }
 
+        .salutation {
+            font-style: italic;
+            color: var(--bg-accent-blue);
+            font-size: 1.2rem;
+        }
+
         .signature {
             margin-top: 50px !important;
             text-align: right !important;
@@ -739,7 +745,7 @@
             <h2>TO MY SAFEST HAVEN ♡</h2>
 
             <p class="salutation">Dearest Frenz,</p>
-            
+
             <p>Thank you for everything you do for me. The past few weeks have been amazing, and I’m really grateful for every moment we’ve shared, from all the conversations and messages we’ve had to the first time we finally met in real life. I’m looking forward to spending more moments with you and creating more memories together in the future.</p>
 
             <p>I know life isn’t always easy. There are days when things feel a little heavier than usual, but I’m thankful that through those days, you never made me feel like I had to face them alone. You’ve always been there, supporting me in your own way, and I hope you know that I want to be that person for you too. Whatever days may come, I’ll be here to listen, to understand, and to support you just as you’ve done for me.</p>
@@ -950,20 +956,18 @@
             }
         }
 
-        const particles = Array.from({ length: 35 }, () => new Particle());
+        const particles = Array.from({ length: 30 }, () => new Particle());
 
-        function animateParticles() {
+        function animate() {
             ctx.clearRect(0, 0, width, height);
             particles.forEach(p => {
                 p.update();
                 p.draw();
             });
-            requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animate);
         }
 
-        window.onload = function() {
-            animateParticles();
-        };
+        animate();
     </script>
 </body>
 </html>
