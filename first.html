@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Love ❤️ | Monthsary Special</title>
-    <!-- Tailwind CSS for modern styling -->
+    <title>For My Love ❤️ | First Monthsary</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Poppins & Fira Code -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for cute icons -->
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <script>
@@ -43,7 +43,6 @@
         }
     </script>
     <style>
-        /* Custom scrollbar for terminal */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -58,22 +57,11 @@
             background: #db2777;
         }
 
-        /* Floating background hearts animation */
         @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) scale(0.5);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.6;
-            }
-            80% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+            20% { opacity: 0.6; }
+            80% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
         .floating-heart {
             position: absolute;
@@ -84,7 +72,6 @@
             z-index: 0;
         }
 
-        /* CRT scanline effect for terminal */
         .crt::after {
             content: " ";
             display: block;
@@ -101,120 +88,116 @@
 </head>
 <body class="bg-gradient-to-br from-slate-950 via-purple-950 to-rose-950 text-slate-100 min-h-screen font-sans relative overflow-x-hidden flex flex-col justify-between selection:bg-love-500 selection:text-white">
 
-    <!-- Floating Background Hearts Container -->
+    <!-- Floating Background Hearts -->
     <div id="hearts-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
 
-    <!-- Header Navbar -->
+    <!-- Header -->
     <header class="w-full py-4 px-6 md:px-12 flex justify-between items-center z-20 backdrop-blur-md bg-black/20 border-b border-love-500/20">
         <div class="flex items-center space-x-3">
             <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-love-500 to-purple-500 flex items-center justify-center shadow-lg shadow-love-500/30 animate-pulse">
                 <i class="fa-solid fa-heart text-white text-lg"></i>
             </div>
             <div>
-                <h1 class="font-bold text-lg md:text-xl tracking-wide bg-gradient-to-r from-love-300 via-pink-400 to-purple-300 bg-clip-text text-transparent">Monthsary Special</h1>
+                <h1 class="font-bold text-lg md:text-xl tracking-wide bg-gradient-to-r from-love-300 via-pink-400 to-purple-300 bg-clip-text text-transparent">First Monthsary Special</h1>
                 <p class="text-xs text-slate-400">For My Favorite Person</p>
             </div>
         </div>
         
-        <!-- Navigation Buttons -->
-        <div class="flex items-center space-x-2 md:space-x-4">
+        <!-- Navigation Tabs -->
+        <div class="flex items-center space-x-2">
             <button onclick="switchTab('terminal')" id="btn-terminal" class="px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-love-600 text-white shadow-lg shadow-love-600/30 flex items-center space-x-2">
                 <i class="fa-solid fa-terminal"></i>
-                <span class="hidden sm:inline">Terminal</span>
+                <span>Terminal</span>
             </button>
-            <button onclick="switchTab('scratch')" id="btn-scratch" class="px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-white/10 hover:bg-white/20 text-slate-300 border border-white/10 flex items-center space-x-2">
-                <i class="fa-solid fa-ticket"></i>
-                <span class="hidden sm:inline">Scratch Card</span>
+            <button onclick="switchTab('milestone')" id="btn-milestone" class="px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-white/10 hover:bg-white/20 text-slate-300 border border-white/10 flex items-center space-x-2">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span>Milestone</span>
             </button>
         </div>
     </header>
 
-    <!-- Main Content Container -->
+    <!-- Main Container -->
     <main class="flex-grow flex items-center justify-center p-4 md:p-8 z-10 w-full max-w-5xl mx-auto">
 
-        <!-- SECTION 1: TERMINAL LOVE LETTER -->
+        <!-- VIEW 1: TERMINAL LOVE LETTER -->
         <div id="section-terminal" class="w-full transition-all duration-500">
             <div class="text-center mb-6">
-                <h2 class="text-2xl md:text-4xl font-bold mb-2 tracking-tight">Hacker of My Heart 💻❤️</h2>
-                <p class="text-xs md:text-sm text-slate-400 max-w-lg mx-auto">Type commands into the terminal below to unlock love notes, check our relationship duration, or launch your surprise scratch card!</p>
+                <h2 class="text-2xl md:text-4xl font-bold mb-2 tracking-tight">Interactive Love Terminal 💻❤️</h2>
+                <p class="text-xs md:text-sm text-slate-400 max-w-lg mx-auto">Type commands below to view our milestone counter, read your love letter, or send a virtual hug.</p>
             </div>
 
             <!-- Terminal Window -->
             <div class="relative bg-terminal-box border border-terminal-border rounded-2xl shadow-2xl shadow-black/80 w-full max-w-3xl mx-auto flex flex-col h-[420px] md:h-[460px] crt">
-                <!-- Terminal Top Bar -->
                 <div class="bg-black/40 px-4 py-3 rounded-t-2xl border-b border-terminal-border flex items-center justify-between z-20">
                     <div class="flex items-center space-x-2">
                         <div class="w-3 h-3 rounded-full bg-rose-500"></div>
                         <div class="w-3 h-3 rounded-full bg-amber-500"></div>
                         <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                        <span class="ml-2 font-mono text-xs text-slate-400">bash - monthsary_os@love</span>
+                        <span class="ml-2 font-mono text-xs text-slate-400">bash - first_monthsary@love</span>
                     </div>
-                    <div class="text-xs font-mono text-love-400 hidden sm:block">type <span class="text-terminal-accent">help</span> for commands</div>
+                    <div class="text-xs font-mono text-love-400 hidden sm:block">type <span class="text-terminal-accent">help</span></div>
                 </div>
 
-                <!-- Terminal Output Screen -->
+                <!-- Terminal Output -->
                 <div id="terminal-output" class="flex-grow p-4 md:p-6 font-mono text-xs md:text-sm overflow-y-auto space-y-3 z-20 select-text">
-                    <div class="text-slate-400">Welcome to <span class="text-love-400 font-semibold">Monthsary-OS v1.4</span> ❤️</div>
-                    <div class="text-slate-400">Type <span class="text-terminal-accent font-semibold">help</span> to view all available commands.</div>
-                    <div class="text-love-300/80 italic">Tip: You can also type <span class="text-terminal-accent">scratch</span> to open your surprise scratch card!</div>
+                    <div class="text-slate-400">Welcome to First Monthsary Terminal ❤️</div>
+                    <div class="text-slate-400">Type <span class="text-terminal-accent font-semibold">help</span> to view available commands.</div>
                     <br>
                 </div>
 
                 <!-- Terminal Input Form -->
                 <form id="terminal-form" onsubmit="handleCommand(event)" class="bg-black/60 p-3 md:p-4 rounded-b-2xl border-t border-terminal-border flex items-center space-x-3 z-20">
                     <span class="text-terminal-accent font-mono font-bold text-sm md:text-base">❯</span>
-                    <input type="text" id="terminal-input" autocomplete="off" autofocus placeholder="Type a command (e.g. help, loveletter, date)..." class="flex-grow bg-transparent font-mono text-xs md:text-sm text-slate-100 focus:outline-none placeholder:text-slate-600">
+                    <input type="text" id="terminal-input" autocomplete="off" autofocus placeholder="Type a command (e.g. help, date, loveletter)..." class="flex-grow bg-transparent font-mono text-xs md:text-sm text-slate-100 focus:outline-none placeholder:text-slate-600">
                     <button type="submit" class="bg-love-600 hover:bg-love-500 text-white px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors shadow-sm">
                         Send
                     </button>
                 </form>
             </div>
 
-            <!-- Quick Action Command Chips -->
+            <!-- Command Quick Chips -->
             <div class="flex flex-wrap justify-center gap-2 mt-4 max-w-2xl mx-auto">
                 <button onclick="runQuickCommand('help')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 transition-colors">`help`</button>
                 <button onclick="runQuickCommand('date')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 transition-colors">`date`</button>
                 <button onclick="runQuickCommand('loveletter')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 transition-colors">`loveletter`</button>
-                <button onclick="runQuickCommand('scratch')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-love-300 transition-colors border-love-500/30">`scratch` 🎟️</button>
                 <button onclick="runQuickCommand('hug')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 transition-colors">`hug`</button>
                 <button onclick="runQuickCommand('clear')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-slate-300 transition-colors">`clear`</button>
             </div>
         </div>
 
-        <!-- SECTION 2: DIGITAL SCRATCH-OFF CARD -->
-        <div id="section-scratch" class="w-full hidden transition-all duration-500">
+        <!-- VIEW 2: RELATIONSHIP MILESTONE & LETTER -->
+        <div id="section-milestone" class="w-full hidden transition-all duration-500 max-w-2xl mx-auto">
             <div class="text-center mb-6">
-                <h2 class="text-2xl md:text-4xl font-bold mb-2 tracking-tight">Your Monthsary Scratch Card 🎟️✨</h2>
-                <p class="text-xs md:text-sm text-slate-400 max-w-lg mx-auto">Use your mouse or finger to scratch off the silver foil below and reveal your special monthsary reward!</p>
+                <h2 class="text-2xl md:text-4xl font-bold mb-2 tracking-tight">Our First Monthsary Milestone ✨</h2>
+                <p class="text-xs md:text-sm text-slate-400">Celebrating one month of wonderful memories together.</p>
             </div>
 
-            <!-- Scratch Card Wrapper -->
-            <div class="relative w-full max-w-md mx-auto bg-gradient-to-b from-purple-900/60 to-slate-900/80 border-2 border-love-500/40 rounded-3xl p-6 shadow-2xl shadow-love-900/40 backdrop-blur-xl text-center">
-                
-                <!-- Card Inner Hidden Prize Content -->
-                <div id="scratch-prize" class="py-8 px-4 flex flex-col items-center justify-center min-h-[260px] bg-gradient-to-br from-love-950/80 to-purple-950/80 rounded-2xl border border-love-500/30 relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 text-love-500/10 text-9{-rem} pointer-events-none">
-                        <i class="fa-solid fa-gift"></i>
-                    </div>
-                    <div class="w-16 h-16 rounded-full bg-love-500/20 border border-love-500 flex items-center justify-center text-love-300 text-2xl mb-4 shadow-inner shadow-love-500/50 animate-bounce">
-                        <i class="fa-solid fa-crown"></i>
-                    </div>
-                    <span class="text-xs font-mono uppercase tracking-widest text-love-400 font-semibold mb-1">Monthsary Coupon Unlocked</span>
-                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2">1 Free Home-Cooked Dinner & Movie Night 🍝🍿</h3>
-                    <p class="text-xs text-slate-300 max-w-xs mb-4">Good for any weekend of your choice. Includes your favorite meal, unlimited cuddles, and your pick of movie!</p>
-                    <button onclick="resetScratchCard()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-xs font-mono rounded-xl text-love-300 border border-love-500/30 transition-all">
-                        <i class="fa-solid fa-rotate-right mr-1"></i> Reset Scratch Foil
-                    </button>
+            <!-- Live Counter Card -->
+            <div class="bg-gradient-to-b from-purple-900/60 to-slate-900/80 border border-love-500/40 rounded-3xl p-6 shadow-2xl backdrop-blur-xl mb-6 text-center">
+                <div class="w-12 h-12 rounded-full bg-love-500/20 border border-love-500 flex items-center justify-center text-love-300 text-xl mx-auto mb-3 shadow-inner">
+                    <i class="fa-solid fa-clock"></i>
                 </div>
-
-                <!-- Scratch Canvas Overlay -->
-                <div class="absolute inset-x-6 inset-y-6 rounded-2xl overflow-hidden shadow-inner cursor-crosshair">
-                    <canvas id="scratch-canvas" class="w-full h-full block rounded-2xl"></canvas>
-                </div>
-
+                <h3 class="text-xs font-mono uppercase tracking-widest text-love-400 font-semibold mb-1">Time Together Since Oct 26, 2026</h3>
+                <div id="milestone-counter" class="text-lg md:text-xl font-bold text-white mb-2 font-mono">Calculating...</div>
+                <p class="text-xs text-slate-400">Every second with you is a treasure.</p>
             </div>
 
-            <!-- Back to terminal button -->
+            <!-- Love Letter Card -->
+            <div class="bg-gradient-to-br from-love-950/80 to-purple-950/80 border border-love-500/30 rounded-3xl p-6 md:p-8 shadow-2xl relative">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 rounded-full bg-love-500/20 flex items-center justify-center text-love-400">
+                        <i class="fa-solid fa-envelope-open-text"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-base">To My Dearest Boyfriend</h3>
+                        <p class="text-xs text-love-300">Happy First Monthsary ❤️</p>
+                    </div>
+                </div>
+                <p class="text-xs md:text-sm text-slate-200 leading-relaxed font-sans">
+                    Happy first monthsary, my love! I can't believe it has already been a month since we officially started this journey together. You bring so much happiness, warmth, and laughter into my days. Thank you for being my comfort, my best friend, and the person who always makes me smile. I love you more than words can say. ❤️
+                </p>
+            </div>
+
             <div class="text-center mt-6">
                 <button onclick="switchTab('terminal')" class="text-xs md:text-sm font-medium text-love-400 hover:text-love-300 transition-colors inline-flex items-center space-x-2">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -227,10 +210,10 @@
 
     <!-- Footer -->
     <footer class="w-full py-4 text-center text-xs text-slate-500 z-20 border-t border-white/5">
-        Made with infinite love for the best boyfriend in the world ❤️
+        Made with infinite love for you ❤️
     </footer>
 
-    <!-- Custom Modal Message Box (No native alert()) -->
+    <!-- Custom Modal -->
     <div id="custom-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
         <div class="bg-terminal-box border border-love-500/40 p-6 rounded-2xl max-w-sm w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300" id="modal-box">
             <div class="flex items-center space-x-3 mb-3">
@@ -241,7 +224,7 @@
             </div>
             <p id="modal-message" class="text-sm text-slate-300 mb-5 leading-relaxed"></p>
             <div class="flex justify-end">
-                <button onclick="closeModal()" class="px-4 py-2 bg-love-600 hover:bg-love-500 text-white text-xs font-medium rounded-xl shadow-lg shadow-love-600/30 transition-all">
+                <button onclick="closeModal()" class="px-4 py-2 bg-love-600 hover:bg-love-500 text-white text-xs font-medium rounded-xl shadow-lg transition-all">
                     Got it! ❤️
                 </button>
             </div>
@@ -250,7 +233,9 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        // --- 1. FLOATING HEARTS BACKGROUND GENERATOR ---
+        // Start date set to tomorrow: October 26, 2026
+        const startDate = new Date(2026, 9, 26, 0, 0, 0);
+
         function initBackgroundHearts() {
             const container = document.getElementById('hearts-container');
             const heartSymbols = ['❤️', '💖', '✨', '💕', '💗', '⭐'];
@@ -264,47 +249,36 @@
                 heart.style.animationDuration = (Math.random() * 5 + 6) + 's';
                 container.appendChild(heart);
 
-                setTimeout(() => {
-                    heart.remove();
-                }, 8000);
+                setTimeout(() => heart.remove(), 8000);
             }, 600);
         }
 
-        // --- 2. TAB SWITCHING (TERMINAL <-> SCRATCH CARD) ---
         function switchTab(tab) {
             const termSec = document.getElementById('section-terminal');
-            const scratchSec = document.getElementById('section-scratch');
+            const milestoneSec = document.getElementById('section-milestone');
             const btnTerm = document.getElementById('btn-terminal');
-            const btnScratch = document.getElementById('btn-scratch');
+            const btnMilestone = document.getElementById('btn-milestone');
 
             if (tab === 'terminal') {
                 termSec.classList.remove('hidden');
-                scratchSec.classList.add('hidden');
-                
+                milestoneSec.classList.add('hidden');
                 btnTerm.className = "px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-love-600 text-white shadow-lg shadow-love-600/30 flex items-center space-x-2";
-                btnScratch.className = "px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-white/10 hover:bg-white/20 text-slate-300 border border-white/10 flex items-center space-x-2";
-                
-                // Focus terminal input
+                btnMilestone.className = "px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-white/10 hover:bg-white/20 text-slate-300 border border-white/10 flex items-center space-x-2";
                 setTimeout(() => document.getElementById('terminal-input').focus(), 100);
-            } else if (tab === 'scratch') {
+            } else {
                 termSec.classList.add('hidden');
-                scratchSec.classList.remove('hidden');
-                
-                btnScratch.className = "px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-love-600 text-white shadow-lg shadow-love-600/30 flex items-center space-x-2";
+                milestoneSec.classList.remove('hidden');
+                btnMilestone.className = "px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-love-600 text-white shadow-lg shadow-love-600/30 flex items-center space-x-2";
                 btnTerm.className = "px-4 py-2 rounded-xl text-xs md:text-sm font-medium transition-all duration-300 bg-white/10 hover:bg-white/20 text-slate-300 border border-white/10 flex items-center space-x-2";
-                
-                // Re-init scratch canvas sizing
-                resizeScratchCanvas();
+                updateMilestoneCounter();
             }
         }
 
-        // --- 3. CUSTOM MODAL BOX (NO ALERT/CONFIRM) ---
         function showModal(title, message) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-message').innerText = message;
             const modal = document.getElementById('custom-modal');
             const box = document.getElementById('modal-box');
-            
             modal.classList.remove('hidden');
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
@@ -315,24 +289,16 @@
         function closeModal() {
             const modal = document.getElementById('custom-modal');
             const box = document.getElementById('modal-box');
-            
             modal.classList.add('opacity-0');
             box.classList.add('scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
+            setTimeout(() => modal.classList.add('hidden'), 300);
         }
-
-        // --- 4. TERMINAL LOGIC ---
-        // Change this date to your official monthsary start date (YYYY, MM-1, DD)
-        const startDate = new Date(2025, 10, 15, 0, 0, 0); 
 
         function handleCommand(e) {
             e.preventDefault();
             const inputField = document.getElementById('terminal-input');
             const cmd = inputField.value.trim().toLowerCase();
             inputField.value = '';
-
             if (!cmd) return;
 
             appendTerminalLine(`❯ ${cmd}`, 'text-slate-300 font-semibold');
@@ -359,12 +325,11 @@
                     appendTerminalLine(`
                         <div class="space-y-1 text-xs md:text-sm text-slate-300">
                             <div class="text-love-400 font-bold">AVAILABLE COMMANDS:</div>
-                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">help</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show this help menu</div>
-                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">date</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Calculate our total time together</div>
-                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">loveletter</span>&nbsp;&nbsp;- Read a secret love note</div>
-                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">scratch</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Open your surprise scratch-off card 🎟️</div>
-                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">hug</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Send a virtual bear hug 🤗</div>
-                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Clear the terminal screen</div>
+                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">help</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show command list</div>
+                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">date</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Calculate time together</div>
+                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">loveletter</span>&nbsp;&nbsp;- Read our love note</div>
+                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">hug</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Send a virtual bear hug</div>
+                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Clear terminal screen</div>
                         </div>
                     `);
                     break;
@@ -379,9 +344,8 @@
 
                     appendTerminalLine(`
                         <div class="p-3 bg-white/5 rounded-xl border border-white/10 space-y-1">
-                            <div class="text-love-300 font-semibold"><i class="fa-solid fa-clock mr-1"></i> Time We've Been Official:</div>
-                            <div class="text-white font-bold text-sm md:text-base">${days} Days, ${hours} Hours, ${minutes} Minutes, ${seconds} Seconds</div>
-                            <div class="text-xs text-slate-400">Every single second with you is my favorite second. ❤️</div>
+                            <div class="text-love-300 font-semibold"><i class="fa-solid fa-clock mr-1"></i> Time Since Oct 26, 2026:</div>
+                            <div class="text-white font-bold text-xs md:text-sm">${days >= 0 ? `${days} Days, ${hours} Hours, ${minutes} Mins, ${seconds} Secs` : 'Tomorrow is our first day! ❤️'}</div>
                         </div>
                     `);
                     break;
@@ -391,24 +355,16 @@
                         <div class="p-4 bg-love-950/40 rounded-xl border border-love-500/30 space-y-2 font-sans">
                             <div class="text-love-300 font-semibold font-mono"><i class="fa-solid fa-envelope-open-text mr-1"></i> To My Dearest Boyfriend,</div>
                             <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
-                                Happy monthsary, my love! I can't believe how fast time flies when I'm with you. You bring so much laughter, warmth, and joy into my everyday life. Thank you for being my safe place, my best friend, and the person who always makes me smile. I love you more than words (or code!) can ever express. ❤️
+                                Happy first monthsary, my love! I can't believe how fast this first month went by. Thank you for making every single day special. I love you so much! ❤️
                             </p>
                         </div>
                     `);
                     break;
 
-                case 'scratch':
-                    appendTerminalLine(`<div class="text-love-300">Launching your scratch card... ✨</div>`);
-                    setTimeout(() => {
-                        switchTab('scratch');
-                    }, 800);
-                    break;
-
                 case 'hug':
                     appendTerminalLine(`
                         <div class="text-love-400">
-                            (つ≧▽≦)つ *TIGHT BEAR HUG SENT!* 🫂💖<br>
-                            <span class="text-xs text-slate-400">Loading endless warm cuddles straight to your heart...</span>
+                            (つ≧▽≦)つ *TIGHT BEAR HUG SENT!* 🫂💖
                         </div>
                     `);
                     break;
@@ -421,133 +377,38 @@
 
                 default:
                     appendTerminalLine(`
-                        <div class="text-rose-400">Command not recognized: "${cmd}". Type <span class="text-terminal-accent">help</span> for a list of valid commands.</div>
+                        <div class="text-rose-400">Unknown command: "${cmd}". Type <span class="text-terminal-accent">help</span> for valid commands.</div>
                     `);
                     break;
             }
         }
 
-        // --- 5. INTERACTIVE SCRATCH CARD CANVAS LOGIC ---
-        let canvas, ctx, isDrawing = false;
+        function updateMilestoneCounter() {
+            const counterEl = document.getElementById('milestone-counter');
+            const now = new Date();
+            const diff = now - startDate;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
 
-        function initScratchCard() {
-            canvas = document.getElementById('scratch-canvas');
-            ctx = canvas.getContext('2d');
-            
-            resizeScratchCanvas();
-
-            // Mouse Events
-            canvas.addEventListener('mousedown', startScratch);
-            canvas.addEventListener('mousemove', scratch);
-            canvas.addEventListener('mouseup', stopScratch);
-            canvas.addEventListener('mouseleave', stopScratch);
-
-            // Touch Events for mobile
-            canvas.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                startScratch(e.touches[0]);
-            });
-            canvas.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-                scratch(e.touches[0]);
-            });
-            canvas.addEventListener('touchend', stopScratch);
-        }
-
-        function resizeScratchCanvas() {
-            if (!canvas) return;
-            const rect = canvas.parentElement.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-
-            // Draw Silver Metallic Foil Cover
-            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-            gradient.addColorStop(0, '#94a3b8');
-            gradient.addColorStop(0.5, '#cbd5e1');
-            gradient.addColorStop(1, '#64748b');
-            
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Add Scratch Instruction Text on Foil
-            ctx.fillStyle = '#1e293b';
-            ctx.font = 'bold 16px Poppins, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText('✨ SCRATCH HERE WITH MOUSE/FINGER ✨', canvas.width / 2, canvas.height / 2);
-        }
-
-        function getMousePos(e) {
-            const rect = canvas.getBoundingClientRect();
-            return {
-                x: (e.clientX || e.pageX) - rect.left,
-                y: (e.clientY || e.pageY) - rect.top
-            };
-        }
-
-        function startScratch(e) {
-            isDrawing = true;
-            scratch(e);
-        }
-
-        function scratch(e) {
-            if (!isDrawing) return;
-            const pos = getMousePos(e);
-            
-            ctx.globalCompositeOperation = 'destination-out';
-            ctx.beginPath();
-            ctx.arc(pos.x, pos.y, 24, 0, Math.PI * 2, false);
-            ctx.fill();
-
-            checkScratchProgress();
-        }
-
-        function stopScratch() {
-            isDrawing = false;
-        }
-
-        function resetScratchCard() {
-            resizeScratchCanvas();
-        }
-
-        function checkScratchProgress() {
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            let clearedPixels = 0;
-            const totalPixels = imageData.data.length / 4;
-
-            // Sample every 16th pixel for performance
-            for (let i = 3; i < imageData.data.length; i += 64) {
-                if (imageData.data[i] === 0) {
-                    clearedPixels++;
-                }
-            }
-
-            const percentCleared = (clearedPixels / (totalPixels / 16)) * 100;
-            if (percentCleared > 55) {
-                // Automatically clear remaining foil if mostly scratched
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (days >= 0) {
+                counterEl.innerText = `${days} Days, ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                counterEl.innerText = "Starts Tomorrow (Oct 26, 2026)! ❤️";
             }
         }
 
-        // --- 6. INITIALIZATION ON WINDOW LOAD ---
         window.onload = function() {
             initBackgroundHearts();
-            initScratchCard();
+            setInterval(updateMilestoneCounter, 1000);
             
-            // Initial greeting in terminal
             setTimeout(() => {
                 appendTerminalLine(`
-                    <div class="text-love-300 font-semibold">System initialized successfully! Type <span class="text-terminal-accent">help</span> to explore or <span class="text-terminal-accent">scratch</span> for your prize.</div>
+                    <div class="text-love-300 font-semibold">System ready! Type <span class="text-terminal-accent">help</span> to begin.</div>
                 `);
             }, 500);
-
-            // Handle window resizing for scratch canvas
-            window.addEventListener('resize', () => {
-                // Only re-init if scratch card hasn't been fully cleared
-                resizeScratchCanvas();
-            });
         };
     </script>
 </body>
 </html>
-
