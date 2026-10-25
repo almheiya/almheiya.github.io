@@ -72,14 +72,14 @@
             z-index: 0;
         }
 
-        @keyframes kissFall {
+        @keyframes particleFall {
             0% { transform: translateY(-20vh) rotate(0deg) scale(0.5); opacity: 1; }
             100% { transform: translateY(110vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
-        .kiss-particle {
+        .love-particle {
             position: fixed;
             top: -5vh;
-            animation: kissFall 3s linear forwards;
+            animation: particleFall 3s linear forwards;
             z-index: 100;
             pointer-events: none;
         }
@@ -159,7 +159,7 @@
                 <!-- Terminal Input Form -->
                 <form id="terminal-form" onsubmit="handleCommand(event)" class="bg-black/60 p-3 md:p-4 rounded-b-2xl border-t border-terminal-border flex items-center space-x-3 z-20">
                     <span class="text-terminal-accent font-mono font-bold text-sm md:text-base">❯</span>
-                    <input type="text" id="terminal-input" autocomplete="off" autofocus placeholder="Type a command (help, date, letter, kisses)..." class="flex-grow bg-transparent font-mono text-xs md:text-sm text-slate-100 focus:outline-none placeholder:text-slate-600">
+                    <input type="text" id="terminal-input" autocomplete="off" autofocus placeholder="Type a command (help, date, letter, hugs, kisses)..." class="flex-grow bg-transparent font-mono text-xs md:text-sm text-slate-100 focus:outline-none placeholder:text-slate-600">
                     <button type="submit" class="bg-love-600 hover:bg-love-500 text-white px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-colors shadow-sm">
                         Send
                     </button>
@@ -191,12 +191,12 @@
                         <i class="fa-solid fa-envelope-open-text"></i>
                     </div>
                     <div>
-                        <h3 class="font-bold text-white text-base">To My Dearest Baby</h3>
+                        <h3 class="font-bold text-white text-base">To My Dearest Bi</h3>
                         <p class="text-xs text-love-300">Happy First Monthsary ❤️</p>
                     </div>
                 </div>
                 <p class="text-xs md:text-sm text-slate-200 leading-relaxed font-sans">
-                    Happy first monthsary, my love! I can't believe it has already been a month since we officially started this journey together. You bring so much happiness, warmth, and laughter into my days. Thank you for being my comfort, my best friend, and the person who always makes me smile. I love you more than words can say. ❤️
+                    happy first monthsary, by! it's only been a month, but i'm already so thankful that we found our way to each other. thank you for being patient with me, especially on days when i overthink too much or struggle to explain what's going on in my head. i hope you know that even when i don't have the right words, there's still so much love in me for you. i'm really happy i get to call you mine. i love you so much, always. ♡
                 </p>
             </div>
 
@@ -240,14 +240,30 @@
             const kissSymbols = ['💋', '😘', '❤️', '💕'];
             for (let i = 0; i < 25; i++) {
                 setTimeout(() => {
-                    const kiss = document.createElement('div');
-                    kiss.className = 'kiss-particle';
-                    kiss.innerText = kissSymbols[Math.floor(Math.random() * kissSymbols.length)];
-                    kiss.style.left = Math.random() * 100 + 'vw';
-                    kiss.style.fontSize = (Math.random() * 20 + 16) + 'px';
-                    kiss.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    document.body.appendChild(kiss);
-                    setTimeout(() => kiss.remove(), 4000);
+                    const particle = document.createElement('div');
+                    particle.className = 'love-particle';
+                    particle.innerText = kissSymbols[Math.floor(Math.random() * kissSymbols.length)];
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.fontSize = (Math.random() * 20 + 16) + 'px';
+                    particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(particle);
+                    setTimeout(() => particle.remove(), 4000);
+                }, i * 80);
+            }
+        }
+
+        function triggerHugs() {
+            const hugSymbols = ['🤗', '🫂', '💖', '🧸', '✨'];
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'love-particle';
+                    particle.innerText = hugSymbols[Math.floor(Math.random() * hugSymbols.length)];
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.fontSize = (Math.random() * 20 + 16) + 'px';
+                    particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(particle);
+                    setTimeout(() => particle.remove(), 4000);
                 }, i * 80);
             }
         }
@@ -291,18 +307,25 @@
             div.innerHTML = text;
             output.appendChild(div);
             output.scrollTop = output.scrollHeight;
+            return div;
         }
+
+        const letterContent = `happy first monthsary, baby! 🤍<br>
+it's been a month with you, and honestly, i'm not really sure how to put everything i feel into words right now, but i want you to know that i'm still grateful for you and for the things we share. thank you for being here, for making me feel loved, and for being someone i can share my thoughts and little pieces of myself with.<br><br>
+i know i don't always know how to express what i feel, and sometimes i get quiet or struggle to find the right words, but i hope you never mistake that for me not caring. i'm still learning, not just about love, but about how to love you in ways that make you feel appreciated, too.<br><br>
+i hope we continue to grow together, understand each other better, and find comfort in one another even on the days when things aren't perfect. i don't expect us to have everything figured out. i just hope we keep choosing to understand each other, even when it's difficult.<br><br>
+happy first monthsary, by. thank you for being a part of my life. i may not always have the sweetest words to say, but i'm glad it's you. i love you so sooooo much. ♡`;
 
         function processCommand(cmd) {
             switch (cmd) {
                 case 'help':
-                    // Note: 'secret' or 'milestone' is intentionally hidden from this public help menu!
                     appendTerminalLine(`
                         <div class="space-y-1 text-xs md:text-sm text-slate-300">
                             <div class="text-love-400 font-bold">AVAILABLE COMMANDS:</div>
                             <div>&nbsp;&nbsp;<span class="text-terminal-accent">help</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Show command list</div>
                             <div>&nbsp;&nbsp;<span class="text-terminal-accent">date</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Live clock time together</div>
-                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">letter</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Read our love note</div>
+                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">letter</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Read our love note / letter</div>
+                            <div>&nbsp;&nbsp;<span class="text-terminal-accent">hugs</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Send warm virtual hugs 🤗</div>
                             <div>&nbsp;&nbsp;<span class="text-terminal-accent">kisses</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Send digital kisses 💋</div>
                             <div>&nbsp;&nbsp;<span class="text-terminal-accent">clear</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Clear terminal screen</div>
                         </div>
@@ -310,28 +333,47 @@
                     break;
 
                 case 'date':
-                    const now = new Date();
-                    const diff = now - startDate;
-                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                    const minutes = Math.floor((diff / 1000 / 60) % 60);
-                    const seconds = Math.floor((diff / 1000) % 60);
-
+                    const liveLineId = 'live-clock-' + Date.now();
                     appendTerminalLine(`
                         <div class="p-3 bg-white/5 rounded-xl border border-white/10 space-y-1">
-                            <div class="text-love-300 font-semibold"><i class="fa-solid fa-clock mr-1"></i> Live Time Since Sept 26, 2026:</div>
-                            <div class="text-white font-bold text-xs md:text-sm">${days} Days, ${hours} Hours, ${minutes} Mins, ${seconds} Secs</div>
+                            <div class="text-love-300 font-semibold"><i class="fa-solid fa-clock mr-1"></i> Live Time Together Since Sept 26, 2026:</div>
+                            <div id="${liveLineId}" class="text-white font-bold text-xs md:text-sm">Calculating...</div>
                         </div>
                     `);
+
+                    const updateTicker = () => {
+                        const targetEl = document.getElementById(liveLineId);
+                        if (!targetEl) return;
+                        const now = new Date();
+                        const diff = now - startDate;
+                        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                        const minutes = Math.floor((diff / 1000 / 60) % 60);
+                        const seconds = Math.floor((diff / 1000) % 60);
+                        targetEl.innerText = `${days} Days, ${hours} Hours, ${minutes} Mins, ${seconds} Secs`;
+                    };
+
+                    updateTicker();
+                    setInterval(updateTicker, 1000);
                     break;
 
                 case 'letter':
+                case 'loveletter':
                     appendTerminalLine(`
                         <div class="p-4 bg-love-950/40 rounded-xl border border-love-500/30 space-y-2 font-sans">
                             <div class="text-love-300 font-semibold font-mono"><i class="fa-solid fa-envelope-open-text mr-1"></i> To My Dearest Baby,</div>
                             <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
-                                Happy first monthsary, my love! I can't believe how fast this first month went by. Thank you for making every single day special. I love you so much! ❤️
+                                ${letterContent}
                             </p>
+                        </div>
+                    `);
+                    break;
+
+                case 'hugs':
+                    triggerHugs();
+                    appendTerminalLine(`
+                        <div class="text-love-400 font-medium">
+                            🤗 Warm, cozy hugs sent to Baby! 🫂✨
                         </div>
                     `);
                     break;
@@ -339,13 +381,12 @@
                 case 'kisses':
                     triggerKisses();
                     appendTerminalLine(`
-                        <div class="text-love-400">
-                            💋 (😘 ˘ ³˘)♥ *MWAH! Kisses sent to Baby!* 💋
+                        <div class="text-love-400 font-medium">
+                            💋 MWAH! Sweet kisses sent to Baby! 😘❤️
                         </div>
                     `);
                     break;
 
-                // Hidden milestone command (not shown in the help menu)
                 case 'secret':
                 case 'milestone':
                     appendTerminalLine(`
