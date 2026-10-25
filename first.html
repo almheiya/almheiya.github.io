@@ -217,7 +217,6 @@
 
     <!-- JavaScript Application Logic -->
     <script>
-        // Start date set to September 26, 2026 (Exactly 1 month ago from Oct 26)
         const startDate = new Date(2026, 8, 26, 0, 0, 0);
 
         function initBackgroundHearts() {
@@ -297,6 +296,7 @@
         function processCommand(cmd) {
             switch (cmd) {
                 case 'help':
+                    // Note: 'secret' or 'milestone' is intentionally hidden from this public help menu!
                     appendTerminalLine(`
                         <div class="space-y-1 text-xs md:text-sm text-slate-300">
                             <div class="text-love-400 font-bold">AVAILABLE COMMANDS:</div>
@@ -319,7 +319,7 @@
 
                     appendTerminalLine(`
                         <div class="p-3 bg-white/5 rounded-xl border border-white/10 space-y-1">
-                            <div class="text-love-300 font-semibold"><i class="fa-solid fa-clock mr-1"></i> Time Since Sept 26, 2026:</div>
+                            <div class="text-love-300 font-semibold"><i class="fa-solid fa-clock mr-1"></i> Live Time Since Sept 26, 2026:</div>
                             <div class="text-white font-bold text-xs md:text-sm">${days} Days, ${hours} Hours, ${minutes} Mins, ${seconds} Secs</div>
                         </div>
                     `);
@@ -343,6 +343,17 @@
                             💋 (😘 ˘ ³˘)♥ *MWAH! Kisses sent to Baby!* 💋
                         </div>
                     `);
+                    break;
+
+                // Hidden milestone command (not shown in the help menu)
+                case 'secret':
+                case 'milestone':
+                    appendTerminalLine(`
+                        <div class="text-love-300 font-semibold">
+                            ✨ Opening the hidden Milestone panel... ❤️
+                        </div>
+                    `);
+                    setTimeout(() => switchTab('milestone'), 800);
                     break;
 
                 case 'clear':
