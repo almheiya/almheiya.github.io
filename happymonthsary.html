@@ -29,7 +29,7 @@
                         tarragon: '#BAD17A',
                         cream: '#FFFDF9',
                         paper: '#FAF5EE',
-                        /* Blue Palette Additions */
+                        /* Soft Blue Palette Accents */
                         meltingice: '#B3D5F1',
                         avalanche: '#D4EEF8',
                         windstorm: '#6A97C0',
@@ -45,23 +45,18 @@
     </script>
 
     <style>
-        /* Pink & Blue Gradient with Botanical Green Dot Pattern */
+        /* Pink with a Subtle Blue Gradient + Untouched Botanical Green Dots */
         .bg-heart-pattern {
             background-color: #FDA8BF;
             background-image: 
-                radial-gradient(#FFDBDB 2.2px, transparent 2.2px),
+                radial-gradient(#FFDBDB 2.2px, transparent 2.2px), 
                 radial-gradient(#6C9B76 2.2px, transparent 2.2px),
-                linear-gradient(135deg, #FDA8BF 0%, #FB8CAC 48%, #B3D5F1 85%, #D4EEF8 100%);
+                linear-gradient(135deg, #FDA8BF 0%, #FB8CAC 58%, #B3D5F1 88%, #D4EEF8 100%);
             background-size: 32px 32px, 32px 32px, 100% 100%;
             background-position: 0 0, 16px 16px, 0 0;
         }
 
-        /* Subtle Pink-to-Blue Gradient Card Accent */
-        .pink-blue-gradient {
-            background: linear-gradient(135deg, rgba(255, 219, 219, 0.55) 0%, rgba(251, 140, 172, 0.25) 55%, rgba(179, 213, 241, 0.45) 100%);
-        }
-
-        /* Washi Tape Effects: Pink-Blue Gradient & Untouched Aroma Green */
+        /* Washi Tape Effects: Pink-to-Blue Subtle Gradient & Untouched Aroma Green */
         .washi-tape-pink {
             background: linear-gradient(90deg, rgba(251, 140, 172, 0.92) 0%, rgba(251, 140, 172, 0.92) 65%, rgba(179, 213, 241, 0.92) 100%);
             background-image: 
@@ -88,7 +83,7 @@
 
         /* Smooth Scroll Roll Transition Mechanism */
         .scroll-container {
-            transition: max-height 1.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-in-out, transform 1s ease;
+            transition: max-height 1.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-in-out, transform 1s ease;
         }
 
         /* Stamp Border */
@@ -105,60 +100,8 @@
             background: #FDA8BF;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #FF5C89, #6A97C0);
+            background: linear-gradient(180deg, #FF5C89 65%, #6A97C0 100%);
             border-radius: 4px;
         }
 
-        /* Floating animations for background hearts */
-        @keyframes heartFloat {
-            0%, 100% { transform: translateY(0px) rotate(-4deg) scale(1); }
-            50% { transform: translateY(-12px) rotate(8deg) scale(1.1); }
-        }
-        @keyframes heartPulseGlow {
-            0%, 100% { opacity: 0.75; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.15); }
-        }
-        .float-anim-1 { animation: heartFloat 3.5s ease-in-out infinite; }
-        .float-anim-2 { animation: heartFloat 4.5s ease-in-out infinite 1s; }
-        .float-anim-3 { animation: heartFloat 3.8s ease-in-out infinite 2s; }
-        .float-anim-4 { animation: heartFloat 4.2s ease-in-out infinite 0.5s; }
-        .float-anim-5 { animation: heartFloat 3.2s ease-in-out infinite 1.5s; }
-        .pulse-anim { animation: heartPulseGlow 2.5s ease-in-out infinite; }
-    </style>
-</head>
-<body class="bg-heart-pattern min-h-screen font-cute text-gray-700 flex flex-col items-center justify-center p-3 sm:p-6 overflow-x-hidden selection:bg-softblush selection:text-bubblegum">
-
-    <!-- FLOATING SVG HEARTS BACKGROUND -->
-    <div class="fixed top-6 left-8 pointer-events-none float-anim-1 text-bubblegum opacity-80 hidden md:block">
-        <svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-    <div class="fixed top-24 left-32 pointer-events-none float-anim-4 text-avalanche opacity-90 hidden lg:block">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-    <div class="fixed bottom-10 left-12 pointer-events-none float-anim-2 text-wintermist opacity-90 hidden md:block">
-        <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-    <div class="fixed bottom-32 left-44 pointer-events-none float-anim-5 text-tarragon opacity-85 hidden lg:block">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-    <div class="fixed top-10 right-10 pointer-events-none float-anim-3 text-windstorm opacity-80 hidden md:block">
-        <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-    <div class="fixed top-28 right-36 pointer-events-none float-anim-1 text-aquadulce opacity-85 hidden lg:block">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-    <div class="fixed bottom-14 right-16 pointer-events-none float-anim-4 text-avalanche opacity-90 hidden md:block">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-    </div>
-
-    <!-- MAIN CONTAINER -->
-    <main class="w-full max-w-4xl mx-auto flex flex-col items-center relative z-10">
-
-        <!-- HEADER TITLE BADGE -->
-        <header class="mb-4 text-center">
-            <div class="inline-block relative">
-                <div class="washi-tape-pink absolute -top-3 left-1/2 -translate-x-1/2 w-36 h-6 z-20"></div>
-                <div class="flex items-center space-x-2 bg-cream/95 backdrop-blur-sm px-6 py-2.5 rounded-2xl shadow-md border-2 border-bubblegumtint">
-                    <div class="flex space-x-1 text-bubblegum">
-                        <svg class="w-6 h-6 fill-current pulse-anim" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        <svg class="w-4 h-4 fill-current text-windstorm self-center" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.3
+        /* Floating animations
