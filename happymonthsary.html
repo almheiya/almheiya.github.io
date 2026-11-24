@@ -128,4 +128,456 @@
         <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
     </div>
     <div class="fixed top-10 right-10 pointer-events-none float-anim-3 text-bubblegum opacity-80 hidden md:block">
-        <svg width="50" height="50" viewBox="0
+        <svg width="50" height="50" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <div class="fixed top-28 right-36 pointer-events-none float-anim-1 text-aquadulce opacity-85 hidden lg:block">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+    <div class="fixed bottom-14 right-16 pointer-events-none float-anim-4 text-softblush opacity-90 hidden md:block">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="w-full max-w-4xl mx-auto flex flex-col items-center relative z-10">
+
+        <!-- HEADER TITLE BADGE -->
+        <header class="mb-4 text-center">
+            <div class="inline-block relative">
+                <div class="washi-tape-pink absolute -top-3 left-1/2 -translate-x-1/2 w-36 h-6 z-20"></div>
+                <div class="flex items-center space-x-2 bg-cream/95 backdrop-blur-sm px-6 py-2.5 rounded-2xl shadow-md border-2 border-bubblegumtint">
+                    <div class="flex space-x-1 text-bubblegum">
+                        <svg class="w-6 h-6 fill-current pulse-anim" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <svg class="w-4 h-4 fill-current text-bubblegumtint self-center" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                    <h1 class="font-hand text-3xl sm:text-4xl md:text-5xl font-bold text-bubblegum">
+                        Happy 2nd Monthsary, Baby!
+                    </h1>
+                    <div class="flex space-x-1 text-bubblegum">
+                        <svg class="w-4 h-4 fill-current text-bubblegumtint self-center" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <svg class="w-6 h-6 fill-current pulse-anim" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- CARD & SCROLL WRAPPER -->
+        <div class="w-full relative flex flex-col items-center">
+
+            <!-- 1. CLOSED CARD STATE -->
+            <div id="closedCard" class="w-full max-w-2xl bg-cream border-4 border-bubblegumtint rounded-3xl p-6 sm:p-10 shadow-xl relative cursor-pointer group transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                
+                <!-- Decorative Top Washi Tapes -->
+                <div class="washi-tape-pink absolute -top-3 left-8 w-24 h-6"></div>
+                <div class="washi-tape-green absolute -top-3 right-8 w-24 h-6"></div>
+
+                <div class="bg-softblush/50 border-2 border-dashed border-bubblegumtint rounded-2xl p-6 sm:p-10 flex flex-col items-center text-center relative overflow-hidden">
+                    
+                    <!-- Heart Postage Stamp Top Right -->
+                    <div class="absolute top-4 right-4 postage-stamp bg-cream p-1.5 rounded transform rotate-6 shadow-sm hidden sm:block">
+                        <div class="bg-softblush p-2 text-center flex flex-col items-center">
+                            <div class="flex space-x-0.5">
+                                <svg class="w-4 h-4 text-bubblegum fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                <svg class="w-3 h-3 text-bubblegumtint fill-current self-end" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            </div>
+                            <span class="block text-[9px] font-sans text-bubblegum font-bold tracking-widest mt-1">FOR FRENZ</span>
+                        </div>
+                    </div>
+
+                    <!-- Wax Seal Badge -->
+                    <div class="w-20 h-20 sm:w-24 sm:h-24 bg-gradient-to-tr from-bubblegum via-bubblegumtint to-softblush rounded-full flex items-center justify-center shadow-md my-3 group-hover:scale-110 transition-transform duration-300 relative border-2 border-white">
+                        <div class="relative flex items-center justify-center">
+                            <svg class="w-10 h-10 text-white fill-current animate-pulse" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            <svg class="w-4 h-4 text-wintermist fill-current absolute -top-1 -right-2 transform rotate-12" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        </div>
+                        <div class="absolute -bottom-1 bg-chaletgreen text-white text-[10px] font-sans px-3 py-0.5 rounded-full uppercase tracking-wider font-semibold shadow-sm">Open Scroll</div>
+                    </div>
+
+                    <!-- Front Titles -->
+                    <h2 class="font-hand text-3xl sm:text-4xl text-gray-800 font-bold mb-1">
+                        For My Dearest Frenz
+                    </h2>
+                    <p class="font-cute text-lg text-bubblegum max-w-md mt-2">
+                        Something sweet for my favorite person to celebrate us. Unroll me, baby!
+                    </p>
+
+                    <!-- Interactive Open Button -->
+                    <button onclick="openScrollCard()" class="mt-5 bg-bubblegum hover:bg-bubblegumtint text-white font-sans font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg transition-all flex items-center space-x-2.5 group-hover:scale-105">
+                        <svg class="w-5 h-5 text-white fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <span>Unroll Scroll</span>
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                </div>
+
+                <!-- Bottom Tape Sticker -->
+                <div class="washi-tape-pink absolute -bottom-3 left-1/2 -translate-x-1/2 w-32 h-6"></div>
+            </div>
+
+            <!-- 2. OPENED STATE: UNROLLING PAPER SCROLL -->
+            <div id="scrollContainer" class="scroll-container w-full max-w-3xl max-h-0 opacity-0 overflow-hidden flex flex-col items-center">
+                
+                <!-- TOP CHALET GREEN SCROLL ROLLER HANDLE -->
+                <div class="w-[96%] sm:w-[102%] h-7 bg-gradient-to-r from-[#4d6135] via-[#657E47] to-[#4d6135] rounded-full shadow-md z-30 flex items-center justify-between px-3 border-b border-[#3b4b28]">
+                    <div class="w-4 h-4 rounded-full bg-tarragon border border-white shadow-inner flex items-center justify-center">
+                        <div class="w-1.5 h-1.5 rounded-full bg-chaletgreen"></div>
+                    </div>
+                    <div class="h-1 w-2/3 bg-wintermist/40 rounded-full"></div>
+                    <div class="w-4 h-4 rounded-full bg-tarragon border border-white shadow-inner flex items-center justify-center">
+                        <div class="w-1.5 h-1.5 rounded-full bg-chaletgreen"></div>
+                    </div>
+                </div>
+
+                <!-- UNROLLED SCROLL PAPER BODY -->
+                <div class="w-full bg-[#FAF5EE] border-x-4 border-bubblegumtint shadow-2xl relative p-4 sm:p-8 md:p-10 text-gray-800 my-0">
+                    
+                    <!-- Side Shadow Overlays -->
+                    <div class="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/5 to-transparent pointer-events-none"></div>
+                    <div class="absolute inset-y-0 right-0 w-4 bg-gradient-to-l from-black/5 to-transparent pointer-events-none"></div>
+
+                    <!-- SCRAPBOOK CONTENT CONTAINER -->
+                    <div class="relative z-10 space-y-6">
+                        
+                        <!-- Header inside Scroll -->
+                        <div class="flex flex-col sm:flex-row items-center justify-between border-b-2 border-dashed border-bubblegumtint pb-4 gap-4">
+                            <div class="flex items-center space-x-3">
+                                <div class="flex items-center space-x-1 text-bubblegum">
+                                    <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    <svg class="w-5 h-5 fill-current text-bubblegumtint" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                </div>
+                                <div>
+                                    <h2 class="font-hand text-3xl sm:text-4xl text-bubblegum font-bold leading-tight">Our Story Together</h2>
+                                    <p class="text-xs font-sans text-chaletgreen tracking-wider font-semibold uppercase">Since Sept 26, 2026 • Nov 26, 2026</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Heart Badge Date -->
+                            <div class="washi-tape-pink px-5 py-1.5 rotate-1 font-hand text-xl text-gray-800 font-bold shadow-sm flex items-center space-x-2">
+                                <span>Always & Forever</span>
+                                <svg class="w-4 h-4 text-white fill-current inline" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            </div>
+                        </div>
+
+                        <!-- GRID CONTENT: 3 POLAROID PHOTOS + LETTER (Landscape Layout) -->
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                            
+                            <!-- LEFT COLUMN: 3 POLAROID PHOTO FRAMES (5 Cols) -->
+                            <div class="md:col-span-5 flex flex-col sm:flex-row md:flex-col flex-wrap items-center justify-center gap-5">
+                                
+                                <!-- POLAROID PHOTO 1 -->
+                                <div class="bg-white p-2.5 pt-3.5 pb-4 rounded-sm shadow-md border border-softblush transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative group w-full max-w-[205px]">
+                                    <!-- Pink Washi Tape (Bubblegum Tint) -->
+                                    <div class="washi-tape-pink absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-4 z-20"></div>
+
+                                    <!-- Corner SVG Hearts -->
+                                    <svg class="w-3.5 h-3.5 text-bubblegumtint fill-current absolute top-1.5 right-1.5 opacity-80" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+                                    <!-- Photo Display 1 -->
+                                    <div class="relative w-full aspect-square bg-softblush rounded-sm overflow-hidden border border-gray-100 flex flex-col items-center justify-center">
+                                        <img id="polaroidImg1" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=600&auto=format&fit=crop" alt="Memory Photo 1" class="w-full h-full object-cover">
+                                        
+                                        <!-- Photo Change Overlay -->
+                                        <label for="photoUpload1" class="absolute inset-0 bg-black/40 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer p-2 text-center font-sans text-xs">
+                                            <span>Click to change photo</span>
+                                            <input type="file" id="photoUpload1" accept="image/*" class="hidden" onchange="updatePolaroid(event, 'polaroidImg1')">
+                                        </label>
+                                    </div>
+
+                                    <!-- Polaroid Caption 1 -->
+                                    <p class="font-hand text-center text-lg text-gray-700 mt-1.5 font-semibold flex items-center justify-center space-x-1" contenteditable="true" title="Click to edit caption">
+                                        <span>With Frenz</span>
+                                        <svg class="w-3.5 h-3.5 text-bubblegum fill-current inline" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </p>
+                                </div>
+
+                                <!-- POLAROID PHOTO 2 -->
+                                <div class="bg-white p-2.5 pt-3.5 pb-4 rounded-sm shadow-md border border-wintermist transform rotate-3 hover:rotate-0 transition-transform duration-300 relative group w-full max-w-[205px]">
+                                    <!-- Green Washi Tape (Aroma Green) -->
+                                    <div class="washi-tape-green absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-4 z-20"></div>
+
+                                    <!-- Corner SVG Hearts -->
+                                    <svg class="w-3.5 h-3.5 text-aromagreen fill-current absolute top-1.5 right-1.5 opacity-80" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+                                    <!-- Photo Display 2 -->
+                                    <div class="relative w-full aspect-square bg-wintermist/30 rounded-sm overflow-hidden border border-gray-100 flex flex-col items-center justify-center">
+                                        <img id="polaroidImg2" src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=600&auto=format&fit=crop" alt="Memory Photo 2" class="w-full h-full object-cover">
+                                        
+                                        <!-- Photo Change Overlay -->
+                                        <label for="photoUpload2" class="absolute inset-0 bg-black/40 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer p-2 text-center font-sans text-xs">
+                                            <span>Click to change photo</span>
+                                            <input type="file" id="photoUpload2" accept="image/*" class="hidden" onchange="updatePolaroid(event, 'polaroidImg2')">
+                                        </label>
+                                    </div>
+
+                                    <!-- Polaroid Caption 2 -->
+                                    <p class="font-hand text-center text-lg text-gray-700 mt-1.5 font-semibold flex items-center justify-center space-x-1" contenteditable="true" title="Click to edit caption">
+                                        <span>My Favorite Baby</span>
+                                        <svg class="w-3.5 h-3.5 text-bubblegum fill-current inline" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </p>
+                                </div>
+
+                                <!-- POLAROID PHOTO 3 -->
+                                <div class="bg-white p-2.5 pt-3.5 pb-4 rounded-sm shadow-md border border-softblush transform -rotate-2 hover:rotate-0 transition-transform duration-300 relative group w-full max-w-[205px]">
+                                    <!-- Pink Washi Tape (Bubblegum Tint) -->
+                                    <div class="washi-tape-pink absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-4 z-20"></div>
+
+                                    <!-- Corner SVG Hearts -->
+                                    <svg class="w-3.5 h-3.5 text-bubblegumtint fill-current absolute top-1.5 right-1.5 opacity-80" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+                                    <!-- Photo Display 3 -->
+                                    <div class="relative w-full aspect-square bg-softblush/40 rounded-sm overflow-hidden border border-gray-100 flex flex-col items-center justify-center">
+                                        <img id="polaroidImg3" src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=600&auto=format&fit=crop" alt="Memory Photo 3" class="w-full h-full object-cover">
+                                        
+                                        <!-- Photo Change Overlay -->
+                                        <label for="photoUpload3" class="absolute inset-0 bg-black/40 text-white flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer p-2 text-center font-sans text-xs">
+                                            <span>Click to change photo</span>
+                                            <input type="file" id="photoUpload3" accept="image/*" class="hidden" onchange="updatePolaroid(event, 'polaroidImg3')">
+                                        </label>
+                                    </div>
+
+                                    <!-- Polaroid Caption 3 -->
+                                    <p class="font-hand text-center text-lg text-gray-700 mt-1.5 font-semibold flex items-center justify-center space-x-1" contenteditable="true" title="Click to edit caption">
+                                        <span>Two Months of Us</span>
+                                        <svg class="w-3.5 h-3.5 text-bubblegum fill-current inline" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </p>
+                                </div>
+
+                            </div>
+
+                            <!-- RIGHT COLUMN: HANDWRITTEN MONTHSARY LETTER (7 Cols) -->
+                            <div class="md:col-span-7 bg-white/90 p-6 sm:p-8 rounded-2xl border-2 border-softblush shadow-sm notebook-lines relative">
+                                
+                                <div class="washi-tape-pink absolute -top-3 right-6 w-16 h-5"></div>
+                                <div class="washi-tape-green absolute -bottom-3 left-6 w-16 h-5"></div>
+
+                                <!-- Decorative Scattered Hearts inside Letter -->
+                                <svg class="w-4 h-4 text-softblush fill-current absolute top-4 right-4 pointer-events-none" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                <svg class="w-5 h-5 text-bubblegumtint fill-current absolute bottom-12 right-6 pointer-events-none opacity-60" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+                                <!-- Letter Header with Double Heart -->
+                                <div class="flex items-center space-x-2 mb-3">
+                                    <h3 class="font-hand text-3xl text-bubblegum font-bold">
+                                        Dearest Frenz,
+                                    </h3>
+                                    <div class="flex space-x-1 text-bubblegum">
+                                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                        <svg class="w-4 h-4 fill-current text-bubblegumtint self-center" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </div>
+                                </div>
+
+                                <!-- Main Letter Text for Frenz -->
+                                <div id="letterBody" class="font-hand text-xl sm:text-2xl text-gray-800 space-y-4 leading-relaxed" contenteditable="true" title="Click to edit letter">
+                                    <p>
+                                        Happy 2nd monthsary, baby! Ever since September 26, these past two months with you have truly been the sweetest, happiest chapter of my life. It’s amazing how quickly you became my favorite part of every single day.
+                                    </p>
+                                    <p>
+                                        Thank you for filling my world with your warmth, your patience, your infectious laughter, and your gentle love. Even on my quiet or busy days, just thinking about you or hearing your voice makes everything feel so much brighter, calmer, and lighter.
+                                    </p>
+                                    <p>
+                                        I cherish every late-night talk, every inside joke, and every little moment we’ve shared so far. You make loving you feel so effortless and safe, and I’m endlessly grateful that I get to call you mine.
+                                    </p>
+                                    <p>
+                                        I love you more than words could ever put onto paper, Frenz. Here’s to celebrating today, holding your hand through whatever comes next, and making so many more sweet memories together.
+                                    </p>
+                                </div>
+
+                                <!-- Stamp Graphic & Signature -->
+                                <div class="mt-6 pt-4 flex items-center justify-between border-t border-dashed border-bubblegumtint">
+                                    <div class="flex items-center space-x-1.5 text-bubblegum">
+                                        <svg class="w-4 h-4 fill-current text-bubblegumtint" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                        <svg class="w-6 h-6 fill-current text-bubblegum pulse-anim" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                        <svg class="w-4 h-4 fill-current text-bubblegumtint" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    </div>
+
+                                    <!-- Signature -->
+                                    <div class="text-right">
+                                        <p class="font-hand text-2xl text-bubblegum font-bold">Forever yours,</p>
+                                        <p class="font-hand text-3xl text-chaletgreen font-bold" contenteditable="true" title="Click to edit signature">With all my love</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- RE-CLOSE BUTTON -->
+                        <div class="flex justify-center pt-4">
+                            <button onclick="closeScrollCard()" class="text-xs font-sans text-gray-500 hover:text-bubblegum underline flex items-center space-x-1.5 transition-colors">
+                                <span>Close scroll</span>
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- BOTTOM CHALET GREEN SCROLL ROLLER HANDLE -->
+                <div class="w-[96%] sm:w-[102%] h-7 bg-gradient-to-r from-[#4d6135] via-[#657E47] to-[#4d6135] rounded-full shadow-md z-30 flex items-center justify-between px-3 border-t border-[#3b4b28]">
+                    <div class="w-4 h-4 rounded-full bg-tarragon border border-white shadow-inner flex items-center justify-center">
+                        <div class="w-1.5 h-1.5 rounded-full bg-chaletgreen"></div>
+                    </div>
+                    <div class="h-1 w-2/3 bg-wintermist/40 rounded-full"></div>
+                    <div class="w-4 h-4 rounded-full bg-tarragon border border-white shadow-inner flex items-center justify-center">
+                        <div class="w-1.5 h-1.5 rounded-full bg-chaletgreen"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- TOAST MESSAGE -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-white border-2 border-bubblegumtint text-gray-800 font-cute px-5 py-2.5 rounded-2xl shadow-lg transform translate-y-20 opacity-0 transition-all duration-300 flex items-center space-x-2 z-50">
+        <svg class="w-4 h-4 text-bubblegum fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span id="toastMsg" class="text-sm">Message</span>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Web Audio Chime Sound
+        function playChime() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, idx) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    
+                    gain.gain.setValueAtTime(0, ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.08, ctx.currentTime + (idx * 0.1) + 0.05);
+                    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (idx * 0.1) + 0.8);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.start(ctx.currentTime + (idx * 0.1));
+                    osc.stop(ctx.currentTime + (idx * 0.1) + 0.9);
+                });
+            } catch (e) {
+                console.log("Audio play blocked");
+            }
+        }
+
+        // Open Scroll Card
+        function openScrollCard() {
+            const closedCard = document.getElementById('closedCard');
+            const scrollContainer = document.getElementById('scrollContainer');
+
+            playChime();
+
+            // Heart Confetti Burst with exact theme colors
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 110,
+                    spread: 95,
+                    origin: { y: 0.6 },
+                    colors: ['#FF5C89', '#FB8CAC', '#FFDBDB', '#97C49E', '#657E47', '#BAD17A'],
+                    shapes: ['heart']
+                });
+                setTimeout(() => {
+                    confetti({
+                        particleCount: 65,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#FF5C89', '#FB8CAC', '#FFDBDB'],
+                        shapes: ['heart']
+                    });
+                    confetti({
+                        particleCount: 65,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#FF5C89', '#97C49E', '#BAD17A'],
+                        shapes: ['heart']
+                    });
+                }, 250);
+            }
+
+            closedCard.style.transform = 'scale(0.95)';
+            closedCard.style.opacity = '0';
+            
+            setTimeout(() => {
+                closedCard.classList.add('hidden');
+                scrollContainer.classList.remove('opacity-0');
+                scrollContainer.style.maxHeight = '2600px';
+                scrollContainer.style.opacity = '1';
+
+                showToast('Scroll unrolled! Happy 2nd Monthsary, Frenz!');
+            }, 400);
+        }
+
+        // Close Scroll
+        function closeScrollCard() {
+            const closedCard = document.getElementById('closedCard');
+            const scrollContainer = document.getElementById('scrollContainer');
+
+            scrollContainer.style.maxHeight = '0px';
+            scrollContainer.style.opacity = '0';
+
+            setTimeout(() => {
+                closedCard.classList.remove('hidden');
+                setTimeout(() => {
+                    closedCard.style.transform = 'scale(1)';
+                    closedCard.style.opacity = '1';
+                }, 50);
+            }, 600);
+        }
+
+        // Photo Upload Helper
+        function updatePolaroid(event, imgId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(imgId).src = e.target.result;
+                    showToast('Photo updated successfully!');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Toast Helper
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            
+            toastMsg.innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // Interactive Click Multi-Heart Animation
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('button') || e.target.closest('[contenteditable="true"]') || e.target.closest('label')) return;
+
+            const count = 3;
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                const offsetX = (Math.random() - 0.5) * 40;
+                const offsetY = (Math.random() - 0.5) * 40;
+                const scale = 0.7 + Math.random() * 0.6;
+                
+                heart.className = 'fixed pointer-events-none z-50 text-bubblegum animate-ping';
+                heart.style.left = (e.clientX - 10 + offsetX) + 'px';
+                heart.style.top = (e.clientY - 10 + offsetY) + 'px';
+                heart.style.transform = `scale(${scale})`;
+                heart.innerHTML = `<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
+                
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 750);
+            }
+        });
+    </script>
+</body>
+</html>
