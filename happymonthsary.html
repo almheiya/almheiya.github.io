@@ -20,6 +20,8 @@
                     colors: {
                         babypink: '#FDA8BF',
                         softblush: '#FFDBDB',
+                        periwinkle: '#C5CEFA',
+                        babyblue: '#BCE0FD',
                         aquadulce: '#6C9B76',
                         bubblegum: '#FF5C89',
                         bubblegumtint: '#FB8CAC',
@@ -41,12 +43,16 @@
     </script>
 
     <style>
-        /* Exact Pink Dream & Botanical Green Dot Background Pattern */
+        /* Pink, Periwinkle & Baby Blue Gradient + Botanical Dot Background Pattern */
         .bg-heart-pattern {
             background-color: #FDA8BF;
-            background-image: radial-gradient(#FFDBDB 2.2px, transparent 2.2px), radial-gradient(#6C9B76 2.2px, #FDA8BF 2.2px);
-            background-size: 32px 32px;
-            background-position: 0 0, 16px 16px;
+            background-image: 
+                radial-gradient(rgba(255, 255, 255, 0.65) 2.2px, transparent 2.2px),
+                radial-gradient(rgba(108, 155, 118, 0.5) 2.2px, transparent 2.2px),
+                linear-gradient(135deg, #FDA8BF 0%, #E7BBE3 35%, #C5CEFA 70%, #BCE0FD 100%);
+            background-size: 32px 32px, 32px 32px, 100% 100%;
+            background-position: 0 0, 16px 16px, 0 0;
+            background-attachment: fixed;
         }
 
         /* Washi Tape Effects using requested Bubblegum Tint (#FB8CAC) and Aroma Green (#97C49E) */
@@ -88,7 +94,7 @@
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #FDA8BF;
+            background: #C5CEFA;
         }
         ::-webkit-scrollbar-thumb {
             background: #FF5C89;
@@ -476,7 +482,7 @@
                     particleCount: 110,
                     spread: 95,
                     origin: { y: 0.6 },
-                    colors: ['#FF5C89', '#FB8CAC', '#FFDBDB', '#97C49E', '#657E47', '#BAD17A'],
+                    colors: ['#FF5C89', '#FB8CAC', '#FFDBDB', '#C5CEFA', '#BCE0FD', '#97C49E', '#BAD17A'],
                     shapes: ['heart']
                 });
                 setTimeout(() => {
@@ -485,7 +491,7 @@
                         angle: 60,
                         spread: 55,
                         origin: { x: 0 },
-                        colors: ['#FF5C89', '#FB8CAC', '#FFDBDB'],
+                        colors: ['#FF5C89', '#FB8CAC', '#C5CEFA'],
                         shapes: ['heart']
                     });
                     confetti({
@@ -493,7 +499,7 @@
                         angle: 120,
                         spread: 55,
                         origin: { x: 1 },
-                        colors: ['#FF5C89', '#97C49E', '#BAD17A'],
+                        colors: ['#FF5C89', '#BCE0FD', '#97C49E'],
                         shapes: ['heart']
                     });
                 }, 250);
@@ -533,51 +539,4 @@
         function updatePolaroid(event, imgId) {
             const file = event.target.files[0];
             if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById(imgId).src = e.target.result;
-                    showToast('Photo updated successfully!');
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // Toast Helper
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            const toastMsg = document.getElementById('toastMsg');
-            
-            toastMsg.innerText = msg;
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            toast.classList.add('translate-y-0', 'opacity-100');
-
-            setTimeout(() => {
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3500);
-        }
-
-        // Interactive Click Multi-Heart Animation
-        document.addEventListener('click', function(e) {
-            if (e.target.closest('button') || e.target.closest('[contenteditable="true"]') || e.target.closest('label')) return;
-
-            const count = 3;
-            for (let i = 0; i < count; i++) {
-                const heart = document.createElement('div');
-                const offsetX = (Math.random() - 0.5) * 40;
-                const offsetY = (Math.random() - 0.5) * 40;
-                const scale = 0.7 + Math.random() * 0.6;
-                
-                heart.className = 'fixed pointer-events-none z-50 text-bubblegum animate-ping';
-                heart.style.left = (e.clientX - 10 + offsetX) + 'px';
-                heart.style.top = (e.clientY - 10 + offsetY) + 'px';
-                heart.style.transform = `scale(${scale})`;
-                heart.innerHTML = `<svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`;
-                
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 750);
-            }
-        });
-    </script>
-</body>
-</html>
+                const reader = new FileReader
