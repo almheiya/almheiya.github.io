@@ -380,9 +380,102 @@
     .animate-scroll-cue {
       animation: gentleFloat 2.4s ease-in-out infinite;
     }
+
+    /* ============================================================
+       LOWER-RIGHT "NOW PLAYING: PHOTOGRAPH" NOTIFICATION PILL
+       ============================================================ */
+    .now-playing-pill {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 9500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      border-radius: 9999px;
+      background: rgba(246, 249, 255, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid var(--mystification);
+      box-shadow:
+        0 10px 26px -6px rgba(46, 62, 109, 0.24),
+        0 2px 8px rgba(46, 62, 109, 0.1);
+      color: var(--mystification);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+
+    .now-playing-pill:hover {
+      transform: translateY(-2px);
+      background: #FFFFFF;
+      box-shadow:
+        0 14px 30px -6px rgba(46, 62, 109, 0.3),
+        0 4px 10px rgba(46, 62, 109, 0.12);
+    }
+
+    .eq-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 2.5px;
+      height: 13px;
+      width: 14px;
+    }
+
+    .eq-bar {
+      width: 2.5px;
+      height: 5px;
+      border-radius: 9999px;
+      background-color: var(--mystification);
+      transition: height 0.25s ease;
+    }
+
+    .now-playing-pill.is-playing .eq-bar:nth-child(1) {
+      animation: eqBounce 0.8s ease-in-out infinite alternate;
+    }
+
+    .now-playing-pill.is-playing .eq-bar:nth-child(2) {
+      animation: eqBounce 0.55s ease-in-out 0.15s infinite alternate;
+    }
+
+    .now-playing-pill.is-playing .eq-bar:nth-child(3) {
+      animation: eqBounce 0.7s ease-in-out 0.3s infinite alternate;
+    }
+
+    @keyframes eqBounce {
+      0% { height: 4px; }
+      100% { height: 13px; }
+    }
   </style>
 </head>
 <body class="paper-texture selection:bg-gladeye selection:text-mystification">
+
+  <!-- =====================================================================
+       BACKGROUND MUSIC SECTION (Replace src with your audio file)
+       ===================================================================== -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="music.mp3.mp3" type="audio/mpeg" />
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- Lower-Right "Now Playing: Photograph" Notification -->
+  <button
+    id="now-playing-toast"
+    type="button"
+    class="now-playing-pill"
+    aria-label="Toggle background music: Photograph"
+    title="Click to play or pause Photograph"
+  >
+    <span class="eq-bars" aria-hidden="true">
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+      <span class="eq-bar"></span>
+    </span>
+    <span class="text-xs sm:text-[13px] font-medium tracking-wide text-mystification">
+      Now Playing: <span class="font-serif italic font-semibold">Photograph</span>
+    </span>
+  </button>
 
   <!-- Subtle Floating Tone Toggle Pill (Top Right) -->
   <header class="fixed top-4 right-4 z-30 flex items-center bg-firstsnow/80 backdrop-blur-md border border-gladeye/60 px-3 py-1.5 rounded-full shadow-sm">
@@ -839,10 +932,63 @@
   </div>
 
   <!-- =====================================================================
-       INTERACTIVE LOGIC (Tone Filter, Letter Pop-Out & White Flash)
+       INTERACTIVE LOGIC (Music, Tone Filter, Letter Pop-Out & White Flash)
        ===================================================================== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      // 0. Background Music & "Now Playing: Photograph" Notification
+      const bgMusic = document.getElementById('bg-music');
+      const nowPlayingToast = document.getElementById('now-playing-toast');
+      bgMusic.volume = 0.65;
+
+      function syncMusicUI() {
+        if (!bgMusic.paused) {
+          nowPlayingToast.classList.add('is-playing');
+        } else {
+          nowPlayingToast.classList.remove('is-playing');
+        }
+      }
+
+      function tryAutoPlayMusic() {
+        if (!bgMusic.paused) return;
+        const playPromise = bgMusic.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              syncMusicUI();
+            })
+            .catch(() => {
+              // Browser blocked autoplay until first user interaction
+              syncMusicUI();
+            });
+        }
+      }
+
+      // Attempt immediate playback, and start cleanly on first click/touch/scroll if blocked
+      tryAutoPlayMusic();
+      const unlockAudio = () => {
+        tryAutoPlayMusic();
+        ['click', 'touchstart', 'keydown'].forEach((evt) =>
+          document.removeEventListener(evt, unlockAudio)
+        );
+      };
+      ['click', 'touchstart', 'keydown'].forEach((evt) =>
+        document.addEventListener(evt, unlockAudio, { once: true })
+      );
+
+      nowPlayingToast.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (bgMusic.paused) {
+          bgMusic.play().then(syncMusicUI).catch(() => {});
+        } else {
+          bgMusic.pause();
+          syncMusicUI();
+        }
+      });
+
+      bgMusic.addEventListener('play', syncMusicUI);
+      bgMusic.addEventListener('pause', syncMusicUI);
+
       // 1. Photo Filter Mode Toggle (Indigo Palette Tint / Classic B&W / Original Color)
       const heartGrid = document.getElementById('heart-grid');
       const filterToggleBtn = document.getElementById('filter-toggle-btn');
