@@ -56,6 +56,9 @@
       justify-content: center;
       padding: clamp(14px, 3vw, 36px);
       perspective: 1900px;
+    }
+
+    .book-stage.is-closed {
       cursor: pointer;
     }
 
@@ -65,7 +68,14 @@
       max-height: 88vh;
       position: relative;
       transform-style: preserve-3d;
+      /* Slide slightly to the right when opened */
+      transform: translateX(4%);
       transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Center the closed right-half cover in the viewport */
+    .book-stage.is-closed .notebook-wrapper {
+      transform: translateX(-25%);
     }
 
     .journal-spread {
@@ -84,7 +94,7 @@
       transform-style: preserve-3d;
     }
 
-    /* Center spine crease */
+    /* Center spine crease when open */
     .journal-spread::after {
       content: "";
       position: absolute;
@@ -103,6 +113,16 @@
       z-index: 15;
     }
 
+    .book-stage.is-closed .journal-spread {
+      background: transparent;
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    .book-stage.is-closed .journal-spread::after {
+      display: none;
+    }
+
     .journal-page {
       width: 100%;
       height: 100%;
@@ -110,14 +130,10 @@
       min-height: 0;
       padding: clamp(12px, 2vw, 24px);
       position: relative;
-      backface-visibility: visible;
-      -webkit-backface-visibility: visible;
     }
 
     .page-left {
       transform-origin: right center;
-      transform-style: preserve-3d;
-      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
       z-index: 2;
       cursor: pointer;
     }
@@ -129,12 +145,11 @@
     }
 
     /* ========================================================================
-       2. STRIPED BURGUNDY SNAP-CLASP COVER (STARTS CLOSED)
+       2. STRIPED BURGUNDY SNAP-CLASP COVER (STARTS CLOSED, NO LEFT PAGE)
        ======================================================================== */
-    .book-stage.is-closed .page-left {
-      transform: rotateY(-172deg);
-      opacity: 0;
-      pointer-events: none;
+    .book-stage.is-closed .page-left,
+    .book-stage.is-closed .page-right {
+      display: none;
     }
 
     .book-stage.is-closed .journal-spread::before {
@@ -144,7 +159,7 @@
       right: 0;
       bottom: 0;
       left: 50%;
-      border-radius: 2px 14px 14px 2px;
+      border-radius: 6px 14px 14px 6px;
       /* Burgundy fabric with vertical cream pinstripes & subtle stitching border */
       background-color: var(--burgundy-cover);
       background-image:
@@ -450,7 +465,7 @@
         </div>
 
         <!-- ================================================================
-             LEFT PAGE (Press left side to fold and close the journal)
+             LEFT PAGE (Press left page to close the journal)
              ================================================================ -->
         <section class="journal-page page-left" id="leftPageTrigger" aria-label="Left journal page">
           <div class="grid grid-cols-12 gap-3 h-full min-h-0 relative">
@@ -661,7 +676,6 @@
   <script>
     (function () {
       const bookStage = document.getElementById('bookStage');
-      const journalCaptureArea = document.getElementById('journalCaptureArea');
       const leftPageTrigger = document.getElementById('leftPageTrigger');
 
       let audioCtx = null;
@@ -732,22 +746,20 @@
         spawnHeartsAt(e.clientX, e.clientY);
       });
 
-      // Open journal when clicking outside the open book or on the closed cover
-      bookStage?.addEventListener('click', (e) => {
+      // Open journal when pressing anywhere on the unopened book/stage
+      bookStage?.addEventListener('click', () => {
         if (!bookStage.classList.contains('is-closed')) return;
-        const clickedBook = journalCaptureArea && journalCaptureArea.contains(e.target);
-        if (!clickedBook || e.target.closest('.journal-spread') || e.target.closest('.cover-snap-tab')) {
-          bookStage.classList.remove('is-closed');
-          playOpenDing();
-        }
+        bookStage.classList.remove('is-closed');
+        playOpenDing();
       });
 
-      // Close journal when clicking empty space on the left page
+      // Close journal when pressing the left page of the opened book
       leftPageTrigger?.addEventListener('click', (e) => {
         if (!bookStage || bookStage.classList.contains('is-closed')) return;
         if (e.target.closest('[data-no-close="true"], [data-photo-slot], [contenteditable="true"]')) {
           return;
         }
+        e.stopPropagation();
         bookStage.classList.add('is-closed');
       });
 
