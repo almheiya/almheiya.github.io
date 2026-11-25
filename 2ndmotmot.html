@@ -15,10 +15,11 @@
 
   <style>
     :root {
-      --olive-bg: #6b7f4c;
-      --olive-deep: #55673a;
+      --olive-bg: #6d814d;
+      --burgundy-cover: #681c29;
+      --burgundy-deep: #4c111c;
       --burgundy-swirl: #5c1826;
-      --burgundy-dark: #45101b;
+      --stitch-cream: #f4ead8;
       --paper-cream: #fbf5e8;
       --paper-warm: #f4ebd8;
       --ink-charcoal: #2c2124;
@@ -26,7 +27,6 @@
       --rose-accent: #e88ca8;
     }
 
-    /* Fallback utility rules so layout never collapses even if offline */
     *, *::before, *::after {
       box-sizing: border-box;
     }
@@ -39,12 +39,10 @@
       overflow-x: hidden;
       font-family: 'Caveat', cursive, sans-serif;
       color: var(--ink-charcoal);
-      /* Olive green backdrop with subtle small burgundy swirls */
+      /* Olive green backdrop with repeating burgundy swirls & scattered dots */
       background-color: var(--olive-bg);
-      background-image:
-        radial-gradient(circle at 18% 22%, rgba(92, 24, 38, 0.14) 0%, transparent 28%),
-        radial-gradient(circle at 82% 76%, rgba(92, 24, 38, 0.15) 0%, transparent 32%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%235c1826' stroke-width='1.5' stroke-linecap='round' opacity='0.22'%3E%3Cpath d='M24 38c10-14 28-12 32 2 4 13-9 24-20 19-8-4-9-14-2-19'/%3E%3Cpath d='M118 28c-12 4-16 18-9 27 6 8 19 7 24-2 4-7 0-16-8-18'/%3E%3Cpath d='M42 122c14 6 26-3 25-17-1-11-12-18-22-14-8 3-11 12-6 19'/%3E%3Cpath d='M124 114c-8-11-24-10-30 2-5 10 2 22 13 23 8 1 15-5 16-13'/%3E%3C/g%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%235c1826' stroke-linecap='round'%3E%3Cpath stroke-width='1.55' opacity='0.26' d='M28 46c11-16 32-14 36 3 4 15-10 27-23 21-9-4-11-16-2-22'/%3E%3Cpath stroke-width='1.55' opacity='0.24' d='M165 36c-14 5-19 21-10 31 7 9 22 8 28-2 5-8 0-18-9-20'/%3E%3Cpath stroke-width='1.55' opacity='0.25' d='M54 166c16 7 30-4 28-20-1-13-14-21-26-16-9 4-13 14-7 22'/%3E%3Cpath stroke-width='1.55' opacity='0.26' d='M172 154c-10-13-28-12-35 2-6 12 2 26 15 27 10 1 18-6 19-15'/%3E%3Cpath stroke-width='1.35' opacity='0.2' d='M110 102c8-11 22-9 25 2 3 10-7 19-16 15-6-3-8-11-2-15'/%3E%3C/g%3E%3Cg fill='%235c1826' opacity='0.28'%3E%3Ccircle cx='18' cy='18' r='2.1'/%3E%3Ccircle cx='96' cy='28' r='1.7'/%3E%3Ccircle cx='132' cy='62' r='2.3'/%3E%3Ccircle cx='202' cy='84' r='1.8'/%3E%3Ccircle cx='24' cy='112' r='1.9'/%3E%3Ccircle cx='78' cy='128' r='2.2'/%3E%3Ccircle cx='148' cy='118' r='1.7'/%3E%3Ccircle cx='198' cy='196' r='2.2'/%3E%3Ccircle cx='112' cy='188' r='1.9'/%3E%3Ccircle cx='18' cy='198' r='1.7'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 220px 220px;
     }
 
     /* ========================================================================
@@ -67,7 +65,7 @@
       max-height: 88vh;
       position: relative;
       transform-style: preserve-3d;
-      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .journal-spread {
@@ -82,7 +80,7 @@
         0 20px 45px rgba(28, 12, 16, 0.35),
         inset 0 0 28px rgba(92, 24, 38, 0.08);
       position: relative;
-      overflow: hidden;
+      overflow: visible;
       transform-style: preserve-3d;
     }
 
@@ -126,10 +124,12 @@
 
     .page-right {
       z-index: 1;
+      border-radius: 0 12px 12px 0;
+      overflow: hidden;
     }
 
     /* ========================================================================
-       2. CLOSED COVER STATE (STARTS CLOSED; OPENS ON CLICK)
+       2. STRIPED BURGUNDY SNAP-CLASP COVER (STARTS CLOSED)
        ======================================================================== */
     .book-stage.is-closed .page-left {
       transform: rotateY(-172deg);
@@ -138,22 +138,77 @@
     }
 
     .book-stage.is-closed .journal-spread::before {
-      content: "2nd Monthsary  ♥  Tap to Open";
+      content: "";
       position: absolute;
-      inset: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
       left: 50%;
-      width: 50%;
+      border-radius: 2px 14px 14px 2px;
+      /* Burgundy fabric with vertical cream pinstripes & subtle stitching border */
+      background-color: var(--burgundy-cover);
+      background-image:
+        repeating-linear-gradient(
+          90deg,
+          transparent 0px,
+          transparent 7px,
+          rgba(244, 234, 216, 0.52) 7px,
+          rgba(244, 234, 216, 0.52) 8.4px
+        ),
+        linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(34, 6, 12, 0.28));
+      border: 2.5px solid var(--burgundy-deep);
+      box-shadow:
+        inset 0 0 0 6px rgba(244, 234, 216, 0.35),
+        inset 0 0 24px rgba(24, 4, 9, 0.38),
+        0 18px 36px rgba(28, 12, 16, 0.38);
+      z-index: 28;
+      cursor: pointer;
+    }
+
+    .cover-snap-tab {
+      display: none;
+    }
+
+    .book-stage.is-closed .cover-snap-tab {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      position: absolute;
+      top: 54%;
+      right: -24px;
+      transform: translateY(-50%);
+      width: 78px;
+      height: 58px;
+      padding-left: 11px;
+      border-radius: 14px 24px 24px 14px;
+      background-color: var(--burgundy-cover);
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 7px,
+        rgba(244, 234, 216, 0.48) 7px,
+        rgba(244, 234, 216, 0.48) 8.4px
+      );
+      border: 2.2px solid var(--burgundy-deep);
+      box-shadow:
+        inset 0 0 0 4px rgba(244, 234, 216, 0.35),
+        3px 5px 12px rgba(28, 12, 16, 0.35);
+      z-index: 32;
+      pointer-events: none;
+    }
+
+    .snap-button-metal {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 32% 28%, #f2ece1 0%, #c8bfb0 48%, #8f8578 100%);
+      border: 1.8px solid #4c433b;
+      box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        0 2px 4px rgba(0, 0, 0, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(145deg, #6e1d2e 0%, #4d111e 100%);
-      color: #fbf5e8;
-      font-size: clamp(1.3rem, 2.4vw, 2.2rem);
-      letter-spacing: 0.04em;
-      border-left: 3px solid #380a14;
-      box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.28);
-      z-index: 30;
-      cursor: pointer;
     }
 
     /* ========================================================================
@@ -344,6 +399,32 @@
       background: #7c8288;
       border: 1px solid #444a50;
     }
+
+    /* ========================================================================
+       6. CURSOR PRESS HEART PARTICLES
+       ======================================================================== */
+    .click-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%) scale(0.6);
+      animation: heartFloatUp 820ms cubic-bezier(0.18, 0.85, 0.32, 1) forwards;
+    }
+
+    @keyframes heartFloatUp {
+      0% {
+        opacity: 0.95;
+        transform: translate(-50%, -50%) scale(0.65) rotate(var(--rot, 0deg));
+      }
+      55% {
+        opacity: 0.9;
+        transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 34px)) scale(1.08) rotate(var(--rot, 0deg));
+      }
+      100% {
+        opacity: 0;
+        transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 68px)) scale(0.8) rotate(var(--rot, 0deg));
+      }
+    }
   </style>
 </head>
 <body>
@@ -354,6 +435,19 @@
   <div class="book-stage is-closed" id="bookStage">
     <main class="notebook-wrapper" id="journalCaptureArea">
       <div class="journal-spread">
+
+        <!-- Snap-Clasp Tab on Right Edge of Closed Striped Burgundy Cover -->
+        <div class="cover-snap-tab" aria-hidden="true">
+          <div class="snap-button-metal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="2.2" fill="#4c433b" />
+              <ellipse cx="12" cy="6.5" rx="2" ry="3.5" fill="#5c5249" />
+              <ellipse cx="12" cy="17.5" rx="2" ry="3.5" fill="#5c5249" />
+              <ellipse cx="6.5" cy="12" rx="3.5" ry="2" fill="#5c5249" />
+              <ellipse cx="17.5" cy="12" rx="3.5" ry="2" fill="#5c5249" />
+            </svg>
+          </div>
+        </div>
 
         <!-- ================================================================
              LEFT PAGE (Press left side to fold and close the journal)
@@ -562,7 +656,7 @@
   </div>
 
   <!-- ========================================================================
-       INTERACTIVE JAVASCRIPT (PRESS OUTSIDE COVER TO OPEN, LEFT SIDE TO CLOSE)
+       INTERACTIVE JAVASCRIPT (OPEN/CLOSE, DING SOUND, HEART BURST)
        ======================================================================== -->
   <script>
     (function () {
@@ -570,13 +664,81 @@
       const journalCaptureArea = document.getElementById('journalCaptureArea');
       const leftPageTrigger = document.getElementById('leftPageTrigger');
 
+      let audioCtx = null;
+
+      function playOpenDing() {
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          if (!audioCtx) audioCtx = new AudioContextClass();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+
+          const now = audioCtx.currentTime;
+          const notes = [880, 1174.66]; // Sweet A5 -> D6 chime
+
+          notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            const start = now + idx * 0.085;
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, start);
+
+            gain.gain.setValueAtTime(0.0001, start);
+            gain.gain.exponentialRampToValueAtTime(0.11, start + 0.015);
+            gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.42);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(start);
+            osc.stop(start + 0.45);
+          });
+        } catch (_) {
+          // Ignore audio restrictions if blocked
+        }
+      }
+
+      const heartColors = ['#e88ca8', '#cf5c82', '#7a9a74', '#f4a4be'];
+
+      function spawnHeartsAt(x, y) {
+        const count = 3;
+        for (let i = 0; i < count; i++) {
+          const heart = document.createElement('span');
+          heart.className = 'click-heart';
+          const color = heartColors[(i + Math.floor(Math.random() * heartColors.length)) % heartColors.length];
+          const dx = `${Math.round((Math.random() - 0.5) * 44)}px`;
+          const rot = `${Math.round((Math.random() - 0.5) * 32)}deg`;
+          const size = 14 + Math.round(Math.random() * 6);
+
+          heart.style.left = `${x + (Math.random() - 0.5) * 14}px`;
+          heart.style.top = `${y + (Math.random() - 0.5) * 10}px`;
+          heart.style.setProperty('--dx', dx);
+          heart.style.setProperty('--rot', rot);
+
+          heart.innerHTML = `
+            <svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none">
+              <path d="M12 20.5C12 20.5 3.5 14.8 3.5 8.6C3.5 5.8 5.7 3.8 8.3 3.8C10.1 3.8 11.4 4.8 12 6.1C12.6 4.8 13.9 3.8 15.7 3.8C18.3 3.8 20.5 5.8 20.5 8.6C20.5 14.8 12 20.5 12 20.5Z"
+                fill="${color}" stroke="#4e1320" stroke-width="1.6" stroke-linejoin="round"/>
+            </svg>
+          `;
+
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 860);
+        }
+      }
+
+      document.addEventListener('pointerdown', (e) => {
+        spawnHeartsAt(e.clientX, e.clientY);
+      });
+
       // Open journal when clicking outside the open book or on the closed cover
       bookStage?.addEventListener('click', (e) => {
         if (!bookStage.classList.contains('is-closed')) return;
         const clickedBook = journalCaptureArea && journalCaptureArea.contains(e.target);
-        // Clicking the closed cover or outside the spread opens it smoothly
-        if (!clickedBook || e.target.closest('.journal-spread')) {
+        if (!clickedBook || e.target.closest('.journal-spread') || e.target.closest('.cover-snap-tab')) {
           bookStage.classList.remove('is-closed');
+          playOpenDing();
         }
       });
 
