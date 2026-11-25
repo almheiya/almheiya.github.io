@@ -444,6 +444,11 @@
 </head>
 <body>
 
+  <!-- Background Music (place music.mp3 in the same folder as this HTML file) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
   <!-- ========================================================================
        3D INTERACTIVE NOTEBOOK STAGE (STARTS CLOSED; OPENS TO 16:10 SPREAD)
        ======================================================================== -->
@@ -671,12 +676,13 @@
   </div>
 
   <!-- ========================================================================
-       INTERACTIVE JAVASCRIPT (OPEN/CLOSE, DING SOUND, HEART BURST)
+       INTERACTIVE JAVASCRIPT (OPEN/CLOSE, MUSIC, DING SOUND, HEART BURST)
        ======================================================================== -->
   <script>
     (function () {
       const bookStage = document.getElementById('bookStage');
       const leftPageTrigger = document.getElementById('leftPageTrigger');
+      const bgMusic = document.getElementById('bgMusic');
 
       let audioCtx = null;
 
@@ -751,6 +757,11 @@
         if (!bookStage.classList.contains('is-closed')) return;
         bookStage.classList.remove('is-closed');
         playOpenDing();
+
+        if (bgMusic) {
+          bgMusic.volume = 0.35; // Adjust between 0.0 (mute) and 1.0 (full)
+          bgMusic.play().catch(() => {});
+        }
       });
 
       // Close journal when pressing the left page of the opened book
@@ -761,6 +772,7 @@
         }
         e.stopPropagation();
         bookStage.classList.add('is-closed');
+        bgMusic?.pause();
       });
 
       // Optional photo-slot URL swapper on click
