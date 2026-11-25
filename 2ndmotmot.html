@@ -46,6 +46,38 @@
     }
 
     /* ========================================================================
+       NOW PLAYING PILL NOTIFICATION
+       ======================================================================== */
+    .now-playing-toast {
+      position: fixed;
+      top: 18px;
+      left: 50%;
+      transform: translate(-50%, -18px) scale(0.95);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 20px;
+      border-radius: 999px;
+      background: var(--paper-cream);
+      border: 2px solid var(--rose-accent);
+      box-shadow: 0 8px 22px rgba(28, 12, 16, 0.25);
+      font-family: 'Caveat', cursive, sans-serif;
+      font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+      font-weight: 600;
+      color: var(--ink-charcoal);
+      z-index: 9990;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
+    }
+
+    .now-playing-toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0) scale(1);
+    }
+
+    /* ========================================================================
        1. BOOK STAGE & 16:10 SPREAD PROPORTION
        ======================================================================== */
     .book-stage {
@@ -449,6 +481,14 @@
     <source src="music.mp3.mp3" type="audio/mpeg" />
   </audio>
 
+  <!-- Now Playing Toast Notification -->
+  <div class="now-playing-toast" id="nowPlayingToast" role="status" aria-live="polite">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 20.5C12 20.5 3.5 14.8 3.5 8.6C3.5 5.8 5.7 3.8 8.3 3.8C10.1 3.8 11.4 4.8 12 6.1C12.6 4.8 13.9 3.8 15.7 3.8C18.3 3.8 20.5 5.8 20.5 8.6C20.5 14.8 12 20.5 12 20.5Z" fill="#e88ca8" stroke="#5c1826" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <span>Now Playing: Photograph</span>
+  </div>
+
   <!-- ========================================================================
        3D INTERACTIVE NOTEBOOK STAGE (STARTS CLOSED; OPENS TO 16:10 SPREAD)
        ======================================================================== -->
@@ -676,15 +716,31 @@
   </div>
 
   <!-- ========================================================================
-       INTERACTIVE JAVASCRIPT (OPEN/CLOSE, MUSIC, DING SOUND, HEART BURST)
+       INTERACTIVE JAVASCRIPT (OPEN/CLOSE, MUSIC, TOAST, DING, HEART BURST)
        ======================================================================== -->
   <script>
     (function () {
       const bookStage = document.getElementById('bookStage');
       const leftPageTrigger = document.getElementById('leftPageTrigger');
       const bgMusic = document.getElementById('bgMusic');
+      const nowPlayingToast = document.getElementById('nowPlayingToast');
 
       let audioCtx = null;
+      let toastTimer = null;
+
+      function showNowPlayingToast(durationMs = 3600) {
+        if (!nowPlayingToast) return;
+        clearTimeout(toastTimer);
+        nowPlayingToast.classList.add('is-visible');
+        toastTimer = setTimeout(() => {
+          nowPlayingToast.classList.remove('is-visible');
+        }, durationMs);
+      }
+
+      function hideNowPlayingToast() {
+        clearTimeout(toastTimer);
+        nowPlayingToast?.classList.remove('is-visible');
+      }
 
       function playOpenDing() {
         try {
@@ -760,7 +816,14 @@
 
         if (bgMusic) {
           bgMusic.volume = 0.35; // Adjust between 0.0 (mute) and 1.0 (full)
-          bgMusic.play().catch(() => {});
+          const playPromise = bgMusic.play();
+          if (playPromise && typeof playPromise.then === 'function') {
+            playPromise.then(() => {
+              showNowPlayingToast();
+            }).catch(() => {});
+          } else {
+            showNowPlayingToast();
+          }
         }
       });
 
@@ -773,6 +836,7 @@
         e.stopPropagation();
         bookStage.classList.add('is-closed');
         bgMusic?.pause();
+        hideNowPlayingToast();
       });
 
       // Optional photo-slot URL swapper on click
