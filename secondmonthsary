@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>home — A Romantic Keepsake</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Playfair Display / Cormorant Garamond for editorial serif, Inter for crisp UI -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            mystification: '#2E3E6D',
+            astronaut: '#495589',
+            orbital: '#7087BB',
+            gladeye: '#A2B7E4',
+            steel: '#BBD0ED',
+            firstsnow: '#E5EDFA',
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+            editorial: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    /* Exact Palette Custom Properties */
+    :root {
+      --mystification: #2E3E6D;
+      --astronaut: #495589;
+      --orbital: #7087BB;
+      --gladeye: #A2B7E4;
+      --light-steel-blue: #BBD0ED;
+      --first-snow: #E5EDFA;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--first-snow);
+      color: var(--mystification);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 12%, rgba(187, 208, 237, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at 85% 28%, rgba(162, 183, 228, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 50% 82%, rgba(187, 208, 237, 0.65) 0%, transparent 55%),
+        var(--first-snow);
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Subtle paper grain overlay */
+    .paper-texture::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 40;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* ============================================================
+       HEART MOSAIC GRID (Exact 7-Column Asymmetric Reference Layout)
+       ============================================================ */
+    .heart-mosaic-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      grid-auto-rows: 1fr;
+      gap: clamp(4px, 0.8vw, 8px);
+      width: 100%;
+      max-width: 740px;
+      margin: 0 auto;
+      aspect-ratio: 7 / 6.35;
+      position: relative;
+    }
+
+    .heart-tile {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--light-steel-blue);
+      box-shadow: 0 4px 14px rgba(46, 62, 109, 0.12);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+      cursor: pointer;
+    }
+
+    .heart-tile:hover {
+      transform: scale(1.035);
+      z-index: 15;
+      box-shadow: 0 12px 26px rgba(46, 62, 109, 0.24);
+    }
+
+    .heart-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: filter 0.45s ease, transform 0.55s ease;
+    }
+
+    .heart-tile:hover img {
+      transform: scale(1.06);
+    }
+
+    /* Palette Duotone Tint Mode vs Classic B&W Mode */
+    .mode-duotone .heart-tile::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(46, 62, 109, 0.28), rgba(112, 135, 187, 0.22));
+      mix-blend-mode: color;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .mode-duotone .heart-tile img {
+      filter: grayscale(100%) contrast(1.08) brightness(1.02);
+    }
+
+    .mode-bw .heart-tile img {
+      filter: grayscale(100%) contrast(1.1);
+    }
+
+    .mode-original .heart-tile img {
+      filter: contrast(1.02);
+    }
+
+    /* Individual Tile Grid Coordinates matching reference image 1 */
+    /* Row 1: Top lobes */
+    .tile-1  { grid-column: 2 / 3; grid-row: 1 / 2; }
+    .tile-2  { grid-column: 3 / 4; grid-row: 1 / 2; }
+    .tile-3  { grid-column: 5 / 7; grid-row: 1 / 3; } /* Tall right-lobe hero square */
+
+    /* Row 2: Upper body & center cleft */
+    .tile-4  { grid-column: 1 / 2; grid-row: 2 / 3; }
+    .tile-5  { grid-column: 2 / 4; grid-row: 2 / 4; } /* Large left-center square */
+    .tile-6  { grid-column: 4 / 5; grid-row: 2 / 3; } /* Center heart cleft */
+    .tile-7  { grid-column: 7 / 8; grid-row: 2 / 3; } /* Far right upper */
+
+    /* Row 3: Middle shoulders */
+    .tile-8  { grid-column: 1 / 2; grid-row: 3 / 4; }
+    .tile-9  { grid-column: 4 / 5; grid-row: 3 / 4; }
+    .tile-10 { grid-column: 5 / 7; grid-row: 3 / 5; } /* Large right-center square */
+    .tile-11 { grid-column: 7 / 8; grid-row: 3 / 4; }
+
+    /* Row 4: Lower taper */
+    .tile-12 { grid-column: 2 / 3; grid-row: 4 / 5; }
+    .tile-13 { grid-column: 3 / 5; grid-row: 4 / 6; } /* Large lower-center square */
+
+    /* Row 5 & 6: Bottom point */
+    .tile-14 { grid-column: 5 / 6; grid-row: 5 / 6; }
+    .tile-15 { grid-column: 4 / 5; grid-row: 6 / 7; } /* Bottom tip of the heart */
+
+    /* Dictionary "home" positioning block nested in bottom-right negative space */
+    .dictionary-block {
+      grid-column: 5 / 8;
+      grid-row: 6 / 7;
+      padding-left: clamp(6px, 1.5vw, 18px);
+      padding-top: 2px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      text-align: left;
+      z-index: 10;
+    }
+
+    @media (max-width: 600px) {
+      .heart-mosaic-grid {
+        aspect-ratio: auto;
+        grid-auto-rows: minmax(44px, 12.5vw);
+      }
+      .dictionary-block {
+        grid-column: 4 / 8;
+        grid-row: 7 / 8;
+        padding-top: 10px;
+        padding-left: 4px;
+      }
+    }
+
+    /* Tile hover camera badge */
+    .tile-swap-hint {
+      position: absolute;
+      bottom: 6px;
+      right: 6px;
+      background: rgba(46, 62, 109, 0.82);
+      color: #E5EDFA;
+      border-radius: 9999px;
+      padding: 4px 7px;
+      font-size: 10px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: all 0.25s ease;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+
+    .heart-tile:hover .tile-swap-hint {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================================
+       ORNATE VINTAGE SCALLOPED ENVELOPE & 3D FLAP ANIMATION
+       ============================================================ */
+    .envelope-stage {
+      perspective: 1400px;
+    }
+
+    .vintage-envelope {
+      position: relative;
+      width: min(92vw, 520px);
+      aspect-ratio: 1.54 / 1;
+      margin: 0 auto;
+      cursor: pointer;
+      border-radius: 6px;
+      background: linear-gradient(160deg, #F6F8FD 0%, #E5EDFA 55%, #D5E2F5 100%);
+      box-shadow:
+        0 24px 50px -12px rgba(46, 62, 109, 0.26),
+        0 8px 20px -6px rgba(73, 85, 137, 0.16),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.85);
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+      transform-style: preserve-3d;
+      user-select: none;
+    }
+
+    .vintage-envelope:hover:not(.is-opening) {
+      transform: translateY(-8px) scale(1.015);
+      box-shadow:
+        0 34px 64px -12px rgba(46, 62, 109, 0.32),
+        0 12px 28px -6px rgba(112, 135, 187, 0.25),
+        inset 0 0 0 1px #FFFFFF;
+    }
+
+    /* Inner Letter Card peeking inside envelope */
+    .envelope-inner-letter {
+      position: absolute;
+      left: 6%;
+      right: 6%;
+      bottom: 8%;
+      height: 82%;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F4F7FD 100%);
+      border: 1px solid var(--gladeye);
+      border-radius: 4px;
+      padding: 18px 22px;
+      box-shadow: 0 4px 16px rgba(46, 62, 109, 0.12);
+      z-index: 2;
+      transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+    }
+
+    .vintage-envelope.is-opening .envelope-inner-letter {
+      transform: translateY(-48%);
+    }
+
+    /* Envelope Pocket (Bottom & Side Folds) */
+    .envelope-pocket {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    /* Top Scalloped Flap (3D Rotating Element) */
+    .envelope-flap-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 84%;
+      z-index: 4;
+      transform-origin: top center;
+      transition: transform 0.75s cubic-bezier(0.34, 1.15, 0.64, 1), z-index 0.2s linear 0.25s;
+      filter: drop-shadow(0 8px 12px rgba(46, 62, 109, 0.18));
+      pointer-events: none;
+    }
+
+    .vintage-envelope.is-opening .envelope-flap-wrapper {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    /* ============================================================
+       WHITE FLASH TRANSITION OVERLAY
+       ============================================================ */
+    #white-flash-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #FFFFFF 45%, #E5EDFA 100%);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.42s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #white-flash-overlay.flash-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* ============================================================
+       FULL-SCREEN READABLE LETTER VIEW
+       ============================================================ */
+    #letter-view-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(187, 208, 237, 0.65) 0%, transparent 50%),
+        radial-gradient(circle at 80% 85%, rgba(162, 183, 228, 0.55) 0%, transparent 55%),
+        var(--first-snow);
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    #letter-view-overlay.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .stationery-sheet {
+      background: linear-gradient(180deg, #FFFFFF 0%, #F7FAFF 45%, #EEF3FC 100%);
+      border: 1px solid var(--gladeye);
+      box-shadow:
+        0 25px 60px -15px rgba(46, 62, 109, 0.2),
+        0 0 0 8px rgba(229, 237, 250, 0.7),
+        0 0 0 9px rgba(162, 183, 228, 0.45);
+      position: relative;
+    }
+
+    .stationery-inner-frame {
+      border: 1px solid rgba(112, 135, 187, 0.35);
+    }
+
+    /* Subtle ruled lines on letter body */
+    .letter-ruled-paper {
+      background-image: linear-gradient(to bottom, transparent 31px, rgba(162, 183, 228, 0.24) 32px);
+      background-size: 100% 32px;
+      line-height: 32px;
+    }
+
+    /* Editable highlight on focus */
+    [contenteditable="true"]:focus {
+      outline: 2px dashed var(--orbital);
+      outline-offset: 6px;
+      border-radius: 4px;
+      background-color: rgba(229, 237, 250, 0.45);
+    }
+
+    /* Gentle float & bounce animations */
+    @keyframes gentleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    .animate-scroll-cue {
+      animation: gentleFloat 2.4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="paper-texture selection:bg-gladeye selection:text-mystification">
+
+  <!-- Hidden file input for swapping individual heart collage tiles -->
+  <input type="file" id="tile-photo-input" accept="image/*" class="hidden" />
+  <!-- Hidden multi-file input for uploading a batch of photos -->
+  <input type="file" id="batch-photo-input" accept="image/*" multiple class="hidden" />
+
+  <!-- Subtle Floating Control Pill (Top Right) -->
+  <header class="fixed top-4 right-4 z-30 flex items-center gap-2 bg-firstsnow/80 backdrop-blur-md border border-gladeye/60 px-3 py-1.5 rounded-full shadow-sm">
+    <button
+      id="filter-toggle-btn"
+      type="button"
+      title="Switch photo tone style"
+      class="text-xs font-medium text-mystification hover:text-orbital transition px-2 py-1 rounded-full flex items-center gap-1.5"
+    >
+      <span class="w-2.5 h-2.5 rounded-full bg-mystification inline-block"></span>
+      <span id="filter-label">Indigo Tint</span>
+    </button>
+    <span class="text-gladeye">|</span>
+    <button
+      id="upload-all-btn"
+      type="button"
+      title="Upload your own photos into the heart"
+      class="text-xs font-medium text-astronaut hover:text-mystification transition px-2 py-1 rounded-full flex items-center gap-1"
+    >
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+      </svg>
+      <span>Add Photos</span>
+    </button>
+  </header>
+
+  <!-- Toast notification (replaces alert) -->
+  <div
+    id="toast-banner"
+    class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-mystification text-firstsnow text-xs sm:text-sm px-4 py-2.5 rounded-full shadow-lg opacity-0 pointer-events-none transition-all duration-300 translate-y-2"
+  >
+    Photo updated in your heart collage
+  </div>
+
+  <!-- =====================================================================
+       SECTION 1: HEART PHOTO COLLAGE + DICTIONARY 'HOME' DEFINITION
+       ===================================================================== -->
+  <main>
+    <section
+      id="heart-section"
+      class="min-h-screen w-full flex flex-col items-center justify-between px-4 sm:px-8 pt-16 pb-8 max-w-5xl mx-auto"
+    >
+      <!-- Top Spacer for vertical centering balance -->
+      <div class="hidden sm:block h-4"></div>
+
+      <!-- Heart Photo Collage Container -->
+      <div class="w-full flex flex-col items-center justify-center my-auto">
+        <div id="heart-grid" class="heart-mosaic-grid mode-duotone" aria-label="Heart-shaped photo collage">
+          <!-- 15 Photo Tiles forming the exact asymmetric heart silhouette -->
+          <div class="heart-tile tile-1" data-tile="0">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=500&q=80" alt="Memory 1" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-2" data-tile="1">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=500&q=80" alt="Memory 2" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-3" data-tile="2">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=700&q=80" alt="Memory 3" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-4" data-tile="3">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=500&q=80" alt="Memory 4" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-5" data-tile="4">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=700&q=80" alt="Memory 5" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-6" data-tile="5">
+            <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?auto=format&fit=crop&w=500&q=80" alt="Memory 6" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-7" data-tile="6">
+            <img src="https://images.unsplash.com/photo-1523438885200-e635ba2c371e?auto=format&fit=crop&w=500&q=80" alt="Memory 7" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-8" data-tile="7">
+            <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=500&q=80" alt="Memory 8" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-9" data-tile="8">
+            <img src="https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=500&q=80" alt="Memory 9" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-10" data-tile="9">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=700&q=80" alt="Memory 10" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-11" data-tile="10">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=500&q=80" alt="Memory 11" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-12" data-tile="11">
+            <img src="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=500&q=80" alt="Memory 12" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-13" data-tile="12">
+            <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=700&q=80" alt="Memory 13" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-14" data-tile="13">
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=500&q=80" alt="Memory 14" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+          <div class="heart-tile tile-15" data-tile="14">
+            <img src="https://images.unsplash.com/photo-1544078751-58fee2d8a03b?auto=format&fit=crop&w=500&q=80" alt="Memory 15" />
+            <span class="tile-swap-hint">Swap</span>
+          </div>
+
+          <!-- Dictionary Entry Nested in Bottom-Right Negative Space (Matches Reference 1) -->
+          <div class="dictionary-block">
+            <h1 class="font-serif font-bold text-mystification text-3xl sm:text-4xl md:text-[2.6rem] leading-none tracking-tight">
+              home
+            </h1>
+            <p class="font-editorial italic text-orbital text-xs sm:text-sm mt-1 tracking-wide">
+              [h&#333;m] <span class="not-italic font-medium">noun</span>
+            </p>
+            <p class="font-editorial text-astronaut text-xs sm:text-[13.5px] leading-snug mt-1.5 max-w-[215px]">
+              A place where you are always welcome and surrounded by those who love you
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Downward Scroll Prompt -->
+      <a
+        href="#envelope-section"
+        class="mt-10 sm:mt-12 flex flex-col items-center text-center group cursor-pointer focus:outline-none"
+      >
+        <span class="font-editorial italic text-astronaut group-hover:text-mystification text-base sm:text-lg tracking-wide transition-colors">
+          Scroll down to open your letter
+        </span>
+        <div class="mt-1.5 w-8 h-8 rounded-full border border-gladeye bg-firstsnow/70 flex items-center justify-center text-mystification group-hover:border-orbital group-hover:bg-steel/40 transition-all animate-scroll-cue">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </a>
+    </section>
+
+    <!-- Delicate Divider -->
+    <div class="max-w-xs mx-auto flex items-center justify-center gap-3 opacity-60 my-4">
+      <span class="h-px flex-1 bg-gradient-to-r from-transparent to-orbital"></span>
+      <svg class="w-4 h-4 text-orbital" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+      </svg>
+      <span class="h-px flex-1 bg-gradient-to-l from-transparent to-orbital"></span>
+    </div>
+
+    <!-- =====================================================================
+         SECTION 2: ORNATE SCALLOPED VINTAGE ENVELOPE
+         ===================================================================== -->
+    <section
+      id="envelope-section"
+      class="min-h-[88vh] w-full flex flex-col items-center justify-center px-4 py-20 relative"
+    >
+      <div class="text-center mb-8">
+        <p class="uppercase tracking-[0.25em] text-[11px] font-semibold text-orbital mb-2">
+          A Keepsake Note For You
+        </p>
+        <h2 class="font-serif text-2xl sm:text-3xl text-mystification">
+          Sealed With Love
+        </h2>
+      </div>
+
+      <!-- 3D Envelope Stage -->
+      <div class="envelope-stage w-full flex justify-center items-center my-4">
+        <div
+          id="vintage-envelope"
+          class="vintage-envelope"
+          role="button"
+          tabindex="0"
+          aria-label="Click the envelope to open your letter"
+        >
+          <!-- Layer 1: Inner Letter Peeking Out on Open -->
+          <div class="envelope-inner-letter">
+            <span class="text-[10px] uppercase tracking-[0.2em] text-orbital font-semibold">For My Favorite Person</span>
+            <p class="font-serif italic text-mystification text-base sm:text-lg mt-2">
+              Wherever we are together is home...
+            </p>
+            <div class="w-16 h-px bg-gladeye my-2"></div>
+            <p class="font-editorial text-astronaut text-xs sm:text-sm line-clamp-2 max-w-xs">
+              Every photograph above holds a quiet moment I never want to forget.
+            </p>
+          </div>
+
+          <!-- Layer 2: Envelope Base Pocket SVG (Diagonal Folds & Subtle Shading) -->
+          <div class="envelope-pocket">
+            <svg viewBox="0 0 520 338" class="w-full h-full" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="pocketLeftGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#E5EDFA" />
+                  <stop offset="100%" stop-color="#C8D8F0" />
+                </linearGradient>
+                <linearGradient id="pocketRightGrad" x1="100%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#E5EDFA" />
+                  <stop offset="100%" stop-color="#C3D4EE" />
+                </linearGradient>
+                <linearGradient id="pocketBottomGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#EDF2FC" />
+                  <stop offset="100%" stop-color="#BBD0ED" />
+                </linearGradient>
+              </defs>
+
+              <!-- Left inner fold -->
+              <polygon points="0,0 260,185 0,338" fill="url(#pocketLeftGrad)" stroke="#A2B7E4" stroke-width="0.8" />
+              <!-- Right inner fold -->
+              <polygon points="520,0 260,185 520,338" fill="url(#pocketRightGrad)" stroke="#A2B7E4" stroke-width="0.8" />
+              <!-- Bottom triangular flap -->
+              <polygon points="0,338 260,152 520,338" fill="url(#pocketBottomGrad)" stroke="#95AEDF" stroke-width="1" />
+              <!-- Subtle inner highlight -->
+              <polyline points="2,337 260,154 518,337" fill="none" stroke="#FFFFFF" stroke-width="1.2" opacity="0.8" />
+            </svg>
+          </div>
+
+          <!-- Layer 3: Ornate Scalloped Lace & Twin-Swan Embossed Top Flap -->
+          <div class="envelope-flap-wrapper">
+            <svg viewBox="0 0 520 285" class="w-full h-full overflow-visible">
+              <defs>
+                <linearGradient id="flapSurfaceGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#F8FAFF" />
+                  <stop offset="60%" stop-color="#E5EDFA" />
+                  <stop offset="100%" stop-color="#CCD9F2" />
+                </linearGradient>
+
+                <!-- Embossed Relief Shadow & Highlight Filter -->
+                <filter id="embossRelief" x="-15%" y="-15%" width="130%" height="130%">
+                  <feDropShadow dx="0" dy="1.4" stdDeviation="1.1" flood-color="#495589" flood-opacity="0.32" />
+                  <feDropShadow dx="0" dy="-0.8" stdDeviation="0.6" flood-color="#FFFFFF" flood-opacity="0.95" />
+                </filter>
+              </defs>
+
+              <!-- Scalloped Triangular Flap Silhouette -->
+              <path
+                d="M 2,2
+                   L 518,2
+                   C 516,32 496,54 472,62
+                   C 464,88 442,106 416,112
+                   C 406,138 384,156 358,162
+                   C 346,188 324,206 298,214
+                   C 288,236 274,254 260,268
+                   C 246,254 232,236 222,214
+                   C 196,206 174,188 162,162
+                   C 136,156 114,138 104,112
+                   C 78,106 56,88 48,62
+                   C 24,54 4,32 2,2 Z"
+                fill="url(#flapSurfaceGrad)"
+                stroke="#A2B7E4"
+                stroke-width="1.2"
+              />
+
+              <!-- Delicate Inner Lace Scallop Stitching & Filigree Trim -->
+              <path
+                d="M 14,10
+                   C 18,34 34,50 56,56
+                   C 64,80 84,96 108,102
+                   C 118,126 138,142 164,148
+                   C 174,172 194,188 220,196
+                   C 230,216 245,234 260,248
+                   C 275,234 290,216 300,196
+                   C 326,188 346,172 356,148
+                   C 382,142 402,126 412,102
+                   C 436,96 456,80 464,56
+                   C 486,50 502,34 506,10"
+                fill="none"
+                stroke="#7087BB"
+                stroke-width="1.2"
+                stroke-dasharray="2.5 3.5"
+                opacity="0.85"
+              />
+
+              <!-- Secondary Lace Border Line -->
+              <path
+                d="M 22,14
+                   C 26,34 40,46 60,52
+                   C 68,74 86,88 110,94
+                   C 120,116 138,132 162,138
+                   C 172,160 190,174 216,182
+                   C 226,202 242,218 260,232
+                   C 278,218 294,202 304,182
+                   C 330,174 348,160 358,138
+                   C 382,132 400,116 410,94
+                   C 434,88 452,74 460,52
+                   C 480,46 494,34 498,14"
+                fill="none"
+                stroke="#FFFFFF"
+                stroke-width="1.4"
+                opacity="0.9"
+              />
+
+              <!-- Embossed Floral Heart Wreath & Facing Swans Centerpiece -->
+              <g transform="translate(260, 114)" filter="url(#embossRelief)">
+                <!-- Outer Ornate Heart Wreath -->
+                <path
+                  d="M 0,-42
+                     C -18,-66 -58,-62 -64,-28
+                     C -70,8 -34,38 0,66
+                     C 34,38 70,8 64,-28
+                     C 58,-62 18,-66 0,-42 Z"
+                  fill="none"
+                  stroke="#E5EDFA"
+                  stroke-width="3.2"
+                />
+                <!-- Floral Garland Dots & Leaves around Heart Wreath -->
+                <path
+                  d="M 0,-42
+                     C -18,-66 -58,-62 -64,-28
+                     C -70,8 -34,38 0,66
+                     C 34,38 70,8 64,-28
+                     C 58,-62 18,-66 0,-42 Z"
+                  fill="none"
+                  stroke="#7087BB"
+                  stroke-width="1.5"
+                  stroke-dasharray="1.5 5.5"
+                  stroke-linecap="round"
+                />
+                <!-- Inner Delicate Heart Ring -->
+                <path
+                  d="M 0,-34
+                     C -14,-53 -46,-50 -51,-23
+                     C -56,6 -27,30 0,53
+                     C 27,30 56,6 51,-23
+                     C 46,-50 14,-53 0,-34 Z"
+                  fill="none"
+                  stroke="#BBD0ED"
+                  stroke-width="1.3"
+                />
+
+                <!-- Bottom Rosette Accent on Wreath Tip -->
+                <circle cx="0" cy="66" r="4.5" fill="#E5EDFA" stroke="#7087BB" stroke-width="1.2" />
+                <circle cx="0" cy="66" r="1.8" fill="#495589" />
+
+                <!-- Left Embossed Swan (Curved Neck Forming Heart) -->
+                <g transform="translate(-2, 4)">
+                  <!-- Wing & Body -->
+                  <path
+                    d="M -32,6
+                       C -34,-6 -24,-14 -14,-10
+                       C -10,-22 -16,-32 -10,-36
+                       C -5,-39 -1,-33 -4,-26
+                       C -7,-18 -6,-6 2,4
+                       C -6,12 -24,14 -32,6 Z"
+                    fill="#F2F6FE"
+                    stroke="#7087BB"
+                    stroke-width="1.25"
+                    stroke-linejoin="round"
+                  />
+                  <!-- Wing Feather Detail -->
+                  <path
+                    d="M -27,2 C -21,-3 -14,-2 -9,2 M -25,6 C -19,3 -13,4 -8,6"
+                    fill="none"
+                    stroke="#7087BB"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                  />
+                </g>
+
+                <!-- Right Embossed Swan (Mirrored) -->
+                <g transform="translate(2, 4) scale(-1, 1)">
+                  <path
+                    d="M -32,6
+                       C -34,-6 -24,-14 -14,-10
+                       C -10,-22 -16,-32 -10,-36
+                       C -5,-39 -1,-33 -4,-26
+                       C -7,-18 -6,-6 2,4
+                       C -6,12 -24,14 -32,6 Z"
+                    fill="#F2F6FE"
+                    stroke="#7087BB"
+                    stroke-width="1.25"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M -27,2 C -21,-3 -14,-2 -9,2 M -25,6 C -19,3 -13,4 -8,6"
+                    fill="none"
+                    stroke="#7087BB"
+                    stroke-width="1"
+                    stroke-linecap="round"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Prompt Below Envelope -->
+      <button
+        id="open-envelope-btn"
+        type="button"
+        class="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-mystification text-firstsnow hover:bg-astronaut text-sm font-medium shadow-md hover:shadow-lg transition-all cursor-pointer"
+      >
+        <svg class="w-4 h-4 text-steel" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 19v-8.93a2 2 0 01.89-1.664l7-4.666a2 2 0 012.22 0l7 4.666A2 2 0 0121 10.07V19M3 19a2 2 0 002 2h14a2 2 0 002-2M3 19l6.75-4.5M21 19l-6.75-4.5M3 10l6.75 4.5M21 10l-6.75 4.5m0 0l-1.14.76a2 2 0 01-2.22 0l-1.14-.76" />
+        </svg>
+        <span>Click the envelope to open</span>
+      </button>
+    </section>
+  </main>
+
+  <!-- =====================================================================
+       WHITE FLASH OVERLAY (Triggered when opening envelope)
+       ===================================================================== -->
+  <div id="white-flash-overlay" aria-hidden="true"></div>
+
+  <!-- =====================================================================
+       SECTION 3: FULL-SCREEN READABLE & EDITABLE LETTER VIEW
+       ===================================================================== -->
+  <div
+    id="letter-view-overlay"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="letter-heading"
+  >
+    <div class="min-h-screen w-full flex flex-col items-center justify-center px-4 py-10 sm:py-14">
+
+      <!-- Top Action Bar -->
+      <div class="w-full max-w-2xl flex items-center justify-between mb-5 px-1">
+        <span class="text-xs font-medium text-astronaut flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-orbital" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+          <span>Tap any text on the letter to personalize it</span>
+        </span>
+
+        <button
+          id="close-letter-btn"
+          type="button"
+          class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-mystification text-firstsnow hover:bg-astronaut text-xs sm:text-sm font-medium shadow transition-all cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span>Return to Heart</span>
+        </button>
+      </div>
+
+      <!-- Stationery Sheet -->
+      <article class="stationery-sheet w-full max-w-2xl rounded-xl p-4 sm:p-8 md:p-10">
+        <div class="stationery-inner-frame rounded-lg p-5 sm:p-8 md:p-10 relative overflow-hidden">
+
+          <!-- Subtle Embossed Swan & Heart Watermark in Center of Letter -->
+          <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.065]">
+            <svg viewBox="0 0 200 200" class="w-72 h-72 text-mystification">
+              <path
+                d="M100 172 C45 128 18 92 18 58 C18 32 38 14 62 14 C78 14 92 23 100 36 C108 23 122 14 138 14 C162 14 182 32 182 58 C182 92 155 128 100 172 Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+              />
+              <circle cx="100" cy="92" r="36" fill="none" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 4" />
+            </svg>
+          </div>
+
+          <!-- Letter Header Crest & Date -->
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between border-b border-gladeye/60 pb-4 mb-6 gap-2 relative z-10">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-firstsnow border border-gladeye flex items-center justify-center text-mystification">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-serif font-bold text-mystification text-base leading-none">home</p>
+                <p class="font-editorial italic text-orbital text-xs mt-0.5">[h&#333;m] &bull; where my heart stays</p>
+              </div>
+            </div>
+
+            <p
+              contenteditable="true"
+              class="font-editorial italic text-astronaut text-sm sm:text-base"
+            >
+              November 25, 2026
+            </p>
+          </div>
+
+          <!-- Salutation -->
+          <h2
+            id="letter-heading"
+            contenteditable="true"
+            class="font-serif italic text-2xl sm:text-3xl text-mystification mb-6 relative z-10"
+          >
+            My Dearest,
+          </h2>
+
+          <!-- Main Letter Body (Editable) -->
+          <div
+            contenteditable="true"
+            class="letter-ruled-paper font-editorial text-astronaut text-lg sm:text-[1.22rem] space-y-6 relative z-10"
+          >
+            <p>
+              If someone ever asked me to define what <span class="font-semibold text-mystification">home</span> truly means, I wouldn’t point to a street name, a doorway, or four walls. I would point straight to you—to the quiet comfort of your laugh, the warmth of your hand in mine, and every ordinary afternoon that somehow became my favorite memory.
+            </p>
+            <p>
+              Looking back at all the snapshots woven into the heart above, I realize how effortlessly you turned fleeting moments into the safest place I have ever known. No matter how loud or hurried the world outside becomes, being beside you always feels like coming back to stillness.
+            </p>
+            <p>
+              Thank you for being my sanctuary, my favorite story, and the person I always want to come home to—today, tomorrow, and in every season still waiting for us.
+            </p>
+          </div>
+
+          <!-- Sign-Off -->
+          <div class="mt-10 pt-4 flex flex-col items-end text-right relative z-10">
+            <p contenteditable="true" class="font-editorial italic text-astronaut text-lg">
+              Forever &amp; always yours,
+            </p>
+            <p contenteditable="true" class="font-serif font-semibold text-mystification text-xl sm:text-2xl mt-1">
+              With all my love
+            </p>
+          </div>
+
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       INTERACTIVE LOGIC (Photo Swapping, Tone Filter, White Flash & Envelope)
+       ===================================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Photo Filter Mode Toggle (Indigo Palette Tint / Classic B&W / Original Color)
+      const heartGrid = document.getElementById('heart-grid');
+      const filterToggleBtn = document.getElementById('filter-toggle-btn');
+      const filterLabel = document.getElementById('filter-label');
+      const modes = [
+        { className: 'mode-duotone', label: 'Indigo Tint' },
+        { className: 'mode-bw', label: 'Classic B&W' },
+        { className: 'mode-original', label: 'Natural Tone' },
+      ];
+      let currentModeIdx = 0;
+
+      filterToggleBtn.addEventListener('click', () => {
+        heartGrid.classList.remove(modes[currentModeIdx].className);
+        currentModeIdx = (currentModeIdx + 1) % modes.length;
+        heartGrid.classList.add(modes[currentModeIdx].className);
+        filterLabel.textContent = modes[currentModeIdx].label;
+      });
+
+      // Toast helper
+      const toastBanner = document.getElementById('toast-banner');
+      let toastTimeout;
+      function showToast(message) {
+        toastBanner.textContent = message;
+        toastBanner.classList.remove('opacity-0', 'translate-y-2');
+        toastBanner.classList.add('opacity-100', 'translate-y-0');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toastBanner.classList.add('opacity-0', 'translate-y-2');
+          toastBanner.classList.remove('opacity-100', 'translate-y-0');
+        }, 2600);
+      }
+
+      // 2. Individual Tile Photo Replacement & Batch Photo Upload
+      const tilePhotoInput = document.getElementById('tile-photo-input');
+      const batchPhotoInput = document.getElementById('batch-photo-input');
+      const uploadAllBtn = document.getElementById('upload-all-btn');
+      const tiles = document.querySelectorAll('.heart-tile');
+      let activeTileImg = null;
+
+      tiles.forEach((tile) => {
+        tile.addEventListener('click', () => {
+          activeTileImg = tile.querySelector('img');
+          tilePhotoInput.value = '';
+          tilePhotoInput.click();
+        });
+      });
+
+      tilePhotoInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file || !activeTileImg) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          activeTileImg.src = ev.target.result;
+          showToast('Memory tile updated');
+        };
+        reader.readAsDataURL(file);
+      });
+
+      uploadAllBtn.addEventListener('click', () => {
+        batchPhotoInput.value = '';
+        batchPhotoInput.click();
+      });
+
+      batchPhotoInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files || []);
+        if (!files.length) return;
+        tiles.forEach((tile, index) => {
+          const file = files[index % files.length];
+          const reader = new FileReader();
+          reader.onload = (ev) => {
+            const img = tile.querySelector('img');
+            if (img) img.src = ev.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+        showToast(`Loaded ${files.length} photo${files.length > 1 ? 's' : ''} into your heart`);
+      });
+
+      // 3. Envelope Open Sequence -> White Screen Flash -> Full-Screen Letter
+      const envelope = document.getElementById('vintage-envelope');
+      const openEnvelopeBtn = document.getElementById('open-envelope-btn');
+      const whiteFlashOverlay = document.getElementById('white-flash-overlay');
+      const letterViewOverlay = document.getElementById('letter-view-overlay');
+      const closeLetterBtn = document.getElementById('close-letter-btn');
+      let isTransitioning = false;
+
+      function triggerOpenEnvelopeSequence() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        // Step 1: Animate the scalloped flap open (3D rotateX) & lift inner card
+        envelope.classList.add('is-opening');
+
+        // Step 2: Trigger pure white flash overlay as the letter emerges
+        setTimeout(() => {
+          whiteFlashOverlay.classList.add('flash-active');
+        }, 560);
+
+        // Step 3: While screen is bright white, reveal the full-screen Letter View underneath
+        setTimeout(() => {
+          letterViewOverlay.scrollTop = 0;
+          letterViewOverlay.classList.add('is-visible');
+          document.body.style.overflow = 'hidden';
+        }, 980);
+
+        // Step 4: Dissolve the white flash away smoothly so the letter is now on screen
+        setTimeout(() => {
+          whiteFlashOverlay.classList.remove('flash-active');
+          isTransitioning = false;
+        }, 1150);
+      }
+
+      function closeLetterSequence() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        // Gentle white bloom back to the main page
+        whiteFlashOverlay.classList.add('flash-active');
+
+        setTimeout(() => {
+          letterViewOverlay.classList.remove('is-visible');
+          envelope.classList.remove('is-opening');
+          document.body.style.overflow = '';
+        }, 380);
+
+        setTimeout(() => {
+          whiteFlashOverlay.classList.remove('flash-active');
+          isTransitioning = false;
+        }, 520);
+      }
+
+      envelope.addEventListener('click', triggerOpenEnvelopeSequence);
+      envelope.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          triggerOpenEnvelopeSequence();
+        }
+      });
+      openEnvelopeBtn.addEventListener('click', triggerOpenEnvelopeSequence);
+      closeLetterBtn.addEventListener('click', closeLetterSequence);
+
+      // Allow Escape key to close the letter view
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && letterViewOverlay.classList.contains('is-visible')) {
+          closeLetterSequence();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
